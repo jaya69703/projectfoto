@@ -70,9 +70,9 @@ Route::middleware(['auth', 'user-access:User'])->group(function () {
 
     // TODO LIST APP
     Route::get('/user/app/todo', [TodoController::class, 'index'])->name('user.app.todo.index');
-    Route::post('/user/app/todo/store', [TodoController::class, 'store'])->name('auth.app.todo.user.store');
-    Route::delete('/user/app/todo/destroy/{id}', [TodoController::class, 'destroy'])->name('auth.app.todo.user.destroy');
-    Route::patch('/user/app/todo/update/{id}', [TodoController::class, 'update'])->name('auth.app.todo.user.update');
+    Route::post('/user/app/todo/store', [TodoController::class, 'store'])->name('user.app.todo.store');
+    Route::delete('/user/app/todo/destroy/{id}', [TodoController::class, 'destroy'])->name('user.app.todo.destroy');
+    Route::patch('/user/app/todo/update/{id}', [TodoController::class, 'update'])->name('user.app.todo.update');
 });
 //
 
