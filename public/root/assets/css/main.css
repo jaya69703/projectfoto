@@ -1697,18 +1697,19 @@ section {
   margin-bottom: 0;
 }
 
-.contact .php-email-form {
+
+.contact .mail-form {
   width: 100%;
   background: #fff;
   box-shadow: 0 0 25px rgba(0, 0, 0, 0.08);
   padding: 30px;
 }
 
-.contact .php-email-form .form-group {
+.contact .mail-form .form-group {
   padding-bottom: 20px;
 }
 
-.contact .php-email-form .error-message {
+.contact .mail-form .error-message {
   display: none;
   color: #fff;
   background: #df1529;
@@ -1717,11 +1718,11 @@ section {
   font-weight: 600;
 }
 
-.contact .php-email-form .error-message br+br {
+.contact .mail-form .error-message br+br {
   margin-top: 25px;
 }
 
-.contact .php-email-form .sent-message {
+.contact .mail-form .sent-message {
   display: none;
   color: #fff;
   background: #059652;
@@ -1730,14 +1731,14 @@ section {
   font-weight: 600;
 }
 
-.contact .php-email-form .loading {
+.contact .mail-form .loading {
   display: none;
   background: #fff;
   text-align: center;
   padding: 15px;
 }
 
-.contact .php-email-form .loading:before {
+.contact .mail-form .loading:before {
   content: "";
   display: inline-block;
   border-radius: 50%;
@@ -1749,27 +1750,27 @@ section {
   animation: animate-loading 1s linear infinite;
 }
 
-.contact .php-email-form input,
-.contact .php-email-form textarea {
+.contact .mail-form input,
+.contact .mail-form textarea {
   border-radius: 0;
   box-shadow: none;
   font-size: 14px;
 }
 
-.contact .php-email-form input:focus,
-.contact .php-email-form textarea:focus {
+.contact .mail-form input:focus,
+.contact .mail-form textarea:focus {
   border-color: var(--color-primary);
 }
 
-.contact .php-email-form input {
+.contact .mail-form input {
   height: 44px;
 }
 
-.contact .php-email-form textarea {
+.contact .mail-form textarea {
   padding: 10px 12px;
 }
 
-.contact .php-email-form button[type=submit] {
+.contact .mail-form button[type=submit] {
   background: var(--color-primary);
   border: 0;
   padding: 10px 35px;
@@ -1778,7 +1779,7 @@ section {
   border-radius: 5px;
 }
 
-.contact .php-email-form button[type=submit]:hover {
+.contact .mail-form button[type=submit]:hover {
   background: rgba(254, 185, 0, 0.8);
 }
 

@@ -52,33 +52,40 @@
           </div>
 
           <div class="row gy-4 mt-1">
-
+            @if(session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+              <strong>Success!</strong> {{ session('success') }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            @endif
             <div class="col-lg-6 ">
               <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621" frameborder="0" style="border:0; width: 100%; height: 384px;" allowfullscreen></iframe>
             </div><!-- End Google Maps -->
 
             <div class="col-lg-6">
-              <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+              <form action="{{ route('root.pages.contact.store') }}" method="post" class="mail-form">
+                @csrf
                 <div class="row gy-4">
-                  <div class="col-lg-6 form-group">
+                  <div class="col-lg-6 form-group mb-4">
                     <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" value="{{ Auth::user()->name ?? '' }}" required>
-                  </div>
-                  <div class="col-lg-6 form-group">
+                    @error('name') <small class="text-danger">{{ $message }}</small> @enderror
+                </div>
+                <div class="col-lg-6 form-group mb-4">
                     <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" value="{{ Auth::user()->email ?? '' }}" required>
+                    @error('email') <small class="text-danger">{{ $message }}</small> @enderror
                   </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group mb-4">
                   <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
+                  @error('subject') <small class="text-danger">{{ $message }}</small> @enderror
                 </div>
-                <div class="form-group">
+                <div class="form-group mb-4">
                   <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
+                  @error('message') <small class="text-danger">{{ $message }}</small> @enderror
                 </div>
                 <div class="my-3">
-                  <div class="loading">Loading</div>
-                  <div class="error-message"></div>
-                  <div class="sent-message">Your message has been sent. Thank you!</div>
                 </div>
-                <div class="text-center"><button type="submit">Send Message</button></div>
+                <div class="text-center"><button type="submit" class="btn btn-outline-warning">Send Message</button></div>
               </form>
             </div><!-- End Contact Form -->
 

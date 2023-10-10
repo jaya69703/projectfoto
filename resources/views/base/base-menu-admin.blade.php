@@ -65,6 +65,14 @@
         </li>
     </ul>
 </li>
+<li class="menu {{ Str::is('admin/message*', request()->path()) ? 'active' : '' }}">
+    <a href="{{ url('/admin/message') }}" aria-expanded="false" class="dropdown-toggle">
+        <div class="d-flex align-items-center justify-content-between">
+            <i class="fa-solid fa-envelope" style="font-size: 20px; margin-right: 10px;" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ></i>
+            <span>Mail Inbox</span>
+        </div>
+    </a>
+</li>
 <li class="menu {{ Str::is('admin/paket*', request()->path()) ? 'active' : '' }}">
     <a href="{{ url('/admin/paket') }}" aria-expanded="false" class="dropdown-toggle">
         <div class="d-flex align-items-center justify-content-between">

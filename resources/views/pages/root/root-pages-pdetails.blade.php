@@ -109,10 +109,12 @@
                     </div>
                 </div>
                 <div class="modal-body">
+                    @auth
                     <div class="form-group col-12 mb-3">
                         <input type="hidden" name="user_id" id="user_id" class="form-control" value="{{ Auth::user()->id }}">
                         @error('user_id') <small class="text-danger">{{ $message }}</small> @enderror
                     </div>
+                    @endauth
                     <div class="form-group col-12 mb-3">
                         <input type="hidden" name="paket_id" id="paket_id" class="form-control" value="{{ $paket->id }}">
                         @error('paket_id') <small class="text-danger">{{ $message }}</small> @enderror

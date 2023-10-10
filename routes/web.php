@@ -6,6 +6,7 @@ use App\Http\Controllers\Pages\Base\TodoController;
 use App\Http\Controllers\Pages\Base\AnnouncementController;
 use App\Http\Controllers\Pages\Base\WebSettingController;
 use App\Http\Controllers\Pages\Base\RootController;
+use App\Http\Controllers\Pages\Base\MessageController;
 use App\Http\Controllers\Pages\Master\UserManagerController;
 use App\Http\Controllers\Pages\Master\PaketController;
 use App\Http\Controllers\Pages\Master\BookingController;
@@ -26,6 +27,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [RootController::class, 'index'])->name('root.index');
 Route::get('/about-us', [RootController::class, 'about'])->name('root.pages.about');
 Route::get('/contact-us', [RootController::class, 'contact'])->name('root.pages.contact');
+Route::post('/contact-us/store', [MessageController::class, 'store'])->name('root.pages.contact.store');
 Route::get('/product/details/{id}', [RootController::class, 'pdetails'])->name('root.pages.pdetails');
 Route::get('/product/{pakets:slug}', [RootController::class, 'sample'])->name('root.pages.sample');
 
@@ -82,6 +84,11 @@ Route::middleware(['auth', 'user-access:Admin', 'isverify:1'])->group(function (
     Route::get('/admin/home', [AdminController::class, 'index'])->name('admin.home.index');
     Route::get('/admin/profile', [AdminController::class, 'show'])->name('admin.profile.index');
     Route::patch('/admin/profile/update', [AdminController::class, 'update'])->name('admin.profile.update');
+
+    // MESSAGE USER
+    Route::get('/admin/message', [MessageController::class, 'index'])->name('admin.message.index');
+    Route::get('/admin/message/show/{id}', [MessageController::class, 'show'])->name('admin.message.show');
+    Route::delete('/admin/message/delete/{id}', [MessageController::class, 'destroy'])->name('admin.message.destroy');
 
     // TODO LIST APP
     Route::get('/admin/app/todo', [TodoController::class, 'index'])->name('admin.app.todo.index');
