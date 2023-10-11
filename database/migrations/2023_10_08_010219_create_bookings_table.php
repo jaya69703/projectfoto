@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->integer('user_id');
             $table->integer('paket_id');
+            $table->integer('book_stat')->default('0');
             $table->date('book_date');
             $table->text('book_note');
             $table->string('book_time');
-            $table->string('book_stat')->default('Pending');
             $table->string('book_take')->nullable();
             $table->string('book_prof')->nullable();
 

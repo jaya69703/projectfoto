@@ -31,7 +31,7 @@
     <a href="#manageUser" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
         <div class="d-flex align-items-center justify-content-between">
             <i class="fa-solid fa-users" style="font-size: 20px; margin-right: 10px;" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></i>
-            <span>Users Manager</span>
+            <span>Kelola Pengguna</span>
         </div>
         <div>
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
@@ -39,10 +39,10 @@
     </a>
     <ul class="collapse submenu list-unstyled" id="manageUser" data-bs-parent="#accordionExample">
         <li class="menu {{ Str::is('/admin/usermanage/admin*', request()->path()) ? 'active' : '' }}">
-            <a href="{{ url('/admin/usermanage/admin') }}"> Manage Admin </a>
+            <a href="{{ url('/admin/usermanage/admin') }}">Pengguna Admin </a>
         </li>
         <li class="menu {{ Str::is('/admin/usermanage/member*', request()->path()) ? 'active' : '' }}">
-            <a href="{{ url('/admin/usermanage/member') }}"> Manage Member </a>
+            <a href="{{ url('/admin/usermanage/member') }}">Pengguna Member </a>
         </li>
     </ul>
 </li>
@@ -50,7 +50,7 @@
     <a href="#manageBooking" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
         <div class="d-flex align-items-center justify-content-between">
             <i class="fa-solid fa-book-bookmark" style="font-size: 20px; margin-right: 10px;" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></i>
-            <span>Booking Data</span>
+            <span>Kelola Pesanan</span>
         </div>
         <div>
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
@@ -58,10 +58,13 @@
     </a>
     <ul class="collapse submenu list-unstyled" id="manageBooking" data-bs-parent="#accordionExample">
         <li class="menu {{ Str::is('admin/booking/all*', request()->path()) ? 'active' : '' }}">
-            <a href="{{ url('/admin/booking/all') }}"> All Data </a>
+            <a href="{{ url('/admin/booking/all') }}">Semua Pesanan </a>
         </li>
         <li class="menu {{ Str::is('admin/booking/pending*', request()->path()) ? 'active' : '' }}">
-            <a href="{{ url('/admin/booking/pending') }}"> Pending Data </a>
+            <a href="{{ url('/admin/booking/pending') }}">Menunggu Pembayaran </a>
+        </li>
+        <li class="menu {{ Str::is('admin/booking/verify*', request()->path()) ? 'active' : '' }}">
+            <a href="{{ url('/admin/booking/verify') }}">Menunggu Verifikasi </a>
         </li>
     </ul>
 </li>

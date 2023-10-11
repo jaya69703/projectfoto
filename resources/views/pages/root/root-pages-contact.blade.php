@@ -9,7 +9,7 @@
 
     <!-- ======= Breadcrumbs ======= -->
     <div class="breadcrumbs d-flex align-items-center" style="background-image: url('{{ asset('root') }}/assets/img/breadcrumbs-bg.jpg');">
-      <div class="container position-relative d-flex flex-column align-items-center" data-aos="fade">
+      <div class="container position-relative d-flex flex-column align-items-center text-center" data-aos="fade">
 
         <h2>{{ $submenu }}</h2>
         <ol>
@@ -66,20 +66,20 @@
               <form action="{{ route('root.pages.contact.store') }}" method="post" class="mail-form">
                 @csrf
                 <div class="row gy-4">
-                  <div class="col-lg-6 form-group mb-4">
+                  <div class="col-lg-6 form-group">
                     <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" value="{{ Auth::user()->name ?? '' }}" required>
                     @error('name') <small class="text-danger">{{ $message }}</small> @enderror
                 </div>
-                <div class="col-lg-6 form-group mb-4">
+                <div class="col-lg-6 form-group">
                     <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" value="{{ Auth::user()->email ?? '' }}" required>
                     @error('email') <small class="text-danger">{{ $message }}</small> @enderror
                   </div>
                 </div>
-                <div class="form-group mb-4">
+                <div class="form-group">
                   <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
                   @error('subject') <small class="text-danger">{{ $message }}</small> @enderror
                 </div>
-                <div class="form-group mb-4">
+                <div class="form-group">
                   <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
                   @error('message') <small class="text-danger">{{ $message }}</small> @enderror
                 </div>

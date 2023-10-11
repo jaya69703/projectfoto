@@ -20,14 +20,14 @@
                 <table id="style-3" class="table style-3 dt-table-hover">
                     <thead>
                         <tr>
-                            <th class="text-center">Record Id</th>
-                            <th class="text-center">Package Name</th>
-                            <th class="text-center">Client Name</th>
-                            <th class="text-center">Booking Date</th>
-                            <th class="text-center">Booking Time</th>
-                            <th class="text-center">Booking Price</th>
-                            <th class="text-center">Booking Status</th>
-                            <th class="text-center">Action</th>
+                            <th class="text-center">Id</th>
+                            <th class="text-center">Nama Paket</th>
+                            <th class="text-center">Nama Klien</th>
+                            <th class="text-center">Tanggal Pemesanan</th>
+                            <th class="text-center">Jam Pemesanan</th>
+                            <th class="text-center">Harga</th>
+                            <th class="text-center">Status Pesanan</th>
+                            <th class="text-center">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -39,19 +39,13 @@
                             <td>{{ \Carbon\Carbon::parse($item->book_date)->formatLocalized('%A, %d %B %Y') }}</td>
                             <td>{{ $item->book_time }}</td>
                             <td>{{ $item->paket->price }}</td>
-                            <td><span class="badge badge-danger">{{ $item->book_stat }}</span></td>
+                            <td>{!! $item->book_stat !!}</td>
                             <td class="text-center d-flex justify-content-center align-items-center">
-                                <a  href="{{ route('admin.booking.index', $item->id) }}" style="margin-right: 10px;" class="btn btn-rounded btn-outline-warning bs-tooltip me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Show" data-original-title="Show">
-                                    <i class="fa-solid fa-eye"></i>
-                                </a>
-                                <a  href="{{ route('admin.booking.index', $item->id) }}" style="margin-right: 10px;" class="btn btn-rounded btn-outline-success bs-tooltip me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" data-original-title="Edit">
-                                    <i class="fa-solid fa-edit"></i>
-                                </a>
-                                <form id="delete-form-{{ $item->id }}" action="{{ route('admin.booking.index', $item->id) }}" method="POST">
+                                <form id="delete-form-{{ $item->id }}" action="{{ route('admin.booking.destroy', $item->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <a type="button" class="bs-tooltip btn btn-rounded btn-outline-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-original-title="Delete"
-                                        data-url="{{ route('admin.booking.index', $item->id) }}" data-name="{{ $item->name }}"
+                                        data-url="{{ route('admin.booking.destroy', $item->id) }}" data-name="{{ $item->name }}"
                                         onclick="deleteData('{{ $item->id }}')">
                                         <i class="fa-solid fa-trash-can"></i>
                                      </a>
@@ -65,14 +59,14 @@
                 <table id="style-3" class="table style-3 dt-table-hover">
                     <thead>
                         <tr>
-                            <th class="text-center">Record Id</th>
-                            <th class="text-center">Package Name</th>
-                            <th class="text-center">Client Name</th>
-                            <th class="text-center">Booking Date</th>
-                            <th class="text-center">Booking Time</th>
-                            <th class="text-center">Booking Price</th>
-                            <th class="text-center">Booking Status</th>
-                            <th class="text-center">Action</th>
+                            <th class="text-center">Id</th>
+                            <th class="text-center">Nama Paket</th>
+                            <th class="text-center">Nama Klien</th>
+                            <th class="text-center">Tanggal Pemesanan</th>
+                            <th class="text-center">Jam Pemesanan</th>
+                            <th class="text-center">Harga</th>
+                            <th class="text-center">Status Pesanan</th>
+                            <th class="text-center">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -84,19 +78,12 @@
                             <td>{{ \Carbon\Carbon::parse($item->book_date)->formatLocalized('%A, %d %B %Y') }}</td>
                             <td>{{ $item->book_time }}</td>
                             <td>{{ $item->paket->price }}</td>
-                            <td><span class="badge badge-danger">{{ $item->book_stat }}</span></td>
-                            <td class="text-center d-flex justify-content-center align-items-center">
-                                <a  href="{{ route('admin.booking.index', $item->id) }}" style="margin-right: 10px;" class="btn btn-rounded btn-outline-warning bs-tooltip me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Show" data-original-title="Show">
-                                    <i class="fa-solid fa-eye"></i>
-                                </a>
-                                <a  href="{{ route('admin.booking.index', $item->id) }}" style="margin-right: 10px;" class="btn btn-rounded btn-outline-success bs-tooltip me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" data-original-title="Edit">
-                                    <i class="fa-solid fa-edit"></i>
-                                </a>
-                                <form id="delete-form-{{ $item->id }}" action="{{ route('admin.booking.index', $item->id) }}" method="POST">
+                            <td>{!! $item->book_stat !!}</td>
+                                <form id="delete-form-{{ $item->id }}" action="{{ route('admin.booking.destroy', $item->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <a type="button" class="bs-tooltip btn btn-rounded btn-outline-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-original-title="Delete"
-                                        data-url="{{ route('admin.booking.index', $item->id) }}" data-name="{{ $item->name }}"
+                                        data-url="{{ route('admin.booking.destroy', $item->id) }}" data-name="{{ $item->name }}"
                                         onclick="deleteData('{{ $item->id }}')">
                                         <i class="fa-solid fa-trash-can"></i>
                                      </a>
@@ -110,14 +97,14 @@
                 <table id="style-3" class="table style-3 dt-table-hover">
                     <thead>
                         <tr>
-                            <th class="text-center">Record Id</th>
-                            <th class="text-center">Package Name</th>
-                            <th class="text-center">Client Name</th>
-                            <th class="text-center">Booking Date</th>
-                            <th class="text-center">Booking Time</th>
-                            <th class="text-center">Booking Price</th>
-                            <th class="text-center">Booking Status</th>
-                            <th class="text-center">Action</th>
+                            <th class="text-center">Id</th>
+                            <th class="text-center">Nama Paket</th>
+                            <th class="text-center">Nama Klien</th>
+                            <th class="text-center">Tanggal Pemesanan</th>
+                            <th class="text-center">Jam Pemesanan</th>
+                            <th class="text-center">Harga</th>
+                            <th class="text-center">Status Pesanan</th>
+                            <th class="text-center">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -131,17 +118,11 @@
                             <td>{{ $item->paket->price }}</td>
                             <td><span class="badge badge-warning">{{ $item->book_stat }}</span></td>
                             <td class="text-center d-flex justify-content-center align-items-center">
-                                <a  href="{{ route('admin.booking.index', $item->id) }}" style="margin-right: 10px;" class="btn btn-rounded btn-outline-warning bs-tooltip me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Show" data-original-title="Show">
-                                    <i class="fa-solid fa-eye"></i>
-                                </a>
-                                <a  href="{{ route('admin.booking.index', $item->id) }}" style="margin-right: 10px;" class="btn btn-rounded btn-outline-success bs-tooltip me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" data-original-title="Edit">
-                                    <i class="fa-solid fa-edit"></i>
-                                </a>
-                                <form id="delete-form-{{ $item->id }}" action="{{ route('admin.booking.index', $item->id) }}" method="POST">
+                                <form id="delete-form-{{ $item->id }}" action="{{ route('admin.booking.destroy', $item->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <a type="button" class="bs-tooltip btn btn-rounded btn-outline-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-original-title="Delete"
-                                        data-url="{{ route('admin.booking.index', $item->id) }}" data-name="{{ $item->name }}"
+                                        data-url="{{ route('admin.booking.destroy', $item->id) }}" data-name="{{ $item->name }}"
                                         onclick="deleteData('{{ $item->id }}')">
                                         <i class="fa-solid fa-trash-can"></i>
                                      </a>
@@ -151,22 +132,22 @@
                         @endforeach
                     </tbody>
                 </table>
-                @elseif(Str::is('admin/booking/done', request()->path()))
+                @elseif(Str::is('admin/booking/verify', request()->path()))
                 <table id="style-3" class="table style-3 dt-table-hover">
                     <thead>
                         <tr>
-                            <th class="text-center">Record Id</th>
-                            <th class="text-center">Package Name</th>
-                            <th class="text-center">Client Name</th>
-                            <th class="text-center">Booking Date</th>
-                            <th class="text-center">Booking Time</th>
-                            <th class="text-center">Booking Price</th>
-                            <th class="text-center">Booking Status</th>
-                            <th class="text-center">Action</th>
+                            <th class="text-center">Id</th>
+                            <th class="text-center">Nama Paket</th>
+                            <th class="text-center">Nama Klien</th>
+                            <th class="text-center">Tanggal Pemesanan</th>
+                            <th class="text-center">Jam Pemesanan</th>
+                            <th class="text-center">Harga</th>
+                            <th class="text-center">Status Pesanan</th>
+                            <th class="text-center">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($done as $key => $item)
+                        @foreach ($verify as $key => $item)
                         <tr class="text-center">
                             <td>{{ ++$key }}</td>
                             <td>{{ $item->paket->name }}</td>
@@ -174,19 +155,14 @@
                             <td>{{ \Carbon\Carbon::parse($item->book_date)->formatLocalized('%A, %d %B %Y') }}</td>
                             <td>{{ $item->book_time }}</td>
                             <td>{{ $item->paket->price }}</td>
-                            <td><span class="badge badge-success">{{ $item->book_stat }}</span></td>
+                            <td>{!! $item->book_stat !!}</td>
                             <td class="text-center d-flex justify-content-center align-items-center">
-                                <a  href="{{ route('admin.booking.index', $item->id) }}" style="margin-right: 10px;" class="btn btn-rounded btn-outline-warning bs-tooltip me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Show" data-original-title="Show">
-                                    <i class="fa-solid fa-eye"></i>
-                                </a>
-                                <a  href="{{ route('admin.booking.index', $item->id) }}" style="margin-right: 10px;" class="btn btn-rounded btn-outline-success bs-tooltip me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" data-original-title="Edit">
-                                    <i class="fa-solid fa-edit"></i>
-                                </a>
-                                <form id="delete-form-{{ $item->id }}" action="{{ route('admin.booking.index', $item->id) }}" method="POST">
+                                <a href="#" class="btn btn-rounded btn-outline-primary" data-bs-toggle="modal" data-bs-target="#paymentView{{$item->id}}"><i class="fa-solid fa-eye"></i></a>
+                                <form id="delete-form-{{ $item->id }}" action="{{ route('admin.booking.destroy', $item->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <a type="button" class="bs-tooltip btn btn-rounded btn-outline-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-original-title="Delete"
-                                        data-url="{{ route('admin.booking.index', $item->id) }}" data-name="{{ $item->name }}"
+                                        data-url="{{ route('admin.booking.destroy', $item->id) }}" data-name="{{ $item->name }}"
                                         onclick="deleteData('{{ $item->id }}')">
                                         <i class="fa-solid fa-trash-can"></i>
                                      </a>
@@ -201,6 +177,33 @@
         </div>
     </div>
 </div>
+@if($item->book_stat == '<span class="btn btn-sm btn-outline-warning">Menunggu Verifikasi</span>')
+@foreach ($verify as $item)
+<div class="modal fade" id="paymentView{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="tabsModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <form action="{{ route('user.book.product.payment', $item->id) }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            @method('PATCH')
+            <div class="modal-content">
+                <div class="modal-header align-items-center" style="font-size: 20px">
+                    <h5 class="modal-title" id="tabsModalLabel"><span style="font-size: 20px;">Lihat bukti pembayaran</span></h5>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <button style="" type="button" class="btn btn-rounded btn-outline-warning" data-bs-dismiss="modal" aria-label="Close">
+                            <i class="fa-solid fa-close"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group col-12 mb-3 text-center">
+                        <img src="{{ asset('storage/images/prof/'.$item->book_prof) }}" alt="" style="max-height: 300px">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+@endforeach
+@endif
 @endsection
 @section('custom-js')
 

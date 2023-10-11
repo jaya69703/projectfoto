@@ -113,7 +113,7 @@
           <li><a href="services.html">Services</a></li>
           <li><a href="projects.html">Projects</a></li>
           <li><a href="blog.html">Blog</a></li>
-          <li><a href="{{ route('root.pages.contact') }}">Contact</a></li>
+          <li><a href="{{ route('root.pages.contact') }}" class="{{ Str::is('contact-us*', request()->path()) ? 'active' : '' }}">Contact</a></li>
           @auth
           <li class="dropdown">
             <a href="#"><i class="fa-solid fa-user-circle" style="font-size: 20px; margin-right: 8px;"></i><span style="margin-right: 5px;">{{ Auth::user()->name }}</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>

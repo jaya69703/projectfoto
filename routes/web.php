@@ -61,6 +61,7 @@ Route::middleware(['auth', 'user-access:User'])->group(function () {
     Route::patch('/user/book/update-profile', [RootController::class, 'updateUser'])->name('user.book.update');
     Route::put('/user/book/update-password', [RootController::class, 'updatePass'])->name('user.book.update.password');
     Route::post('/user/book/product', [RootController::class, 'booknow'])->name('user.book.product');
+    Route::patch('/user/book/product/payment/{id}', [RootController::class, 'uploadProof'])->name('user.book.product.payment');
     Route::get('/user/book/history', [RootController::class, 'history'])->name('user.book.history');
     Route::get('/user/book/history/{id}', [RootController::class, 'historyShow'])->name('user.book.history.show');
 });
@@ -114,8 +115,10 @@ Route::middleware(['auth', 'user-access:Admin', 'isverify:1'])->group(function (
     // MANAGE BOOKING
     Route::get('/admin/booking/all', [BookingController::class, 'index'])->name('admin.booking.all');
     Route::get('/admin/booking/pending', [BookingController::class, 'index'])->name('admin.booking.pending');
+    Route::get('/admin/booking/verify', [BookingController::class, 'index'])->name('admin.booking.verify');
     Route::get('/admin/booking/progress', [BookingController::class, 'index'])->name('admin.booking.progress');
     Route::get('/admin/booking/done', [BookingController::class, 'index'])->name('admin.booking.done');
+    Route::delete('/admin/booking/delete/{id}', [BookingController::class, 'destroy'])->name('admin.booking.destroy');
 
     // EXPORT - IMPORT USER
     Route::post('/admin/usermanage/user/import', [UserManagerController::class, 'importUser'])->name('admin.usermanage.user.import');

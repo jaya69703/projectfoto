@@ -32,7 +32,7 @@ class RootController extends Controller
     {
         $data['title'] = "SkyDash";
         $data['menu'] = "Home";
-        $data['submenu'] = "About Us";
+        $data['submenu'] = "Tentang Kami";
         $data['users'] = User::where('type', '2')->get();
 
         // dd($data['users']);
@@ -44,7 +44,7 @@ class RootController extends Controller
     {
         $data['title'] = "SkyDash";
         $data['menu'] = "Home";
-        $data['submenu'] = "Contact Us";
+        $data['submenu'] = "Kontak Kami";
         $data['users'] = User::where('type', '2')->get();
 
         // dd($data['users']);
@@ -56,7 +56,7 @@ class RootController extends Controller
     {
         $data['title'] = "SkyDash";
         $data['menu'] = "Home";
-        $data['submenu'] = "Product Details";
+        $data['submenu'] = "Detail Produk";
         $data['users'] = User::where('type', '2')->get();
         $data['paket'] = Paket::findorFail($id);
         $userId = Auth::id();
@@ -72,7 +72,7 @@ class RootController extends Controller
     {
         $data['title'] = "SkyDash";
         $data['menu'] = "Home";
-        $data['submenu'] = "Book History";
+        $data['submenu'] = "Riwayat Pesanan";
         $data['users'] = User::where('type', '2')->get();
         $data['book'] = Booking::all();
         $userId = Auth::user()->id;
@@ -86,7 +86,7 @@ class RootController extends Controller
     {
         $data['title'] = "SkyDash";
         $data['menu'] = "Home";
-        $data['submenu'] = "Profile User";
+        $data['submenu'] = "Profile Pengguna";
         // $data['users'] = User::where('type', '2')->get();
         // $data['book'] = Booking::all();
 
@@ -164,6 +164,32 @@ class RootController extends Controller
         $book->save();
 
         return redirect()->route('user.book.history')->with('success', 'Pemesanan sukses!!, Silahkan lakukan pembayaran dan upload bukti pembayaran');
+    }
+
+    public function uploadProof(Request $request, $id)
+    {
+        $request->validate([
+            'book_prof' => 'required',
+        ]);
+        $book = Booking::find($id);
+        if($request->hasFile('book_prof')){
+            $oldPhoto = $book->book_prof;
+
+            if ($oldPhoto !== 'default.png' && Storage::disk('public')->exists('images/prof/' . $oldPhoto)) {
+                Storage::disk('public')->delete('images/web/' . $oldPhoto);
+            }
+
+            $filename = $request->book_prof->getClientOriginalName();
+            $request->book_prof->storeAs('images/prof/', $filename, 'public');
+            $book->book_prof = $filename;
+            $book->book_stat = 1;
+
+            $book->save();
+            // Auth()->web()->update(['image'=>$filename]);
+            // return redirect()->route('admin.app.setting.index')->with('success', 'Foto berhasil diupdate.');
+            return redirect()->route('user.book.history')->with('success', 'Upload bukti pembayaran berhasil');
+        }
+
     }
 
 }

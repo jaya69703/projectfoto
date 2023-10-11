@@ -16,6 +16,8 @@ class Booking extends Model
         'book_date',
         'book_time',
         'book_note',
+        'book_stat',
+        'book_prof',
     ];
 
     public function user()
@@ -25,5 +27,18 @@ class Booking extends Model
     public function paket()
     {
         return $this->belongsTo(Paket::class);
+    }
+
+    public function getBookStatAttribute($value)
+    {
+        if ($value === 0) {
+            return '<span class="btn btn-sm btn-outline-danger">Menunggu Pembayaran</span>';
+        } elseif ($value === 1) {
+            // Tambahkan kondisi lain jika diperlukan
+            return '<span class="btn btn-sm btn-outline-warning">Menunggu Verifikasi</span>';
+        } else {
+            // Tambahkan kondisi lain jika diperlukan
+            return '<span class="badge badge-success">Status Lainnya</span>';
+        }
     }
 }

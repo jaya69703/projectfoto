@@ -5,39 +5,41 @@
 @section('content')
 <main id="main">
 
-  <!-- ======= Breadcrumbs ======= -->
-  <div class="breadcrumbs d-flex align-items-center" style="background-image: url('{{ asset('root') }}/assets/img/breadcrumbs-bg.jpg');">
-    <div class="container position-relative d-flex flex-column align-items-center" data-aos="fade">
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs d-flex align-items-center" style="background-image: url('{{ asset('root') }}/assets/img/breadcrumbs-bg.jpg');">
+        <div class="container position-relative d-flex flex-column align-items-center text-center" data-aos="fade">
 
-      <h2>Project Details</h2>
-      <ol>
-        <li><a href="index.html">Home</a></li>
-        <li>Project Details</li>
-      </ol>
+          <h2>{{ $submenu }}</h2>
+          <ol>
+            <li><a href="/">Home</a></li>
+            <li>{{ $submenu }}</li>
+          </ol>
 
-    </div>
-  </div><!-- End Breadcrumbs -->
+        </div>
+    </div><!-- End Breadcrumbs -->
 
   <!-- ======= Projet Details Section ======= -->
   <section id="project-details" class="project-details">
     <div class="container" data-aos="fade-up" data-aos-delay="100">
 
-      <div class="position-relative h-100">
-        <div class="slides-1 portfolio-details-slider swiper">
-          <div class="swiper-wrapper align-items-center">
+        <div class="position-relative h-100" style="max-width: 560px; margin: 0 auto; text-align: center; display: flex; justify-content: center; align-items: center;">
+            <div class="slides-1 portfolio-details-slider swiper" style="">
+              <div class="swiper-wrapper align-items-center">
 
-            <div class="swiper-slide">
-              <img src="{{ asset('storage/images/paket/'.$paket->image) }}" alt="Picture-Slider">
+                <div class="swiper-slide">
+                  <img src="{{ asset('storage/images/paket/'.$paket->image) }}" alt="">
+                </div>
+                <div class="swiper-slide">
+                  <img src="{{ asset('storage/images/paket/'.$paket->image) }}" alt="">
+                </div>
+
+              </div>
+              <div class="swiper-pagination"></div>
             </div>
-
-
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
           </div>
-          <div class="swiper-pagination"></div>
-        </div>
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-button-next"></div>
 
-      </div>
 
       <div class="row justify-content-between gy-4 mt-4">
 
@@ -192,5 +194,4 @@
 </div>
 @endsection
 @section('custom-js')
-
 @endsection

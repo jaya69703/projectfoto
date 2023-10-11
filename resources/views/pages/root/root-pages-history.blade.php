@@ -1,6 +1,11 @@
 @extends('base.base-root-index')
 @section('custom-css')
+<link rel="stylesheet" type="text/css" href="{{ asset('main') }}/src/plugins/src/table/datatable/datatables.css">
 
+<link rel="stylesheet" type="text/css" href="{{ asset('main') }}/src/plugins/css/light/table/datatable/dt-global_style.css">
+<link rel="stylesheet" type="text/css" href="{{ asset('main') }}/src/plugins/css/dark/table/datatable/dt-global_style.css">
+<link rel="stylesheet" type="text/css" href="{{ asset('main') }}/src/plugins/css/light/table/datatable/custom_dt_custom.css">
+<link rel="stylesheet" type="text/css" href="{{ asset('main') }}/src/plugins/css/dark/table/datatable/custom_dt_custom.css">
 @endsection
 @section('content')
 <main id="main">
@@ -36,18 +41,18 @@
                 @endif
                 <div class="card">
                     <div class="card-header">
-                        <span style="font-size: 20px">Booking History</span>
+                        <span style="font-size: 20px">Riwayat Pesanan</span>
                     </div>
                     <div class="card-body">
-                        <table class="table">
+                        <table class="table style-3 dt-table-hover" id="style-3">
                             <thead>
                                 <tr class="text-center">
                                     <th>ID</th>
-                                    <th>User Name</th>
-                                    <th>Package Name</th>
-                                    <th>Booking Date</th>
-                                    <th>Booking Time</th>
-                                    <th>Price</th>
+                                    <th>Nama Klien</th>
+                                    <th>Nama Paket</th>
+                                    <th>Tanggal Pesanan</th>
+                                    <th>Jam Pesanan</th>
+                                    <th>Harga</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
@@ -61,9 +66,13 @@
                                     <td>{{ \Carbon\Carbon::parse($item->book_date)->formatLocalized('%A, %d %B %Y') }}</td>
                                     <td>{{ $item->book_time }}</td>
                                     <td>{{ $item->paket->price }}</td>
-                                    <td>{{ $item->book_stat }}</td>
+                                    <td>{!! $item->book_stat !!}</td>
                                     <td>
-                                        <a href="{{ route('user.book.history.show', $item->id) }}" class="btn btn-outline-primary"><i class="fa-solid fa-eye"></i></a>
+                                        @if($item->book_stat == '<span class="btn btn-sm btn-outline-danger">Menunggu Pembayaran</span>')
+                                        <a href="#" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#paymentHere{{$item->id}}"><i class="fa-solid fa-eye"></i></a>
+                                        @elseif($item->book_stat == '<span class="btn btn-sm btn-outline-warning">Menunggu Verifikasi</span>')
+                                        <a href="#" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#paymentView{{$item->id}}"><i class="fa-solid fa-eye"></i></a>
+                                        @endif
                                     </td>
                                 </tr>
                                 @empty
@@ -81,11 +90,97 @@
 
 
         </div>
-      </section><!-- End Testimonials Section -->
+    </section><!-- End Testimonials Section -->
 
-  </main><!-- End #main -->
+</main><!-- End #main -->
+@foreach ($book as $item)
+<div class="modal fade" id="paymentHere{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="tabsModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <form action="{{ route('user.book.product.payment', $item->id) }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            @method('PATCH')
+            <div class="modal-content">
+                <div class="modal-header" style="font-size: 20px">
+                    <h5 class="modal-title" id="tabsModalLabel">Scan QR Code</h5>
+                    <div class="d-flex justify-content-between align-items-center">
 
+                        <button style="margin-right: 5px;" type="submit" class="btn btn-rounded btn-outline-primary" data-bs-dismiss="modal">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                        <button style="" type="button" class="btn btn-rounded btn-outline-warning" data-bs-dismiss="modal" aria-label="Close">
+                            <i class="fa-solid fa-close"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group col-12 mb-3 text-center">
+                        <img src="{{ asset('storage/images/user/default.png') }}" alt="" style="max-height: 300px">
+                    </div>
+                    <div class="form-group col-12 mb-3">
+                        <label for="book_proof">Nilai Harga Pembayaran</label>
+                        <input type="text" disabled class="form-control" value="{{ $item->paket->price }}">
+                        @error('book_proof') <small class="text-danger">{{ $message }}</small> @enderror
+                    </div>
+                    <div class="form-group col-12 mb-3">
+                        <label for="book_prof">Bukti Pembayaran</label>
+                        <input type="file" name="book_prof" id="book_prof" class="form-control">
+                        @error('book_prof') <small class="text-danger">{{ $message }}</small> @enderror
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+@endforeach
+@if($item->book_stat == '<span class="btn btn-sm btn-outline-warning">Menunggu Verifikasi</span>')
+@foreach ($book as $item)
+<div class="modal fade" id="paymentView{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="tabsModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <form action="{{ route('user.book.product.payment', $item->id) }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            @method('PATCH')
+            <div class="modal-content">
+                <div class="modal-header align-items-center" style="font-size: 20px">
+                    <h5 class="modal-title" id="tabsModalLabel"><span style="font-size: 20px;">Lihat bukti pembayaran</span></h5>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <button style="" type="button" class="btn btn-rounded btn-outline-warning" data-bs-dismiss="modal" aria-label="Close">
+                            <i class="fa-solid fa-close"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group col-12 mb-3 text-center">
+                        <img src="{{ asset('storage/images/prof/'.$item->book_prof) }}" alt="" style="max-height: 300px">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+@endforeach
+
+@endif
 @endsection
 @section('custom-js')
+<script src="{{ asset('main') }}/src/plugins/src/table/datatable/datatables.js"></script>
 
+<script>
+    c3 = $('#style-3').DataTable({
+        "dom": "<'dt--top-section'<'row'<'col-12 col-sm-6 d-flex justify-content-sm-start justify-content-center'l><'col-12 col-sm-6 d-flex justify-content-sm-end justify-content-center mt-sm-0 mt-3'f>>>" +
+    "<'table-responsive'tr>" +
+    "<'dt--bottom-section d-sm-flex justify-content-sm-between text-center'<'dt--pages-count  mb-sm-0 mb-3'i><'dt--pagination'p>>",
+        "oLanguage": {
+            "oPaginate": { "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' },
+            "sInfo": "Showing page _PAGE_ of _PAGES_",
+            "sSearch": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>',
+            "sSearchPlaceholder": "Search...",
+        "sLengthMenu": "Results :  _MENU_",
+        },
+        "stripeClasses": [],
+        "lengthMenu": [5, 10, 20, 50],
+        "pageLength": 10
+    });
+
+    multiCheck(c3);
+</script>
 @endsection

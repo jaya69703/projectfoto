@@ -17,9 +17,9 @@ class BookingController extends Controller
         $data['menu'] = "Booking";
         $data['submenu'] = "Data Booking";
         $data['all'] = Booking::all();
-        $data['pending'] = Booking::where('book_stat', 'Pending')->get();
-        $data['progress'] = Booking::where('book_stat', 'Progress')->get();
-        $data['done'] = Booking::where('book_stat', 'Done')->get();
+        $data['pending'] = Booking::where('book_stat', 0)->get();
+        $data['verify'] = Booking::where('book_stat', 1)->get();
+        $data['done'] = Booking::where('book_stat', 2)->get();
 
         return view('pages.booking.booking-index', $data);
     }
