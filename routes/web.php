@@ -26,10 +26,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [RootController::class, 'index'])->name('root.index');
 Route::get('/about-us', [RootController::class, 'about'])->name('root.pages.about');
+Route::get('/blog', [RootController::class, 'blog'])->name('root.pages.blog');
+Route::get('/blog/single', [RootController::class, 'blogsingle'])->name('root.pages.blog.single');
 Route::get('/contact-us', [RootController::class, 'contact'])->name('root.pages.contact');
 Route::post('/contact-us/store', [MessageController::class, 'store'])->name('root.pages.contact.store');
 Route::get('/product/details/{id}', [RootController::class, 'pdetails'])->name('root.pages.pdetails');
-Route::get('/product/{pakets:slug}', [RootController::class, 'sample'])->name('root.pages.sample');
+Route::get('/projects', [RootController::class, 'projects'])->name('root.pages.projects');
+// Route::get('/product/{pakets:slug}', [RootController::class, 'sample'])->name('root.pages.sample');
+Route::get('/services', [RootController::class, 'services'])->name('root.pages.services');
 
 
 Route::get('/errors-verify', function () {
@@ -55,32 +59,31 @@ Route::get('/back', function () {
 Route::get('/announcement/show/{id}', [AnnouncementController::class, 'show'])->name('guest.app.announ.show');
 
 
-Route::middleware(['auth', 'user-access:User'])->group(function () {
-    Route::get('/user/book/changepass', [RootController::class, 'profile'])->name('user.book.changepass');
-    Route::get('/user/book/profile', [RootController::class, 'profile'])->name('user.book.profile');
-    Route::patch('/user/book/update-profile', [RootController::class, 'updateUser'])->name('user.book.update');
-    Route::put('/user/book/update-password', [RootController::class, 'updatePass'])->name('user.book.update.password');
-    Route::post('/user/book/product', [RootController::class, 'booknow'])->name('user.book.product');
-    Route::patch('/user/book/product/payment/{id}', [RootController::class, 'uploadProof'])->name('user.book.product.payment');
-    Route::get('/user/book/history', [RootController::class, 'history'])->name('user.book.history');
-    Route::get('/user/book/history/{id}', [RootController::class, 'historyShow'])->name('user.book.history.show');
+Route::middleware(['auth', 'user-access:Member'])->group(function () {
+    Route::get('/member/book/changepass', [RootController::class, 'profile'])->name('member.book.changepass');
+    Route::get('/member/book/profile', [RootController::class, 'profile'])->name('member.book.profile');
+    Route::patch('/member/book/update-profile', [RootController::class, 'updateUser'])->name('member.book.update');
+    Route::put('/member/book/update-password', [RootController::class, 'updatePass'])->name('member.book.update.password');
+    Route::post('/member/book/product', [RootController::class, 'booknow'])->name('member.book.product');
+    Route::patch('/member/book/product/payment/{id}', [RootController::class, 'uploadProof'])->name('member.book.product.payment');
+    Route::get('/member/book/history', [RootController::class, 'history'])->name('member.book.history');
+    Route::get('/member/book/history/{id}', [RootController::class, 'historyShow'])->name('member.book.history.show');
 });
-Route::middleware(['auth', 'user-access:User'])->group(function () {
+Route::middleware(['auth', 'user-access:Member'])->group(function () {
     // DASHBOARD ADMIN
-    Route::get('/user/home', [UserController::class, 'index'])->name('user.home.index');
-    Route::get('/user/profile', [UserController::class, 'show'])->name('user.profile.index');
-    Route::patch('/user/profile/update', [UserController::class, 'update'])->name('user.profile.update');
+    Route::get('/member/home', [UserController::class, 'index'])->name('member.home.index');
+    Route::get('/member/profile', [UserController::class, 'show'])->name('member.profile.index');
+    Route::patch('/member/profile/update', [UserController::class, 'update'])->name('member.profile.update');
 
     // TODO LIST APP
-    Route::get('/user/app/todo', [TodoController::class, 'index'])->name('user.app.todo.index');
-    Route::post('/user/app/todo/store', [TodoController::class, 'store'])->name('user.app.todo.store');
-    Route::delete('/user/app/todo/destroy/{id}', [TodoController::class, 'destroy'])->name('user.app.todo.destroy');
-    Route::patch('/user/app/todo/update/{id}', [TodoController::class, 'update'])->name('user.app.todo.update');
+    Route::get('/member/app/todo', [TodoController::class, 'index'])->name('member.app.todo.index');
+    Route::post('/member/app/todo/store', [TodoController::class, 'store'])->name('member.app.todo.store');
+    Route::delete('/member/app/todo/destroy/{id}', [TodoController::class, 'destroy'])->name('member.app.todo.destroy');
+    Route::patch('/member/app/todo/update/{id}', [TodoController::class, 'update'])->name('member.app.todo.update');
 });
 //
 
 Route::middleware(['auth', 'user-access:Admin', 'isverify:1'])->group(function () {
-    // DASHBOARD ADMIN
     // DASHBOARD ADMIN
     Route::get('/admin/home', [AdminController::class, 'index'])->name('admin.home.index');
     Route::get('/admin/profile', [AdminController::class, 'show'])->name('admin.profile.index');
@@ -116,28 +119,28 @@ Route::middleware(['auth', 'user-access:Admin', 'isverify:1'])->group(function (
     Route::get('/admin/booking/all', [BookingController::class, 'index'])->name('admin.booking.all');
     Route::get('/admin/booking/pending', [BookingController::class, 'index'])->name('admin.booking.pending');
     Route::get('/admin/booking/verify', [BookingController::class, 'index'])->name('admin.booking.verify');
-    Route::get('/admin/booking/progress', [BookingController::class, 'index'])->name('admin.booking.progress');
-    Route::get('/admin/booking/done', [BookingController::class, 'index'])->name('admin.booking.done');
     Route::delete('/admin/booking/delete/{id}', [BookingController::class, 'destroy'])->name('admin.booking.destroy');
     Route::patch('/admin/book/product/verify/{id}', [BookingController::class, 'verifyPayment'])->name('admin.book.product.verify');
 
 
     // USER MANAGER CRUD
-    Route::get('/admin/usermanage/admin', [UserManagerController::class, 'index'])->name('admin.usermanage.admin');
     Route::get('/admin/usermanage/member', [UserManagerController::class, 'index'])->name('admin.usermanage.member');
+    Route::get('/admin/usermanage/member-plus', [UserManagerController::class, 'index'])->name('admin.usermanage.memberplus');
+    Route::get('/admin/usermanage/author', [UserManagerController::class, 'index'])->name('admin.usermanage.author');
+    Route::get('/admin/usermanage/admin', [UserManagerController::class, 'index'])->name('admin.usermanage.admin');
     // Tambah User
     Route::post('/admin/usermanage/store', [UserManagerController::class, 'store'])->name('admin.usermanage.store');
 
 
 
-    Route::post('/admin/usermanage/user/store', [UserManagerController::class, 'store'])->name('admin.usermanage.user.store');
-    Route::get('/admin/usermanage/user/edit/{id}', [UserManagerController::class, 'edit'])->name('admin.usermanage.user.edit');
-    Route::get('/admin/usermanage/user/show/{id}', [UserManagerController::class, 'store'])->name('admin.usermanage.user.show');
-    Route::patch('/admin/usermanage/user/update/{id}', [UserManagerController::class, 'update'])->name('admin.usermanage.user.update');
+    Route::post('/admin/usermanage/member/store', [UserManagerController::class, 'store'])->name('admin.usermanage.member.store');
+    Route::get('/admin/usermanage/member/edit/{id}', [UserManagerController::class, 'edit'])->name('admin.usermanage.member.edit');
+    Route::get('/admin/usermanage/member/show/{id}', [UserManagerController::class, 'store'])->name('admin.usermanage.member.show');
+    Route::patch('/admin/usermanage/member/update/{id}', [UserManagerController::class, 'update'])->name('admin.usermanage.member.update');
     Route::patch('/admin/usermanage/worker/update/{id}', [UserManagerController::class, 'update'])->name('admin.usermanage.worker.update');
-    Route::delete('/admin/usermanage/user/delete/{id}', [UserManagerController::class, 'Userdestroy'])->name('admin.usermanage.user.destroy');
+    Route::delete('/admin/usermanage/member/delete/{id}', [UserManagerController::class, 'Userdestroy'])->name('admin.usermanage.member.destroy');
     Route::delete('/admin/usermanage/worker/delete/{id}', [UserManagerController::class, 'destroy'])->name('admin.usermanage.worker.destroy');
-    Route::get('/admin/usermanage/user/create', [UserManagerController::class, 'create'])->name('admin.usermanage.user.create');
+    Route::get('/admin/usermanage/member/create', [UserManagerController::class, 'create'])->name('admin.usermanage.member.create');
 
     // ANNOUNCEMENT LIST APP
     Route::get('/admin/app/setting', [WebSettingController::class, 'index'])->name('admin.app.setting.index');

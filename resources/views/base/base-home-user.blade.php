@@ -1,4 +1,4 @@
-@if(Auth::user()->type == 'User')
+@if(Auth::user()->type == 'Member')
 
 
 @endif

@@ -35,9 +35,27 @@ class RootController extends Controller
         $data['submenu'] = "Tentang Kami";
         $data['users'] = User::where('type', '2')->get();
 
-        // dd($data['users']);
-
         return view('pages.root.root-pages-about', $data);
+    }
+
+    public function blog()
+    {
+        $data['title'] = "SkyDash";
+        $data['menu'] = "Home";
+        $data['submenu'] = "Blog";
+        $data['users'] = User::where('type', '2')->get();
+
+        return view('pages.root.root-pages-blog', $data);
+    }
+
+    public function blogsingle()
+    {
+        $data['title'] = "SkyDash";
+        $data['menu'] = "Home";
+        $data['submenu'] = "Blog Single Page";
+        $data['users'] = User::where('type', '2')->get();
+
+        return view('pages.root.root-pages-blog-single', $data);
     }
 
     public function contact()
@@ -95,6 +113,32 @@ class RootController extends Controller
         return view('pages.root.root-pages-profile', $data);
     }
 
+    public function projects()
+    {
+        $data['title'] = "SkyDash";
+        $data['menu'] = "Home";
+        $data['submenu'] = "Daftar Projects";
+        // $data['users'] = User::where('type', '2')->get();
+        // $data['book'] = Booking::all();
+
+        // dd($data['users']);
+
+        return view('pages.root.root-pages-projects', $data);
+    }
+
+    public function services()
+    {
+        $data['title'] = "SkyDash";
+        $data['menu'] = "Home";
+        $data['submenu'] = "Layanan Kami";
+        // $data['users'] = User::where('type', '2')->get();
+        // $data['book'] = Booking::all();
+
+        // dd($data['users']);
+
+        return view('pages.root.root-pages-services', $data);
+    }
+
     public function updateUser(Request $request)
     {
         $userId = Auth::id();
@@ -126,11 +170,11 @@ class RootController extends Controller
             // $user->update(['image' => $filename]);
             // $user->save();
             // dd($oldPhoto);
-            return redirect()->route('user.book.profile')->with('success', 'Foto berhasil diupdate.');
+            return redirect()->route('member.book.profile')->with('success', 'Foto berhasil diupdate.');
         }
 
 
-        return redirect()->route('user.book.profile')->with('success', 'Data berhasil diupdate.');
+        return redirect()->route('member.book.profile')->with('success', 'Data berhasil diupdate.');
     }
 
     public function updatePass(Request $request)
@@ -144,7 +188,7 @@ class RootController extends Controller
             'password' => Hash::make($validated['password']),
         ]);
 
-        return redirect()->route('user.book.changepass')->with('status', 'password-updated');
+        return redirect()->route('member.book.changepass')->with('status', 'password-updated');
     }
 
     public function booknow(Request $request)
@@ -163,7 +207,7 @@ class RootController extends Controller
 
         $book->save();
 
-        return redirect()->route('user.book.history')->with('success', 'Pemesanan sukses!!, Silahkan lakukan pembayaran dan upload bukti pembayaran');
+        return redirect()->route('member.book.history')->with('success', 'Pemesanan sukses!!, Silahkan lakukan pembayaran dan upload bukti pembayaran');
     }
 
     public function uploadProof(Request $request, $id)
@@ -190,7 +234,7 @@ class RootController extends Controller
             $book->save();
             // Auth()->web()->update(['image'=>$filename]);
             // return redirect()->route('admin.app.setting.index')->with('success', 'Foto berhasil diupdate.');
-            return redirect()->route('user.book.history')->with('success', 'Upload bukti pembayaran berhasil');
+            return redirect()->route('member.book.history')->with('success', 'Upload bukti pembayaran berhasil');
         }
 
     }

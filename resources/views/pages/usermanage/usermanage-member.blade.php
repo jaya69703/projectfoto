@@ -13,24 +13,24 @@
             @endif
         </td>
         <td class="text-center d-flex justify-content-center align-items-center">
-            <a  href="{{ route('admin.usermanage.user.show', $item->id) }}" style="margin-right: 10px;" class="btn btn-rounded btn-outline-warning bs-tooltip me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Show" data-original-title="Show">
+            <a  href="{{ route('admin.usermanage.member.show', $item->id) }}" style="margin-right: 10px;" class="btn btn-rounded btn-outline-warning bs-tooltip me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Show" data-original-title="Show">
                 <i class="fa-solid fa-eye"></i>
             </a>
-            @if($item->type == 'User')
+            @if($item->type == 'Member')
             <a  href="#" data-bs-toggle="modal" data-bs-target="#editUser{{$item->id}}" style="margin-right: 10px;" class="btn btn-rounded btn-outline-success bs-tooltip me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" data-original-title="Edit">
                 <i class="fa-solid fa-edit"></i>
             </a>
-            <form id="delete-form-{{ $item->id }}" action="{{ route('admin.usermanage.user.destroy', $item->id) }}" method="POST">
+            <form id="delete-form-{{ $item->id }}" action="{{ route('admin.usermanage.member.destroy', $item->id) }}" method="POST">
                 @csrf
                 @method('DELETE')
                 <a type="button" class="bs-tooltip btn btn-rounded btn-outline-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-original-title="Delete"
-                    data-url="{{ route('admin.usermanage.user.destroy', $item->id) }}" data-name="{{ $item->name }}"
+                    data-url="{{ route('admin.usermanage.member.destroy', $item->id) }}" data-name="{{ $item->name }}"
                     onclick="deleteData('{{ $item->id }}')">
                     <i class="fa-solid fa-trash-can"></i>
                  </a>
             </form>
             @else
-            <a  href="{{ route('admin.usermanage.user.edit', $item->id) }}" style="margin-right: 10px;" class="btn btn-rounded btn-outline-success bs-tooltip me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" data-original-title="Edit">
+            <a  href="{{ route('admin.usermanage.member.edit', $item->id) }}" style="margin-right: 10px;" class="btn btn-rounded btn-outline-success bs-tooltip me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" data-original-title="Edit">
                 <i class="fa-solid fa-edit"></i>
             </a>
             <form id="delete-form-{{ $item->id }}" action="{{ route('admin.usermanage.worker.destroy', $item->id) }}" method="POST">

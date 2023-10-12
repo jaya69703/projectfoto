@@ -69,8 +69,9 @@
                         <select name="type" id="type" class="form-control">
                             <option value="" selected>Choose Type User</option>
                             <option value="0">Member</option>
-                            <option value="1">Author</option>
-                            <option value="2">Admin</option>
+                            <option value="1">Member Plus</option>
+                            <option value="2">Author</option>
+                            <option value="3">Admin</option>
                         </select>
                     </div>
                 </div>

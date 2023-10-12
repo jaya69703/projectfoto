@@ -54,12 +54,14 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        if(Auth::user()->type == 'User'){
-            return redirect()->intended(RouteServiceProvider::USERHOME);
-        } elseif (Auth::user()->type == 'Worker') {
-            return redirect()->intended(RouteServiceProvider::WORKHOME);
+        if(Auth::user()->type == 'Member'){
+            return redirect()->intended(RouteServiceProvider::HOME_MEMBER)->with('success', 'Signed in successfully');
+        } elseif (Auth::user()->type == 'Member Plus') {
+            return redirect()->intended(RouteServiceProvider::HOME_MEMBERP)->with('success', 'Signed in successfully');
+        } elseif (Auth::user()->type == 'Author') {
+            return redirect()->intended(RouteServiceProvider::HOME_AUTHOR)->with('success', 'Signed in successfully');
         } elseif (Auth::user()->type == 'Admin') {
-            return redirect()->intended(RouteServiceProvider::ADMINHOME);
+            return redirect()->intended(RouteServiceProvider::HOME_ADMIN)->with('success', 'Signed in successfully');
         }
     }
 }

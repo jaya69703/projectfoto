@@ -93,11 +93,11 @@ class UserController extends Controller
             // $user->update(['image' => $filename]);
             // $user->save();
             // dd($oldPhoto);
-            return redirect()->route('user.profile.index')->with('success', 'Foto berhasil diupdate.');
+            return redirect()->route('member.profile.index')->with('success', 'Foto berhasil diupdate.');
         }
 
 
-        return redirect()->route('user.profile.index')->with('success', 'Data berhasil diupdate.');
+        return redirect()->route('member.profile.index')->with('success', 'Data berhasil diupdate.');
     }
 
     /**

@@ -15,10 +15,10 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
+        // Default Member
         DB::table('users')->insert([
-            'id' => '2',
             // GENERAL INFO ACCOUNT
-            'name' => 'User Account',
+            'name' => 'Member Account',
             'email' => 'useraccount@example.com',
             'image' => 'default.png',
             'phone' => '089612345679',
@@ -28,8 +28,56 @@ class UserSeeder extends Seeder
             'isverify' => '1',
             'type' => '0',
         ]);
+        // Default Member Plus
         DB::table('users')->insert([
-            'id' => '1',
+            // GENERAL INFO ACCOUNT
+            'name' => 'Member Plus',
+            'email' => 'memberplus@example.com',
+            'image' => 'default.png',
+            'phone' => '089612345672',
+            'password' => Hash::make('memberplus'),
+            // SPECIAL IDENTITY
+            'code' => '000002',
+            'isverify' => '1',
+            'type' => '1',
+        ]);
+        DB::table('members')->insert([
+            // IDENTITAS PENGGUNA
+            'member_name' => 'Member Plus',
+
+            // PRIVATE IDENTITY
+            'member_phone' => '089612345672',
+            'member_email' => 'memberplus@example.com',
+
+            // SPECIAL IDENTITY
+            'code' => '000002',
+        ]);
+        // Default Member Plus
+        DB::table('users')->insert([
+            // GENERAL INFO ACCOUNT
+            'name' => 'Author',
+            'email' => 'author@example.com',
+            'image' => 'default.png',
+            'phone' => '089612345677',
+            'password' => Hash::make('author'),
+            // SPECIAL IDENTITY
+            'code' => '000003',
+            'isverify' => '1',
+            'type' => '3',
+        ]);
+        DB::table('authors')->insert([
+            // IDENTITAS PENGGUNA
+            'author_name' => 'Author',
+
+            // PRIVATE IDENTITY
+            'author_phone' => '089612345677',
+            'author_email' => 'author@example.com',
+
+            // SPECIAL IDENTITY
+            'code' => '000003',
+        ]);
+        // Default Admin
+        DB::table('users')->insert([
             // GENERAL INFO ACCOUNT
             'name' => 'Super Administrator',
             'email' => 'superadmin@example.com',
@@ -39,24 +87,8 @@ class UserSeeder extends Seeder
             // SPECIAL IDENTITY
             'code' => '000000',
             'isverify' => '1',
-            'type' => '2',
+            'type' => '3',
         ]);
-        DB::table('worker')->insert([
-            'id' => '1',
-            // IDENTITAS PENGGUNA
-            'worker_name' => 'Super Administrator',
-            'divisi_id' => '1',
-            'position_id' => '1',
-
-            // PRIVATE IDENTITY
-            'worker_phone' => '089612345670',
-            'worker_email' => 'superadmin@example.com',
-
-
-            // SPECIAL IDENTITY
-            'code' => '000000',
-        ]);
-
 
     }
 }

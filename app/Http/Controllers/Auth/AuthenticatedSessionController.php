@@ -32,12 +32,14 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        if(Auth::user()->type == 'User'){
-            return redirect()->intended(RouteServiceProvider::USERHOME)->with('success', 'Signed in successfully');
-        } elseif (Auth::user()->type == 'Worker') {
-            return redirect()->intended(RouteServiceProvider::WORKHOME)->with('success', 'Signed in successfully');
+        if(Auth::user()->type == 'Member'){
+            return redirect()->intended(RouteServiceProvider::HOME_MEMBER)->with('success', 'Signed in successfully');
+        } elseif (Auth::user()->type == 'Member Plus') {
+            return redirect()->intended(RouteServiceProvider::HOME_MEMBERP)->with('success', 'Signed in successfully');
+        } elseif (Auth::user()->type == 'Author') {
+            return redirect()->intended(RouteServiceProvider::HOME_AUTHOR)->with('success', 'Signed in successfully');
         } elseif (Auth::user()->type == 'Admin') {
-            return redirect()->intended(RouteServiceProvider::ADMINHOME)->with('success', 'Signed in successfully');
+            return redirect()->intended(RouteServiceProvider::HOME_ADMIN)->with('success', 'Signed in successfully');
         }
     }
 

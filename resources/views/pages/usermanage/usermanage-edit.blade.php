@@ -9,8 +9,8 @@
 @section('content')
     <div class="layout-top-spacing">
 
-        @if (Auth::user()->type == 'User')
-        <form action="{{ route('admin.usermanage.user.update', $usermanage->id) }}" method="POST" enctype="multipart/form-data">
+        @if (Auth::user()->type == 'Member')
+        <form action="{{ route('admin.usermanage.member.update', $usermanage->id) }}" method="POST" enctype="multipart/form-data">
           @csrf
           @method('PATCH')
           <div class="row">

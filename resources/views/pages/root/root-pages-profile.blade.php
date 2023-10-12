@@ -33,8 +33,8 @@
 
           <div class="row">
 
-              @if(Str::is('user/book/profile', request()->path()))
-                <form action="{{ route('user.book.update') }}" method="POST" enctype="multipart/form-data">
+              @if(Str::is('member/book/profile', request()->path()))
+                <form action="{{ route('member.book.update') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PATCH')
                     <div class="row">
@@ -102,8 +102,8 @@
                         </div>
                     </div>
                 </form>
-              @elseif(Str::is('user/book/changepass', request()->path()))
-                <form action="{{ route('user.book.update.password') }}" method="POST" enctype="multipart/form-data">
+              @elseif(Str::is('member/book/changepass', request()->path()))
+                <form action="{{ route('member.book.update.password') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     @if(session('success'))

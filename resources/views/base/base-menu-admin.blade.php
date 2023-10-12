@@ -28,7 +28,7 @@
     <div class="heading text-white">MENU ADMIN</div>
 </li>
 <li class="menu">
-    <a href="#manageUser" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+    <a href="#manageUser" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle {{ Request::is('admin/usermanage/admin*') || Request::is('admin/usermanage/member*') ? 'active' : '' }}">
         <div class="d-flex align-items-center justify-content-between">
             <i class="fa-solid fa-users" style="font-size: 20px; margin-right: 10px;" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></i>
             <span>Kelola Pengguna</span>
@@ -38,11 +38,17 @@
         </div>
     </a>
     <ul class="collapse submenu list-unstyled" id="manageUser" data-bs-parent="#accordionExample">
-        <li class="menu {{ Str::is('/admin/usermanage/admin*', request()->path()) ? 'active' : '' }}">
-            <a href="{{ url('/admin/usermanage/admin') }}">Pengguna Admin </a>
-        </li>
-        <li class="menu {{ Str::is('/admin/usermanage/member*', request()->path()) ? 'active' : '' }}">
+        <li class="menu {{ Str::is('admin/usermanage/member*', request()->path()) ? 'active' : '' }}">
             <a href="{{ url('/admin/usermanage/member') }}">Pengguna Member </a>
+        </li>
+        <li class="menu {{ Str::is('admin/usermanage/member-plus*', request()->path()) ? 'active' : '' }}">
+            <a href="{{ url('/admin/usermanage/member-plus') }}">Pengguna Member Plus </a>
+        </li>
+        <li class="menu {{ Str::is('admin/usermanage/author*', request()->path()) ? 'active' : '' }}">
+            <a href="{{ url('/admin/usermanage/author') }}">Pengguna Author </a>
+        </li>
+        <li class="menu {{ Str::is('admin/usermanage/admin*', request()->path()) ? 'active' : '' }}">
+            <a href="{{ url('/admin/usermanage/admin') }}">Pengguna Admin </a>
         </li>
     </ul>
 </li>

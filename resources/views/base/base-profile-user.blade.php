@@ -1,5 +1,5 @@
-@if(Auth::user()->type == 'User')
-<form action="{{ route('user.profile.update') }}" method="POST" enctype="multipart/form-data">
+@if(Auth::user()->type == 'Member')
+<form action="{{ route('member.profile.update') }}" method="POST" enctype="multipart/form-data">
   @csrf
   @method('PATCH')
   <div class="row">

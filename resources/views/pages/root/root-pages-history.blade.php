@@ -101,7 +101,7 @@
 @foreach ($book as $item)
 <div class="modal fade" id="paymentHere{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="tabsModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <form action="{{ route('user.book.product.payment', $item->id) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('member.book.product.payment', $item->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PATCH')
             <div class="modal-content">
@@ -141,7 +141,7 @@
 @if($item->book_stat == 'Menunggu Verifikasi')
 <div class="modal fade" id="paymentView{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="tabsModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <form action="{{ route('user.book.product.payment', $item->id) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('member.book.product.payment', $item->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PATCH')
             <div class="modal-content">

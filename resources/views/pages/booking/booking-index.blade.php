@@ -204,8 +204,12 @@
                         <label for="book_stat">Verifikasi Pembayaran</label>
                         <select name="book_stat" id="book_stat" class="form-control">
                             <option value="1" {{ $item->book_stat == 'Menunggu Verifikasi' ? 'selected' : '' }}>Menunggu Verifikasi</option>
-                            <option value="2" {{ $item->book_stat == 'Verifikasi Gagal'    ? 'selected' : '' }}>Verifikasi Gagal</option>
-                            <option value="3" {{ $item->book_stat == 'Verifikasi Berhasil' ? 'selected' : '' }}>Verifikasi Berhasil</option>
+                            <option value="2" {{ $item->book_stat == 'Diterima'    ? 'selected' : '' }}>Diterima</option>
+                            <option value="3" {{ $item->book_stat == 'Ditolak' ? 'selected' : '' }}>Ditolak</option>
+                            <option value="4" {{ $item->book_stat == 'Menunggu Penjadwalan' ? 'selected' : '' }}>Menunggu Penjadwalan</option>
+                            <option value="5" {{ $item->book_stat == 'Sedang Foto Shot' ? 'selected' : '' }}>Sedang Foto Shot</option>
+                            <option value="6" {{ $item->book_stat == 'Tahap Editing Foto' ? 'selected' : '' }}>Tahap Editing Foto</option>
+                            <option value="7" {{ $item->book_stat == 'Selesai' ? 'selected' : '' }}>Selesai</option>
                         </select>
                     </div>
                 </div>

@@ -95,7 +95,7 @@
 {{-- Modal Booking Now --}}
 <div class="modal fade" id="bookNow" tabindex="-1" role="dialog" aria-labelledby="tabsModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <form action="{{ route('user.book.product') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('member.book.product') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="modal-content">
                 <div class="modal-header" style="font-size: 20px">

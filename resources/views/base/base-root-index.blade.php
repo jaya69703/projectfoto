@@ -110,21 +110,21 @@
         <ul>
           <li><a href="{{ route('root.index') }}" class="{{ Str::is('/', request()->path()) ? 'active' : '' }}">Home</a></li>
           <li><a href="{{ route('root.pages.about') }}" class="{{ Str::is('about-us*', request()->path()) ? 'active' : '' }}">About</a></li>
-          <li><a href="services.html">Services</a></li>
-          <li><a href="projects.html">Projects</a></li>
-          <li><a href="blog.html">Blog</a></li>
+          <li><a href="{{ route('root.pages.services') }}" class="{{ Str::is('services*', request()->path()) ? 'active' : '' }}">Services</a></li>
+          <li><a href="{{ route('root.pages.projects') }}" class="{{ Str::is('projects*', request()->path()) ? 'active' : '' }}">Projects</a></li>
+          <li><a href="{{ route('root.pages.blog') }}"  class="{{ Str::is('blog*', request()->path()) ? 'active' : '' }}">Blog</a></li>
           <li><a href="{{ route('root.pages.contact') }}" class="{{ Str::is('contact-us*', request()->path()) ? 'active' : '' }}">Contact</a></li>
           @auth
           <li class="dropdown">
             <a href="#"><i class="fa-solid fa-user-circle" style="font-size: 20px; margin-right: 8px;"></i><span style="margin-right: 5px;">{{ Auth::user()->name }}</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
-                @if(Auth::user()->type === 'User')
-                <li><a href="{{ route('user.book.profile') }}">Profile User</a></li>
+                @if(Auth::user()->type === 'Member')
+                <li><a href="{{ route('member.book.profile') }}">Profile User</a></li>
                 @else
                 <li><a href="{{ route('admin.home.index') }}">Panel Admin</a></li>
                 @endif
-                <li><a href="{{ route('user.book.changepass') }}">Change Password</a></li>
-                <li><a href="{{ route('user.book.history') }}">Rent History</a></li>
+                <li><a href="{{ route('member.book.changepass') }}">Change Password</a></li>
+                <li><a href="{{ route('member.book.history') }}">Rent History</a></li>
                 <li>
                     <a href="#" onclick="logout(event)">Sign Out</a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
