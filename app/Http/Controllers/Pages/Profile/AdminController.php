@@ -7,7 +7,9 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Worker;
+use App\Models\Booking;
 use Auth;
+use Carbon\Carbon;
 
 class AdminController extends Controller
 {
@@ -16,10 +18,58 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $data['title'] = "SkyDash";
-        $data['menu'] = "Dashboard";
-        $data['submenu'] = Auth::user()->name;
+        // $data['title'] = "SkyDash";
+        // $data['menu'] = "Dashboard";
+        // $data['submenu'] = Auth::user()->name;
 
+        $products = Booking::select('paket_id')
+        ->groupBy('paket_id')
+        ->get();
+
+        $dates = [];
+        $productsData = [];
+
+        foreach ($products as $product) {
+            $paketId = $product->paket_id;
+            $productName = $product->paket->name;
+            $productData = [];
+
+            for ($i = 0; $i <= 12; $i++) {
+                $date = Carbon::now()->startOfMonth()->addMonths($i)->format('m/Y');
+                $startOfMonth = Carbon::now()->startOfMonth()->addMonths($i);
+                $endOfMonth = Carbon::now()->startOfMonth()->addMonths($i)->endOfMonth();
+
+                $count = Booking::where('paket_id', $paketId)
+                    ->whereBetween('created_at', [$startOfMonth, $endOfMonth])
+                    ->count();
+
+                $productData[] = $count;
+
+                if (!in_array($date, $dates)) {
+                    $dates[] = $date;
+                }
+            }
+
+            $productsData[] = [
+                'name' => $productName,
+                'data' => $productData,
+            ];
+        }
+
+        $datebook = Carbon::now()->toDateString();
+
+        $data = [
+            'productsData' => $productsData,
+            'dates' => $dates,
+            'menu' => 'Dashboard',
+            'submenu' => Auth::user()->name,
+            'bookday' => Booking::where('book_date', $datebook)
+            ->whereIn('book_stat', [2,4])
+            ->orderBy('book_time', 'asc')
+            ->paginate(5)
+        ];
+
+        // dd($data['bookday']);
         return view('base.base-home', $data);
     }
 

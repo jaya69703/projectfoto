@@ -11,7 +11,6 @@
             <div class="card-header d-flex justify-content-between align-items-center">
                 <span style="font-size: 20px">{{ $menu }}</span>
                 <span class="align-items-center">
-                    <a href="{{ route('admin.paket.index') }}" class="btn btn-outline-success btn-rounded"><i class="fa-solid fa-download"></i></a>
                     <a href="" class="btn btn-outline-warning btn-rounded"><i class="fa-solid fa-sync"></i></a>
                 </span>
             </div>

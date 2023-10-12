@@ -32,13 +32,24 @@ class Booking extends Model
     public function getBookStatAttribute($value)
     {
         if ($value === 0) {
-            return '<span class="btn btn-sm btn-outline-danger">Menunggu Pembayaran</span>';
+            return 'Menunggu Pembayaran';
         } elseif ($value === 1) {
-            // Tambahkan kondisi lain jika diperlukan
-            return '<span class="btn btn-sm btn-outline-warning">Menunggu Verifikasi</span>';
+            return 'Menunggu Verifikasi';
+        } elseif ($value === 2) {
+            return 'Diterima';
+        } elseif ($value === 3) {
+            return 'Ditolak';
+        } elseif ($value === 4) {
+            return 'Menunggu Penjadwalan';
+        } elseif ($value === 5) {
+            return 'Sedang Foto Shoot';
+        } elseif ($value === 6) {
+            return 'Tahap Editing Hasil Foto';
+        } elseif ($value === 7) {
+            return 'Selesai';
         } else {
-            // Tambahkan kondisi lain jika diperlukan
-            return '<span class="badge badge-success">Status Lainnya</span>';
+            return 'Status Tidak Diketahui';
         }
     }
+
 }

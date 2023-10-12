@@ -36,7 +36,7 @@
                       <div class="card-header d-flex align-items-center justify-content-between">
                           <span class="header" style="font-size: 20px;">{{ $submenu }}</span>
                           <span class="header">
-                                <a href="{{ route('admin.usermanage.user.index') }}" class="btn btn-outline-warning btn-rounded"><i class="fa-solid fa-backward"></i></a>
+                                <a href="{{ route('admin.usermanage.admin') }}" class="btn btn-outline-warning btn-rounded"><i class="fa-solid fa-backward"></i></a>
                               <button type="submit" class="btn btn-outline-primary btn-rounded"><i class="fa-solid fa-floppy-disk"></i> Save</button>
                           </span>
                       </div>
@@ -206,7 +206,7 @@
                       <div class="card-header d-flex align-items-center justify-content-between">
                           <span class="header" style="font-size: 20px;">{{ $submenu }}</span>
                           <span class="header">
-                                <a href="{{ route('admin.usermanage.user.index') }}" class="btn btn-outline-warning btn-rounded"><i class="fa-solid fa-backward"></i></a>
+                                <a href="{{ route('admin.usermanage.admin') }}" class="btn btn-outline-warning btn-rounded"><i class="fa-solid fa-backward"></i></a>
                               <button type="submit" class="btn btn-outline-primary btn-rounded"><i class="fa-solid fa-floppy-disk"></i> Save</button>
                           </span>
                       </div>

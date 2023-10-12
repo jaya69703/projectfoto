@@ -16,8 +16,8 @@ class PaketController extends Controller
     public function index()
     {
         $data['title'] = "SkyDash";
-        $data['menu'] = "Package Manager";
-        $data['submenu'] = "Package";
+        $data['menu'] = "Kelola Paket";
+        $data['submenu'] = "Paket";
         $data['paket'] = Paket::all();
 
         return view('pages.paket.paket-index', $data);

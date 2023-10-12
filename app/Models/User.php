@@ -59,6 +59,7 @@ class User extends Authenticatable
         return new Attribute(
             get: function ($value) {
                 return ["User", "Worker", "Admin"][$value];
+                // return ["Member", "Member Plus", "Author", "Admin"][$value];
             }
         );
     }

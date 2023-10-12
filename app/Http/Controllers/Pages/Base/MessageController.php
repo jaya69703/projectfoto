@@ -14,8 +14,8 @@ class MessageController extends Controller
     public function index()
     {
         $data['title'] = 'Skydash';
-        $data['menu'] = 'Message';
-        $data['submenu'] = 'Index';
+        $data['menu'] = 'Kelola Pesan';
+        $data['submenu'] = 'Daftar Pesan';
         $data['message'] = Message::all();
 
         return view('pages.message.message-index', $data);
@@ -57,8 +57,8 @@ class MessageController extends Controller
     public function show(string $id)
     {
         $data['title'] = 'Skydash';
-        $data['menu'] = 'Message';
-        $data['submenu'] = 'Show';
+        $data['menu'] = 'Kelola Pesan';
+        $data['submenu'] = 'Lihat Pesanan';
         $data['message'] = Message::findorFail($id);
 
         return view('pages.message.message-show', $data);

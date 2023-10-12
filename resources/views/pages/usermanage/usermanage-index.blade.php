@@ -9,10 +9,9 @@
     <div class="col-lg-12 col-12">
         <div class="card mb-2">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <span style="font-size: 20px">{{ $submenu }}</span>
+                <span style="font-size: 20px">Daftar {{ $submenu }}</span>
                 <span class="align-items-center">
                     <a href="#" data-bs-toggle="modal" data-bs-target="#createUser" class="btn btn-outline-primary btn-rounded"><i class="fa-solid fa-user-plus"></i></a>
-                    <a href="{{ route('admin.usermanage.user.export') }}" class="btn btn-outline-success btn-rounded"><i class="fa-solid fa-download"></i></a>
                     <a href="" class="btn btn-outline-warning btn-rounded"><i class="fa-solid fa-sync"></i></a>
                 </span>
             </div>
@@ -27,114 +26,17 @@
                             <th class="text-center">Action</th>
                         </tr>
                     </thead>
-                    @if(Str::is('admin/usermanage/admin', request()->path()))
-                    <tbody>
-                        @foreach ($admin as $key => $item)
-                        <tr>
-                            <td class="text-center">{{ ++$key }}</td>
-                            <td>{{ $item->name }}</td>
-                            <td class="text-center">{{ $item->phone }}</td>
-                            <td class="text-center">
-                                @if($item->isverify === 0)
-                                <span class="badge badge-danger">Belum Verify</span>
-                                @elseif($item->isverify === 1)
-                                <span class="badge badge-success">Sudah Verify</span>
-                                @endif
-                            </td>
-                            <td class="text-center d-flex justify-content-center align-items-center">
-                                <a  href="{{ route('admin.usermanage.user.show', $item->id) }}" style="margin-right: 10px;" class="btn btn-rounded btn-outline-warning bs-tooltip me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Show" data-original-title="Show">
-                                    <i class="fa-solid fa-eye"></i>
-                                </a>
-                                @if($item->type == 'User')
-                                <a  href="#" data-bs-toggle="modal" data-bs-target="#editUser{{$item->id}}" style="margin-right: 10px;" class="btn btn-rounded btn-outline-success bs-tooltip me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" data-original-title="Edit">
-                                    <i class="fa-solid fa-edit"></i>
-                                </a>
-                                <form id="delete-form-{{ $item->id }}" action="{{ route('admin.usermanage.user.destroy', $item->id) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <a type="button" class="bs-tooltip btn btn-rounded btn-outline-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-original-title="Delete"
-                                        data-url="{{ route('admin.usermanage.user.destroy', $item->id) }}" data-name="{{ $item->name }}"
-                                        onclick="deleteData('{{ $item->id }}')">
-                                        <i class="fa-solid fa-trash-can"></i>
-                                     </a>
-                                </form>
-                                @else
-                                <a  href="{{ route('admin.usermanage.user.edit', $item->id) }}" style="margin-right: 10px;" class="btn btn-rounded btn-outline-success bs-tooltip me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" data-original-title="Edit">
-                                    <i class="fa-solid fa-edit"></i>
-                                </a>
-                                <form id="delete-form-{{ $item->id }}" action="{{ route('admin.usermanage.worker.destroy', $item->id) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <a type="button" class="bs-tooltip btn btn-rounded btn-outline-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-original-title="Delete"
-                                        data-url="{{ route('admin.usermanage.worker.destroy', $item->id) }}" data-name="{{ $item->name }}"
-                                        onclick="deleteData('{{ $item->id }}')">
-                                        <i class="fa-solid fa-trash-can"></i>
-                                     </a>
-                                </form>
-                                @endif
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                    @elseif(Str::is('admin/usermanage/member', request()->path()))
-                    <tbody>
-                        @foreach ($member as $key => $item)
-                        <tr>
-                            <td class="text-center">{{ ++$key }}</td>
-                            <td>{{ $item->name }}</td>
-                            <td class="text-center">{{ $item->phone }}</td>
-                            <td class="text-center">
-                                @if($item->isverify === 0)
-                                <span class="badge badge-danger">Belum Verify</span>
-                                @elseif($item->isverify === 1)
-                                <span class="badge badge-success">Sudah Verify</span>
-                                @endif
-                            </td>
-                            <td class="text-center d-flex justify-content-center align-items-center">
-                                <a  href="{{ route('admin.usermanage.user.show', $item->id) }}" style="margin-right: 10px;" class="btn btn-rounded btn-outline-warning bs-tooltip me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Show" data-original-title="Show">
-                                    <i class="fa-solid fa-eye"></i>
-                                </a>
-                                @if($item->type == 'User')
-                                <a  href="#" data-bs-toggle="modal" data-bs-target="#editUser{{$item->id}}" style="margin-right: 10px;" class="btn btn-rounded btn-outline-success bs-tooltip me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" data-original-title="Edit">
-                                    <i class="fa-solid fa-edit"></i>
-                                </a>
-                                <form id="delete-form-{{ $item->id }}" action="{{ route('admin.usermanage.user.destroy', $item->id) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <a type="button" class="bs-tooltip btn btn-rounded btn-outline-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-original-title="Delete"
-                                        data-url="{{ route('admin.usermanage.user.destroy', $item->id) }}" data-name="{{ $item->name }}"
-                                        onclick="deleteData('{{ $item->id }}')">
-                                        <i class="fa-solid fa-trash-can"></i>
-                                     </a>
-                                </form>
-                                @else
-                                <a  href="{{ route('admin.usermanage.user.edit', $item->id) }}" style="margin-right: 10px;" class="btn btn-rounded btn-outline-success bs-tooltip me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" data-original-title="Edit">
-                                    <i class="fa-solid fa-edit"></i>
-                                </a>
-                                <form id="delete-form-{{ $item->id }}" action="{{ route('admin.usermanage.worker.destroy', $item->id) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <a type="button" class="bs-tooltip btn btn-rounded btn-outline-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-original-title="Delete"
-                                        data-url="{{ route('admin.usermanage.worker.destroy', $item->id) }}" data-name="{{ $item->name }}"
-                                        onclick="deleteData('{{ $item->id }}')">
-                                        <i class="fa-solid fa-trash-can"></i>
-                                     </a>
-                                </form>
-                                @endif
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                    @endif
+                    @include('pages.usermanage.usermanage-admin')
+                    @include('pages.usermanage.usermanage-member')
                 </table>
             </div>
         </div>
     </div>
 </div>
-{{-- Modal Create User --}}
+{{-- Modal Tambah User --}}
 <div class="modal fade" id="createUser" tabindex="-1" role="dialog" aria-labelledby="tabsModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <form action="{{ route('admin.usermanage.user.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('admin.usermanage.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="modal-content">
                 <div class="modal-header" style="font-size: 20px">
@@ -166,8 +68,8 @@
                         <label for="type">Type User</label>
                         <select name="type" id="type" class="form-control">
                             <option value="" selected>Choose Type User</option>
-                            <option value="0">User</option>
-                            <option value="1">Worker</option>
+                            <option value="0">Member</option>
+                            <option value="1">Author</option>
                             <option value="2">Admin</option>
                         </select>
                     </div>
@@ -176,70 +78,6 @@
         </form>
     </div>
 </div>
-{{-- Modal Import User --}}
-<div class="modal fade" id="importUser" tabindex="-1" role="dialog" aria-labelledby="tabsModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <form action="{{ route('admin.usermanage.user.import') }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            <div class="modal-content">
-                <div class="modal-header" style="font-size: 20px">
-                    <h5 class="modal-title" id="tabsModalLabel">Create {{ $submenu }}</h5>
-                    <div class="d-flex justify-content-between align-items-center">
-
-                        <button style="margin-right: 10px;" type="submit" class="btn btn-rounded btn-outline-secondary" data-bs-dismiss="modal">
-                            <i class="fa-solid fa-plus"></i>
-                        </button>
-                        <button style="" type="button" class="btn btn-rounded btn-outline-warning" data-bs-dismiss="modal" aria-label="Close">
-                            <i class="fa-solid fa-close"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group col-12 mb-2">
-                        <label for="import">Import User</label>
-                        <input type="file" name="import" id="import" class="form-control">
-                        <small class="text-warning">accept: .xlsx,.csv Max:2048</small>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
-{{-- Modal Edit User --}}
-@foreach($admin as $key => $item)
-<div class="modal fade" id="editUser{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="tabsModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <form action="{{ route('admin.usermanage.user.update', $item->id) }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            @method('PATCH')
-            <div class="modal-content">
-                <div class="modal-header" style="font-size: 20px">
-                    <h5 class="modal-title" id="tabsModalLabel">Edit {{ $submenu }}</h5>
-                    <div class="d-flex justify-content-between align-items-center">
-
-                        <button style="margin-right: 10px;" type="submit" class="btn btn-rounded btn-outline-secondary" data-bs-dismiss="modal">
-                            <i class="fa-solid fa-plus"></i>
-                        </button>
-                        <button style="" type="button" class="btn btn-rounded btn-outline-warning" data-bs-dismiss="modal" aria-label="Close">
-                            <i class="fa-solid fa-close"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group col-12 mb-2">
-                        <label for="isverify">Status User</label>
-                        <select name="isverify" id="isverify" class="form-control">
-                            <option value="" selected>Choose Status User</option>
-                            <option value="0" {{ $item->isverify == '0' ? 'selected' : '' }}>Belum Verify</option>
-                            <option value="1" {{ $item->isverify == '1' ? 'selected' : '' }}>Sudah Verify</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
-@endforeach
 @endsection
 @section('custom-js')
 

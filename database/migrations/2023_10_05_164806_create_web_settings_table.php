@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('site_mail');
             $table->string('site_phone');
             $table->string('site_link');
+            $table->string('site_qris')->default('qris.png');
             $table->string('image')->default('logo.svg');
             // SOCIAL LINKS
             $table->string('site_social_fb')->nullable();

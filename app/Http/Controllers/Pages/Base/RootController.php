@@ -74,8 +74,8 @@ class RootController extends Controller
         $data['menu'] = "Home";
         $data['submenu'] = "Riwayat Pesanan";
         $data['users'] = User::where('type', '2')->get();
-        $data['book'] = Booking::all();
         $userId = Auth::user()->id;
+        $data['book'] = Booking::where('user_id', $userId)->get();
 
         // dd($data['users']);
 
@@ -172,6 +172,9 @@ class RootController extends Controller
             'book_prof' => 'required',
         ]);
         $book = Booking::find($id);
+
+
+
         if($request->hasFile('book_prof')){
             $oldPhoto = $book->book_prof;
 

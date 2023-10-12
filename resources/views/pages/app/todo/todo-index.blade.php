@@ -45,11 +45,11 @@
                             <td class="text-center d-flex justify-content-center align-items-center">
                                 <a href="#" class="btn btn-outline-warning btn-rounded right" data-bs-toggle="modal" data-bs-target="#showTodo"><i class="fa-solid fa-eye"></i></a>
                                 <a href="#" class="btn btn-outline-success btn-rounded right" data-bs-toggle="modal" data-bs-target="#editTodo"><i class="fa-solid fa-edit"></i></a>
-                                <form id="delete-form-{{ $item->id }}" action="{{ route('auth.app.todo.destroy', $item->id) }}" method="POST">
+                                <form id="delete-form-{{ $item->id }}" action="{{ route('admin.app.todo.destroy', $item->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <a type="button" class="bs-tooltip btn btn-rounded btn-outline-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-original-title="Delete"
-                                        data-url="{{ route('auth.app.todo.destroy', $item->id) }}" data-name="{{ $item->name }}"
+                                        data-url="{{ route('admin.app.todo.destroy', $item->id) }}" data-name="{{ $item->name }}"
                                         onclick="deleteData('{{ $item->id }}')">
                                         <i class="fa-solid fa-trash-can"></i>
                                      </a>
@@ -69,7 +69,7 @@
 {{-- MODAL CREATE --}}
 <div class="modal fade" id="createTodo" tabindex="-1" role="dialog" aria-labelledby="tabsModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <form action="{{ route('auth.app.todo.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('admin.app.todo.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="modal-content">
                 <div class="modal-header" style="font-size: 20px">
@@ -119,7 +119,7 @@
 @foreach ($todo as $key => $item)
 <div class="modal fade" id="editTodo" tabindex="-1" role="dialog" aria-labelledby="tabsModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <form action="{{ route('auth.app.todo.update', $item->id) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('admin.app.todo.update', $item->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PATCH')
             <div class="modal-content">
@@ -171,7 +171,7 @@
 @foreach ($todo as $key => $item)
 <div class="modal fade" id="showTodo" tabindex="-1" role="dialog" aria-labelledby="tabsModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <form action="{{ route('auth.app.todo.update', $item->id) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('admin.app.todo.update', $item->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PATCH')
             <div class="modal-content">

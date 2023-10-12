@@ -20,8 +20,8 @@ class UserManagerController extends Controller
     public function index()
     {
         $data['title'] = "SkyDash";
-        $data['menu'] = "User Manager";
-        $data['submenu'] = "List Users";
+        $data['menu'] = "Kelola Pengguna";
+        $data['submenu'] = "Pengguna";
         $data['member'] = User::where('type', 0)->get();
         $data['admin'] = User::whereIn('type', [1, 2])->get();
 
@@ -78,7 +78,7 @@ class UserManagerController extends Controller
 
             DB::table('worker')->insert($workerData);
 
-            return redirect()->route('admin.usermanage.user.index')->with('success', 'Data berhasil ditambahkan.');
+            return redirect()->route('admin.usermanage.admin')->with('success', 'Data berhasil ditambahkan.');
 
         }elseif($request->input('type') == '1') {
             $workerData = [
@@ -92,10 +92,10 @@ class UserManagerController extends Controller
 
             DB::table('worker')->insert($workerData);
 
-            return redirect()->route('admin.usermanage.user.index')->with('success', 'Data berhasil ditambahkan.');
+            return redirect()->route('admin.usermanage.admin')->with('success', 'Data berhasil ditambahkan.');
 
         }elseif($request->input('type') == '0') {
-            return redirect()->route('admin.usermanage.user.index')->with('success', 'Data berhasil ditambahkan.');
+            return redirect()->route('admin.usermanage.member')->with('success', 'Data berhasil ditambahkan.');
         }
     }
 
@@ -113,8 +113,8 @@ class UserManagerController extends Controller
     public function edit(string $id)
     {
         $data['title'] = "SkyDash";
-        $data['menu'] = "User Manager";
-        $data['submenu'] = "List Users";
+        $data['menu'] = "Kelola Pengguna";
+        $data['submenu'] = "Edit Pengguna";
         $data['usermanage'] = User::find($id);
 
         return view('pages.usermanage.usermanage-edit', $data);
@@ -152,7 +152,7 @@ class UserManagerController extends Controller
         $worker->delete();
         $usermanage->delete();
 
-        return redirect()->route('admin.usermanage.user.index')->with('success', 'Data berhasil dihapus.');
+        return redirect()->route('admin.usermanage.admin')->with('success', 'Data berhasil dihapus.');
     }
 
     public function Userdestroy(string $id)
@@ -160,17 +160,7 @@ class UserManagerController extends Controller
         $usermanage = User::find($id);
         $usermanage->delete();
 
-        return redirect()->route('admin.usermanage.user.index')->with('success', 'Data berhasil dihapus.');
+        return redirect()->route('admin.usermanage.member')->with('success', 'Data berhasil dihapus.');
     }
 
-    public function exportUser()
-    {
-        return Excel::download(new UsersExport, 'users.csv');
-    }
-
-    public function importUser()
-    {
-        Excel::import(new UsersImport,request()->file('file'));
-        return back();
-    }
 }

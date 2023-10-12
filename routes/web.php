@@ -119,13 +119,17 @@ Route::middleware(['auth', 'user-access:Admin', 'isverify:1'])->group(function (
     Route::get('/admin/booking/progress', [BookingController::class, 'index'])->name('admin.booking.progress');
     Route::get('/admin/booking/done', [BookingController::class, 'index'])->name('admin.booking.done');
     Route::delete('/admin/booking/delete/{id}', [BookingController::class, 'destroy'])->name('admin.booking.destroy');
+    Route::patch('/admin/book/product/verify/{id}', [BookingController::class, 'verifyPayment'])->name('admin.book.product.verify');
 
-    // EXPORT - IMPORT USER
-    Route::post('/admin/usermanage/user/import', [UserManagerController::class, 'importUser'])->name('admin.usermanage.user.import');
-    Route::get('/admin/usermanage/user/export', [UserManagerController::class, 'exportUser'])->name('admin.usermanage.user.export');
+
     // USER MANAGER CRUD
     Route::get('/admin/usermanage/admin', [UserManagerController::class, 'index'])->name('admin.usermanage.admin');
     Route::get('/admin/usermanage/member', [UserManagerController::class, 'index'])->name('admin.usermanage.member');
+    // Tambah User
+    Route::post('/admin/usermanage/store', [UserManagerController::class, 'store'])->name('admin.usermanage.store');
+
+
+
     Route::post('/admin/usermanage/user/store', [UserManagerController::class, 'store'])->name('admin.usermanage.user.store');
     Route::get('/admin/usermanage/user/edit/{id}', [UserManagerController::class, 'edit'])->name('admin.usermanage.user.edit');
     Route::get('/admin/usermanage/user/show/{id}', [UserManagerController::class, 'store'])->name('admin.usermanage.user.show');
@@ -138,9 +142,6 @@ Route::middleware(['auth', 'user-access:Admin', 'isverify:1'])->group(function (
     // ANNOUNCEMENT LIST APP
     Route::get('/admin/app/setting', [WebSettingController::class, 'index'])->name('admin.app.setting.index');
     Route::patch('/admin/app/setting/update', [WebSettingController::class, 'update'])->name('admin.app.setting.update');
-    // Route::post('/admin/app/setting/store', [WebSettingController::class, 'store'])->name('admin.app.setting.store');
-    // Route::get('/admin/app/setting/show/{id}', [WebSettingController::class, 'show'])->name('admin.app.setting.show');
-    // Route::delete('/admin/app/setting/destroy/{id}', [WebSettingController::class, 'destroy'])->name('admin.app.setting.destroy');
 });
 
 require __DIR__.'/auth.php';

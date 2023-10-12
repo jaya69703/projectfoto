@@ -19,7 +19,7 @@ class BookingController extends Controller
         $data['all'] = Booking::all();
         $data['pending'] = Booking::where('book_stat', 0)->get();
         $data['verify'] = Booking::where('book_stat', 1)->get();
-        $data['done'] = Booking::where('book_stat', 2)->get();
+        $data['sverify'] = Booking::where('book_stat', 2)->get();
 
         return view('pages.booking.booking-index', $data);
     }
@@ -27,6 +27,15 @@ class BookingController extends Controller
     /**
      * Show the form for creating a new resource.
      */
+    public function verifyPayment(Request $request, $id)
+    {
+        $book = Booking::findorFail($id);
+        $book->update(['book_stat' => $request->input('book_stat')]);
+        $book->save();
+
+        return back()->with('success', 'Berhasil verifikasi pembayaran');
+    }
+
     public function create()
     {
         //
@@ -69,6 +78,9 @@ class BookingController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $book = Booking::find($id);
+        $book->delete();
+
+        return back()->with('success', 'data berhasil dihapus...');
     }
 }

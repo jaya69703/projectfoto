@@ -11,14 +11,29 @@
     .t-20{
         font-size: 20px
     }
+    /* Aturan CSS untuk tampilan desktop */
+@media (min-width: 768px) {
+    .card .icon {
+        margin-right: 20px;
+    }
+}
+
+/* Aturan CSS untuk tampilan mobile */
+@media (max-width: 767px) {
+    .card .icon {
+        margin-right: 0; /* Menghapus margin kanan pada ikon */
+        text-align: left; /* Mengatur teks ikon menjadi rata kiri */
+    }
+}
 </style>
+<link href="{{ asset('main') }}/src/plugins/src/apex/apexcharts.css" rel="stylesheet" type="text/css">
 @endsection
 @section('content')
+@include('base.base-home-admin')
 <div class="row layout-top-spacing">
     <div class="col-lg-3 col-12 mb-3">
 
         {{-- DASHBOARD UNTUK ADMIN --}}
-        @include('base.base-home-admin')
     </div>
     <div class="col-lg-12 col-12 mb-3">
         <div class="card mb-2">
@@ -82,5 +97,64 @@
 
         multiCheck(c3);
     </script>
-        <script src="{{ asset('main') }}/src/assets/js/dashboard/dash_1.js"></script>
+    <script src="{{ asset('main') }}/src/plugins/src/apex/apexcharts.min.js"></script>
+    <script>
+        var productsData = @json($productsData); // Mengambil data dari Blade
+
+        var sColStacked = {
+            chart: {
+                fontFamily: 'Nunito, Arial, sans-serif',
+                height: 350,
+                type: 'bar',
+                stacked: true,
+                toolbar: {
+                    show: false,
+                }
+            },
+            responsive: [{
+                breakpoint: 480,
+                options: {
+                    legend: {
+                        position: 'bottom',
+                        offsetX: -10,
+                        offsetY: 0
+                    }
+                }
+            }],
+            plotOptions: {
+                bar: {
+                    horizontal: false,
+                },
+            },
+            series: productsData,
+            xaxis: {
+                categories: @json($dates),
+            },
+            legend: {
+                position: 'right',
+                offsetY: 40,
+                markers: {
+                    width: 10,
+                    height: 10,
+                    offsetX: -5,
+                    offsetY: 0
+                },
+                itemMargin: {
+                    horizontal: 10,
+                    vertical: 0
+                }
+            },
+            fill: {
+                opacity: 1
+            }
+        };
+
+        var simpleColumnStacked = new ApexCharts(
+            document.querySelector("#chartpenjualan"),
+            sColStacked
+        );
+
+        simpleColumnStacked.render();
+    </script>
+
 @endsection

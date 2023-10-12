@@ -93,6 +93,17 @@
     </a>
 </li>
 <li class="menu menu-heading">
+    <div class="heading text-white">MENU AUTHOR</div>
+</li>
+<li class="menu {{ Str::is('author/paket*', request()->path()) ? 'active' : '' }}">
+    <a href="{{ url('/author/paket') }}" aria-expanded="false" class="dropdown-toggle">
+        <div class="d-flex align-items-center justify-content-between">
+            <i class="fa-solid fa-images" style="font-size: 20px; margin-right: 10px;" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ></i>
+            <span>Upload Gallery</span>
+        </div>
+    </a>
+</li>
+<li class="menu menu-heading">
     <div class="heading text-white">PAGE SETTINGS</div>
 </li>
 <li class="menu {{ Str::is('admin/app/setting*', request()->path()) ? 'active' : '' }}">

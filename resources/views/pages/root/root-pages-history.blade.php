@@ -44,44 +44,49 @@
                         <span style="font-size: 20px">Riwayat Pesanan</span>
                     </div>
                     <div class="card-body">
-                        <table class="table style-3 dt-table-hover" id="style-3">
-                            <thead>
-                                <tr class="text-center">
-                                    <th>ID</th>
-                                    <th>Nama Klien</th>
-                                    <th>Nama Paket</th>
-                                    <th>Tanggal Pesanan</th>
-                                    <th>Jam Pesanan</th>
-                                    <th>Harga</th>
-                                    <th>Status</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @forelse ($book as $key => $item)
-                                <tr class="text-center align-items-center">
-                                    <td>{{ ++$key }}</td>
-                                    <td>{{ $item->user->name }}</td>
-                                    <td>{{ $item->paket->name }}</td>
-                                    <td>{{ \Carbon\Carbon::parse($item->book_date)->formatLocalized('%A, %d %B %Y') }}</td>
-                                    <td>{{ $item->book_time }}</td>
-                                    <td>{{ $item->paket->price }}</td>
-                                    <td>{!! $item->book_stat !!}</td>
-                                    <td>
-                                        @if($item->book_stat == '<span class="btn btn-sm btn-outline-danger">Menunggu Pembayaran</span>')
-                                        <a href="#" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#paymentHere{{$item->id}}"><i class="fa-solid fa-eye"></i></a>
-                                        @elseif($item->book_stat == '<span class="btn btn-sm btn-outline-warning">Menunggu Verifikasi</span>')
-                                        <a href="#" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#paymentView{{$item->id}}"><i class="fa-solid fa-eye"></i></a>
-                                        @endif
-                                    </td>
-                                </tr>
-                                @empty
-                                <tr class="text-center">
-                                    <td colspan="8">Belum ada data</td>
-                                </tr>
-                                @endforelse
-                            </tbody>
-                          </table>
+                        <div class="table-responsive">
+
+                            <table class="table style-3 dt-table-hover" id="style-3">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th>ID</th>
+                                        <th>Nama Klien</th>
+                                        <th>Nama Paket</th>
+                                        <th>Tanggal Pesanan</th>
+                                        <th>Jam Pesanan</th>
+                                        <th>Harga</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @forelse ($book as $key => $item)
+                                    @if(Auth::user()->id == $item->user_id)
+                                    <tr class="text-center align-items-center">
+                                        <td>{{ ++$key }}</td>
+                                        <td>{{ $item->user->name }}</td>
+                                        <td>{{ $item->paket->name }}</td>
+                                        <td>{{ \Carbon\Carbon::parse($item->book_date)->formatLocalized('%A, %d %B %Y') }}</td>
+                                        <td>{{ $item->book_time }}</td>
+                                        <td>{{ $item->paket->price }}</td>
+                                        <td>{{ $item->book_stat }}</td>
+                                        <td>
+                                            @if($item->book_stat == 'Menunggu Pembayaran')
+                                            <a href="#" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#paymentHere{{$item->id}}"><i class="fa-solid fa-eye"></i></a>
+                                            @elseif($item->book_stat == 'Menunggu Verifikasi')
+                                            <a href="#" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#paymentView{{$item->id}}"><i class="fa-solid fa-eye"></i></a>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    @endif
+                                    @empty
+                                    <tr class="text-center">
+                                        <td colspan="8">Belum ada data</td>
+                                    </tr>
+                                    @endforelse
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -114,7 +119,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group col-12 mb-3 text-center">
-                        <img src="{{ asset('storage/images/user/default.png') }}" alt="" style="max-height: 300px">
+                        <img src="{{ asset('storage/images/web/qris.png') }}" alt="" style="max-height: 300px">
                     </div>
                     <div class="form-group col-12 mb-3">
                         <label for="book_proof">Nilai Harga Pembayaran</label>
@@ -132,8 +137,8 @@
     </div>
 </div>
 @endforeach
-@if($item->book_stat == '<span class="btn btn-sm btn-outline-warning">Menunggu Verifikasi</span>')
 @foreach ($book as $item)
+@if($item->book_stat == 'Menunggu Verifikasi')
 <div class="modal fade" id="paymentView{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="tabsModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <form action="{{ route('user.book.product.payment', $item->id) }}" method="POST" enctype="multipart/form-data">
@@ -152,14 +157,20 @@
                     <div class="form-group col-12 mb-3 text-center">
                         <img src="{{ asset('storage/images/prof/'.$item->book_prof) }}" alt="" style="max-height: 300px">
                     </div>
+                    <div class="form-group col-12 mb-3">
+                        <label for="book_proof">Nilai Harga Pembayaran</label>
+                        <input type="text" disabled class="form-control" value="{{ $item->paket->price }}">
+                        <p class="text-success">Silahkan tunggu konfirmasi dari admin.</p>
+                        @error('book_proof') <small class="text-danger">{{ $message }}</small> @enderror
+                    </div>
                 </div>
             </div>
         </form>
     </div>
 </div>
+@endif
 @endforeach
 
-@endif
 @endsection
 @section('custom-js')
 <script src="{{ asset('main') }}/src/plugins/src/table/datatable/datatables.js"></script>

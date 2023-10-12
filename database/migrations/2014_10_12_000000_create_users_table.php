@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('password');
 
             // SPECIAL IDENTITY
-            $table->string('code', 6)->unique(); // Use string type and length of 6
+            $table->string('code', 6)->unique();
             $table->integer('isverify')->default('0');
             $table->tinyInteger('type')->default('0');
 
