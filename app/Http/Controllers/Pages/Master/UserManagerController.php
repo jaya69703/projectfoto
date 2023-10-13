@@ -6,7 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
-use App\Models\Worker;
+use App\Models\Member;
+use App\Models\Author;
 use App\Models\User;
 use App\Exports\UsersExport;
 use App\Imports\UsersImport;
@@ -23,7 +24,9 @@ class UserManagerController extends Controller
         $data['menu'] = "Kelola Pengguna";
         $data['submenu'] = "Pengguna";
         $data['member'] = User::where('type', 0)->get();
-        $data['admin'] = User::whereIn('type', [1, 2])->get();
+        $data['memplus'] = User::where('type', 1)->get();
+        $data['author'] = User::where('type', 2)->get();
+        $data['admin'] = User::where('type', 3)->get();
 
         return view('pages.usermanage.usermanage-index', $data);
     }
@@ -61,55 +64,47 @@ class UserManagerController extends Controller
             'phone' => $request->phone,
             'email' => $request->email,
             'type' => $request->type,
+            'isverify' => 1,
             'password' => Hash::make($request->input('phone')),
         ];
 
         DB::table('users')->insert($usermanageData);
 
-        if($request->input('type') == '2') {
-            $workerData = [
-                'worker_name' => $request->input('name'),
-                'worker_email' => $request->input('email'),
-                'worker_phone' => $request->input('phone'),
+        // JIKA INPUT TYPE 1 ATAU MEMBER PLUS
+        if($request->input('type') == '1') {
+            $memberData = [
+                'member_name' => $request->input('name'),
+                'member_email' => $request->input('email'),
+                'member_phone' => $request->input('phone'),
                 'code' => $code,
-                // 'position_id' => $request->input('position_id'),
-                // 'divisi_id' => $request->input('divisi_id'),
             ];
 
-            DB::table('worker')->insert($workerData);
+            DB::table('members')->insert($memberData);
 
-            return redirect()->route('admin.usermanage.admin')->with('success', 'Data berhasil ditambahkan.');
+            return redirect()->route('admin.usermanage.memberplus')->with('success', 'Data berhasil ditambahkan.');
 
-        }elseif($request->input('type') == '1') {
-            $workerData = [
-                'worker_name' => $request->input('name'),
-                'worker_email' => $request->input('email'),
-                'worker_phone' => $request->input('phone'),
+        // JIKA INPUT TYPE 2 ATAU AUTHOR
+        }elseif($request->input('type') == '2') {
+            $authorData = [
+                'author_name' => $request->input('name'),
+                'author_email' => $request->input('email'),
+                'author_phone' => $request->input('phone'),
                 'code' => $code,
-                // 'position_id' => $request->input('position_id'),
-                // 'divisi_id' => $request->input('divisi_id'),
             ];
 
-            DB::table('worker')->insert($workerData);
+            DB::table('authors')->insert($authorData);
 
-            return redirect()->route('admin.usermanage.admin')->with('success', 'Data berhasil ditambahkan.');
+            return redirect()->route('admin.usermanage.author')->with('success', 'Data berhasil ditambahkan.');
 
+        // JIKA INPUT TYPE 0 ATAU SEKEDAR MEMBER BIASA
         }elseif($request->input('type') == '0') {
             return redirect()->route('admin.usermanage.member')->with('success', 'Data berhasil ditambahkan.');
+        // JIKA INPUT TYPE 3 ATAU AKUN ADMIN
+        }elseif($request->input('type') == '3') {
+            return redirect()->route('admin.usermanage.admin')->with('success', 'Data berhasil ditambahkan.');
         }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         $data['title'] = "SkyDash";
@@ -118,8 +113,6 @@ class UserManagerController extends Controller
         $data['usermanage'] = User::find($id);
 
         return view('pages.usermanage.usermanage-edit', $data);
-
-
     }
 
     /**
@@ -141,21 +134,29 @@ class UserManagerController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function memberplusdestroy(string $id)
     {
         $usermanage = User::find($id);
-
         $code = $usermanage->code;
-
-        $worker = Worker::where('code', $code)->first();
-
-        $worker->delete();
+        $memberplus = Member::where('code', $code)->first();
+        $memberplus->delete();
         $usermanage->delete();
 
         return redirect()->route('admin.usermanage.admin')->with('success', 'Data berhasil dihapus.');
     }
 
-    public function Userdestroy(string $id)
+    public function authordestroy(string $id)
+    {
+        $usermanage = User::find($id);
+        $code = $usermanage->code;
+        $author = Author::where('code', $code)->first();
+        $author->delete();
+        $usermanage->delete();
+
+        return redirect()->route('admin.usermanage.admin')->with('success', 'Data berhasil dihapus.');
+    }
+
+    public function destroy(string $id)
     {
         $usermanage = User::find($id);
         $usermanage->delete();

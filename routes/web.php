@@ -8,6 +8,7 @@ use App\Http\Controllers\Pages\Base\WebSettingController;
 use App\Http\Controllers\Pages\Base\RootController;
 use App\Http\Controllers\Pages\Base\MessageController;
 use App\Http\Controllers\Pages\Master\UserManagerController;
+use App\Http\Controllers\Pages\App\ChatController;
 use App\Http\Controllers\Pages\Master\PaketController;
 use App\Http\Controllers\Pages\Master\BookingController;
 use Illuminate\Support\Facades\Route;
@@ -68,6 +69,10 @@ Route::middleware(['auth', 'user-access:Member'])->group(function () {
     Route::patch('/member/book/product/payment/{id}', [RootController::class, 'uploadProof'])->name('member.book.product.payment');
     Route::get('/member/book/history', [RootController::class, 'history'])->name('member.book.history');
     Route::get('/member/book/history/{id}', [RootController::class, 'historyShow'])->name('member.book.history.show');
+
+    // APLIKASI CHAT
+    Route::get('/member/chat', [ChatController::class, 'index'])->name('member.chat.index');
+    Route::post('/member/chat/store', [ChatController::class, 'store'])->name('member.chat.store');
 });
 Route::middleware(['auth', 'user-access:Member'])->group(function () {
     // DASHBOARD ADMIN
@@ -84,6 +89,13 @@ Route::middleware(['auth', 'user-access:Member'])->group(function () {
 //
 
 Route::middleware(['auth', 'user-access:Admin', 'isverify:1'])->group(function () {
+    Route::get('/chat-index', function () {
+        $data['title'] = "iSchool";
+        $data['menu'] = "Error";
+        $data['submenu'] = "Chat";
+
+        return view('pages.app.chat.chat-index',$data);
+    })->name('chat.index');
     // DASHBOARD ADMIN
     Route::get('/admin/home', [AdminController::class, 'index'])->name('admin.home.index');
     Route::get('/admin/profile', [AdminController::class, 'show'])->name('admin.profile.index');
@@ -94,19 +106,23 @@ Route::middleware(['auth', 'user-access:Admin', 'isverify:1'])->group(function (
     Route::get('/admin/message/show/{id}', [MessageController::class, 'show'])->name('admin.message.show');
     Route::delete('/admin/message/delete/{id}', [MessageController::class, 'destroy'])->name('admin.message.destroy');
 
-    // TODO LIST APP
+    // APLIKASI TODO LIST
     Route::get('/admin/app/todo', [TodoController::class, 'index'])->name('admin.app.todo.index');
     Route::post('/admin/app/todo/store', [TodoController::class, 'store'])->name('admin.app.todo.store');
     Route::delete('/admin/app/todo/destroy/{id}', [TodoController::class, 'destroy'])->name('admin.app.todo.destroy');
     Route::patch('/admin/app/todo/update/{id}', [TodoController::class, 'update'])->name('admin.app.todo.update');
-    // ANNOUNCEMENT LIST APP
+    // APLIKASI PENGUMUMAN
     Route::get('/admin/app/announ', [AnnouncementController::class, 'index'])->name('admin.app.announ.index');
     Route::post('/admin/app/announ/store', [AnnouncementController::class, 'store'])->name('admin.app.announ.store');
     Route::get('/admin/app/announ/show/{id}', [AnnouncementController::class, 'show'])->name('admin.app.announ.show');
     Route::patch('/admin/app/announ/update/{id}', [AnnouncementController::class, 'update'])->name('admin.app.announ.update');
     Route::delete('/admin/app/announ/destroy/{id}', [AnnouncementController::class, 'destroy'])->name('admin.app.announ.destroy');
 
-    // ANNOUNCEMENT LIST APP
+    // APLIKASI CHAT
+    Route::get('/admin/chat', [ChatController::class, 'index'])->name('admin.chat.index');
+    Route::post('/admin/chat/store', [ChatController::class, 'store'])->name('admin.chat.store');
+
+    // FITUR PAKET
     Route::get('/admin/paket', [PaketController::class, 'index'])->name('admin.paket.index');
     Route::post('/admin/paket/store', [PaketController::class, 'store'])->name('admin.paket.store');
     Route::get('/admin/paket/show/{id}', [PaketController::class, 'show'])->name('admin.paket.show');
@@ -125,22 +141,16 @@ Route::middleware(['auth', 'user-access:Admin', 'isverify:1'])->group(function (
 
     // USER MANAGER CRUD
     Route::get('/admin/usermanage/member', [UserManagerController::class, 'index'])->name('admin.usermanage.member');
-    Route::get('/admin/usermanage/member-plus', [UserManagerController::class, 'index'])->name('admin.usermanage.memberplus');
+    Route::get('/admin/usermanage/memplus', [UserManagerController::class, 'index'])->name('admin.usermanage.memberplus');
     Route::get('/admin/usermanage/author', [UserManagerController::class, 'index'])->name('admin.usermanage.author');
     Route::get('/admin/usermanage/admin', [UserManagerController::class, 'index'])->name('admin.usermanage.admin');
-    // Tambah User
+    // TAMBAH USER 4 ROLE
     Route::post('/admin/usermanage/store', [UserManagerController::class, 'store'])->name('admin.usermanage.store');
+    // DELETE USER AUTHOR AND MEMBER PLUS
+    Route::delete('/admin/usermanage/delete/{id}', [UserManagerController::class, 'destroy'])->name('admin.usermanage.destroy');
+    Route::delete('/admin/usermanage/author/delete/{id}', [UserManagerController::class, 'authordestroy'])->name('admin.usermanage.author.destroy');
+    Route::delete('/admin/usermanage/memberplus/delete/{id}', [UserManagerController::class, 'memberplusdestroy'])->name('admin.usermanage.memberplus.destroy');
 
-
-
-    Route::post('/admin/usermanage/member/store', [UserManagerController::class, 'store'])->name('admin.usermanage.member.store');
-    Route::get('/admin/usermanage/member/edit/{id}', [UserManagerController::class, 'edit'])->name('admin.usermanage.member.edit');
-    Route::get('/admin/usermanage/member/show/{id}', [UserManagerController::class, 'store'])->name('admin.usermanage.member.show');
-    Route::patch('/admin/usermanage/member/update/{id}', [UserManagerController::class, 'update'])->name('admin.usermanage.member.update');
-    Route::patch('/admin/usermanage/worker/update/{id}', [UserManagerController::class, 'update'])->name('admin.usermanage.worker.update');
-    Route::delete('/admin/usermanage/member/delete/{id}', [UserManagerController::class, 'Userdestroy'])->name('admin.usermanage.member.destroy');
-    Route::delete('/admin/usermanage/worker/delete/{id}', [UserManagerController::class, 'destroy'])->name('admin.usermanage.worker.destroy');
-    Route::get('/admin/usermanage/member/create', [UserManagerController::class, 'create'])->name('admin.usermanage.member.create');
 
     // ANNOUNCEMENT LIST APP
     Route::get('/admin/app/setting', [WebSettingController::class, 'index'])->name('admin.app.setting.index');

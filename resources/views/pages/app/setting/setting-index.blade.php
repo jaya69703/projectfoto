@@ -19,7 +19,7 @@ $web = App\Models\WebSetting::find(1);
     @method('PATCH')
     @csrf
     <div class="row layout-top-spacing">
-        <div class="col-lg-3 col-12 mb-3">
+        <div class="col-lg-4 col-12 mb-3">
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <span style="font-size: 20px">Logo {{ $submenu }}</span>
@@ -34,7 +34,7 @@ $web = App\Models\WebSetting::find(1);
                 </div>
             </div>
         </div>
-        <div class="col-lg-9 col-12 mb-3">
+        <div class="col-lg-8 col-12 mb-3">
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <span style="font-size: 20px">{{ $submenu }}</span>

@@ -223,8 +223,8 @@
               </div>
             </div>
             <div class="member-info text-center">
-              <h4>{{ $item->worker->worker_name }}</h4>
-              <span>Chief Executive Officer</span>
+              <h4>{{ $item->name }}</h4>
+              <span>{{ $item->type }}</span>
               <p>Aliquam iure quaerat voluptatem praesentium possimus unde laudantium vel dolorum distinctio dire flow</p>
             </div>
           </div><!-- End Team Member -->

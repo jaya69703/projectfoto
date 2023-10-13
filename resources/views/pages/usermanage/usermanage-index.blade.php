@@ -26,8 +26,10 @@
                             <th class="text-center">Action</th>
                         </tr>
                     </thead>
-                    @include('pages.usermanage.usermanage-admin')
                     @include('pages.usermanage.usermanage-member')
+                    @include('pages.usermanage.usermanage-member-plus')
+                    @include('pages.usermanage.usermanage-author')
+                    @include('pages.usermanage.usermanage-admin')
                 </table>
             </div>
         </div>

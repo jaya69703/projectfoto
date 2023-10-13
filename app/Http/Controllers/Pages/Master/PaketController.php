@@ -72,7 +72,7 @@ class PaketController extends Controller
         $paket->description = $request->description;
         $paket->save();
 
-        return redirect()->route('admin.app.setting.index')->with('success', 'Data berhasil diupdate.');
+        return redirect()->route('admin.paket.index')->with('success', 'Data berhasil diupdate.');
     }
 
     /**
@@ -98,8 +98,8 @@ class PaketController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'image' => 'required|mimes:png,jpg|max:2048',
-            'price' => 'required|integer',
+            // 'image' => 'required|mimes:png,jpg|max:2048',
+            // 'price' => 'required|integer',
             'description' => 'required',
         ]);
 
@@ -143,6 +143,6 @@ class PaketController extends Controller
         $paket = Paket::find($id);
         $paket->delete();
 
-        return redirect()->route('admin.app.setting.index')->with('success', 'Data berhasil dihapus.');
+        return redirect()->route('admin.paket.index')->with('success', 'Data berhasil dihapus.');
     }
 }

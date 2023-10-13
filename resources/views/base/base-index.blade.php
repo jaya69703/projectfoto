@@ -11,6 +11,7 @@
     @endphp
     <title>{{ $web->name . (' - ') . $menu . (' - ') . $submenu }}</title>
     <link rel="icon" type="image/x-icon" href="{{ asset('main') }}/src/assets/img/favicon.ico"/>
+
     <!-- ENABLE LOADERS -->
     <link href="{{ asset('main') }}/layouts/vertical-dark-menu/css/light/loader.css" rel="stylesheet" type="text/css" />
     <link href="{{ asset('main') }}/layouts/vertical-dark-menu/css/dark/loader.css" rel="stylesheet" type="text/css" />
@@ -24,6 +25,7 @@
     <!-- END GLOBAL MANDATORY STYLES -->
 
     <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM STYLES -->
+
     <link rel="stylesheet" type="text/css" href="{{ asset('main') }}/src/assets/css/light/elements/alert.css">
     <link rel="stylesheet" type="text/css" href="{{ asset('main') }}/src/assets/css/dark/elements/alert.css">
 

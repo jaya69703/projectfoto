@@ -1,6 +1,6 @@
-@if(Str::is('admin/usermanage/admin', request()->path()))
+@if(Str::is('admin/usermanage/memplus', request()->path()))
 <tbody>
-    @foreach ($admin as $key => $item)
+    @foreach ($memplus as $key => $item)
     <tr>
         <td class="text-center">{{ ++$key }}</td>
         <td>{{ $item->name }}</td>
@@ -13,11 +13,11 @@
             @endif
         </td>
         <td class="text-center d-flex justify-content-center align-items-center">
-            <form id="delete-form-{{ $item->id }}" action="{{ route('admin.usermanage.destroy', $item->id) }}" method="POST">
+            <form id="delete-form-{{ $item->id }}" action="{{ route('admin.usermanage.memberplus.destroy', $item->id) }}" method="POST">
                 @csrf
                 @method('DELETE')
                 <a type="button" class="bs-tooltip btn btn-rounded btn-outline-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-original-title="Delete"
-                    data-url="{{ route('admin.usermanage.destroy', $item->id) }}" data-name="{{ $item->name }}"
+                    data-url="{{ route('admin.usermanage.memberplus.destroy', $item->id) }}" data-name="{{ $item->name }}"
                     onclick="deleteData('{{ $item->id }}')">
                     <i class="fa-solid fa-trash-can"></i>
                  </a>

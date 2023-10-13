@@ -52,7 +52,7 @@ class UserSeeder extends Seeder
             // SPECIAL IDENTITY
             'code' => '000002',
         ]);
-        // Default Member Plus
+        // Default Author Account
         DB::table('users')->insert([
             // GENERAL INFO ACCOUNT
             'name' => 'Author',
@@ -63,7 +63,7 @@ class UserSeeder extends Seeder
             // SPECIAL IDENTITY
             'code' => '000003',
             'isverify' => '1',
-            'type' => '3',
+            'type' => '2',
         ]);
         DB::table('authors')->insert([
             // IDENTITAS PENGGUNA

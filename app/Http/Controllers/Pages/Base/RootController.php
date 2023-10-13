@@ -33,7 +33,7 @@ class RootController extends Controller
         $data['title'] = "SkyDash";
         $data['menu'] = "Home";
         $data['submenu'] = "Tentang Kami";
-        $data['users'] = User::where('type', '2')->get();
+        $data['users'] = User::where('type', 3)->get();
 
         return view('pages.root.root-pages-about', $data);
     }
@@ -78,8 +78,9 @@ class RootController extends Controller
         $data['users'] = User::where('type', '2')->get();
         $data['paket'] = Paket::findorFail($id);
         $userId = Auth::id();
-        $data['ubook'] = Booking::where('user_id', $userId)->get();
+        $data['ubook'] = Booking::whereIn('paket_id', [$data['paket']->id])->where('user_id', $userId)->where('book_stat', 7)->get();
 
+        // dd($data['ubook']);
 
         // dd($data['users']);
 

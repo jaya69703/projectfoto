@@ -117,7 +117,7 @@ class AdminController extends Controller
         $userId = Auth::id();
         $user = User::findOrFail($userId); // Memanggil 'firstOrFail()' untuk mendapatkan objek user
 
-        Auth()->user()->update(['name'=>$request->input('worker_name')]);
+        Auth()->user()->update(['name'=>$request->input('name')]);
 
 
         if($request->hasFile('image')){

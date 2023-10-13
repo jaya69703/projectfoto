@@ -12,7 +12,7 @@
 
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                    <span style="font-size: 20px">Create {{ $submenu }}</span>
+                    <span style="font-size: 20px">Tambah {{ $submenu }}</span>
                     <span class="align-items-center">
                         <button type="submit" class="btn btn-rounded btn-outline-secondary">
                             <i class="fa-solid fa-plus"></i>
@@ -24,24 +24,24 @@
                     <div class="form-group mb-2">
                         <img class="card-img-top img-fluid text-center mb-2" style="width: 450px; display: none;" alt="Image-Picture" id="image-preview">
 
-                        <label for="image">Package image</label>
+                        <label for="image">Cover Paket</label>
                         <input type="file" name="image" id="image" class="form-control" placeholder="Input package image...">
                         @error('image') <small class="text-danger">{{ $message }}</small> @enderror
                     </div>
                     <div class="form-group mb-2">
-                        <label for="name">Package name</label>
+                        <label for="name">Nama Paket</label>
                         <input type="text" name="name" id="name" class="form-control" placeholder="Input package name...">
                         @error('name') <small class="text-danger">{{ $message }}</small> @enderror
 
                     </div>
                     <div class="form-group mb-2">
-                        <label for="price">Package price</label>
+                        <label for="price">Harga Paket</label>
                         <input type="text" name="price" id="price" class="form-control" placeholder="Input package price...">
                         @error('price') <small class="text-danger">{{ $message }}</small> @enderror
 
                     </div>
                     <div class="form-group mb-2">
-                        <label for="description">Package description</label>
+                        <label for="description">Deskripsi Paket</label>
                         <textarea name="description" id="description" class="form-control" cols="30" rows="10" placeholder="Input package description..."></textarea>
                         @error('description') <small class="text-danger">{{ $message }}</small> @enderror
 
@@ -62,7 +62,7 @@
                 <table id="style-3" class="table style-3 dt-table-hover">
                     <thead>
                         <tr>
-                            <th class="text-center">Record Id</th>
+                            <th class="text-center">Id</th>
                             <th class="text-center">Image</th>
                             <th class="text-center">Name</th>
                             <th class="text-center">Price</th>
@@ -81,13 +81,7 @@
                             <td class="text-center">{{ $item->price }}</td>
                             <td class="text-center">{{ $item->description }}</td>
                             <td class="text-center d-flex justify-content-center align-items-center">
-                                <a  href="{{ route('admin.paket.show', $item->id) }}" style="margin-right: 10px;" class="btn btn-rounded btn-outline-warning bs-tooltip me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Show" data-original-title="Show">
-                                    <i class="fa-solid fa-eye"></i>
-                                </a>
-                                @if($item->type == 'User')
-                                <a  href="#" data-bs-toggle="modal" data-bs-target="#editUser{{$item->id}}" style="margin-right: 10px;" class="btn btn-rounded btn-outline-success bs-tooltip me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" data-original-title="Edit">
-                                    <i class="fa-solid fa-edit"></i>
-                                </a>
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#editPaket{{$item->id}}" class="btn btn-outline-primary btn-rounded" style="margin-right: 5px"><i class="fa-solid fa-edit"></i></a>
                                 <form id="delete-form-{{ $item->id }}" action="{{ route('admin.paket.destroy', $item->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
@@ -97,20 +91,6 @@
                                         <i class="fa-solid fa-trash-can"></i>
                                      </a>
                                 </form>
-                                @else
-                                <a  href="{{ route('admin.paket.edit', $item->id) }}" style="margin-right: 10px;" class="btn btn-rounded btn-outline-success bs-tooltip me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" data-original-title="Edit">
-                                    <i class="fa-solid fa-edit"></i>
-                                </a>
-                                <form id="delete-form-{{ $item->id }}" action="{{ route('admin.usermanage.worker.destroy', $item->id) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <a type="button" class="bs-tooltip btn btn-rounded btn-outline-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-original-title="Delete"
-                                        data-url="{{ route('admin.usermanage.worker.destroy', $item->id) }}" data-name="{{ $item->name }}"
-                                        onclick="deleteData('{{ $item->id }}')">
-                                        <i class="fa-solid fa-trash-can"></i>
-                                     </a>
-                                </form>
-                                @endif
                             </td>
                         </tr>
                         @endforeach
@@ -120,54 +100,9 @@
         </div>
     </div>
 </div>
-{{-- Modal Create User --}}
-<div class="modal fade" id="createUser" tabindex="-1" role="dialog" aria-labelledby="tabsModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <form action="{{ route('admin.paket.store') }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            <div class="modal-content">
-                <div class="modal-header" style="font-size: 20px">
-                    <h5 class="modal-title" id="tabsModalLabel">Create {{ $submenu }}</h5>
-                    <div class="d-flex justify-content-between align-items-center">
-
-                        <button style="margin-right: 10px;" type="submit" class="btn btn-rounded btn-outline-secondary" data-bs-dismiss="modal">
-                            <i class="fa-solid fa-plus"></i>
-                        </button>
-                        <button style="" type="button" class="btn btn-rounded btn-outline-warning" data-bs-dismiss="modal" aria-label="Close">
-                            <i class="fa-solid fa-close"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group col-12 mb-2">
-                        <label for="name">Fullname</label>
-                        <input type="text" name="name" id="name" class="form-control" placeholder="Input your Fullname...">
-                    </div>
-                    <div class="form-group col-12 mb-2">
-                        <label for="phone">Phone Number</label>
-                        <input type="text" name="phone" id="phone" class="form-control" placeholder="Input your Phone Number...">
-                    </div>
-                    <div class="form-group col-12 mb-2">
-                        <label for="email">Email Address</label>
-                        <input type="email" name="email" id="email" class="form-control" placeholder="Input your Email Address...">
-                    </div>
-                    <div class="form-group col-12 mb-2">
-                        <label for="type">Type User</label>
-                        <select name="type" id="type" class="form-control">
-                            <option value="" selected>Choose Type User</option>
-                            <option value="0">User</option>
-                            <option value="1">Worker</option>
-                            <option value="2">Admin</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
-{{-- Modal Edit User --}}
+{{-- MODAL UPDATE PAKET --}}
 @foreach($paket as $key => $item)
-<div class="modal fade" id="editUser{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="tabsModalLabel" aria-hidden="true">
+<div class="modal fade" id="editPaket{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="tabsModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <form action="{{ route('admin.paket.update', $item->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
@@ -187,12 +122,27 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group col-12 mb-2">
-                        <label for="isverify">Status User</label>
-                        <select name="isverify" id="isverify" class="form-control">
-                            <option value="" selected>Choose Status User</option>
-                            <option value="0" {{ $item->isverify == '0' ? 'selected' : '' }}>Belum Verify</option>
-                            <option value="1" {{ $item->isverify == '1' ? 'selected' : '' }}>Sudah Verify</option>
-                        </select>
+                        <div class="text-center">
+
+                            <img class="card-img-top img-fluid mb-2" src="{{ asset('storage/images/paket/'.$item->image) }}" style="width: 450px;" alt="Image-Picture" id="image-preview">
+                        </div>
+                        <label for="image">Cover Image</label>
+                        <input type="file" name="image" id="image" class="form-control" value="{{ $item->image }}">
+                    </div>
+                    <div class="form-group mb-2">
+                        <label for="name">Nama Paket</label>
+                        <input type="text" name="name" id="name" class="form-control" placeholder="Input package name..." value="{{ $item->name }}">
+                        @error('name') <small class="text-danger">{{ $message }}</small> @enderror
+                    </div>
+                    <div class="form-group mb-2">
+                        <label for="price">Harga Paket</label>
+                        <input type="text" name="price" id="price" class="form-control" placeholder="Input package price..." value="{{ $item->price }}">
+                        @error('price') <small class="text-danger">{{ $message }}</small> @enderror
+                    </div>
+                    <div class="form-group mb-2">
+                        <label for="description">Deskripsi Paket</label>
+                        <textarea name="description" id="description" class="form-control" cols="30" rows="10" placeholder="Input package description..."  value="{{ $item->description }}"> {{ $item->description }}</textarea>
+                        @error('description') <small class="text-danger">{{ $message }}</small> @enderror
                     </div>
                 </div>
             </div>

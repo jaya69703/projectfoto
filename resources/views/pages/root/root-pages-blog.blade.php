@@ -52,7 +52,7 @@
 
               <hr>
 
-              <a href="blog-details.html" class="readmore stretched-link"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
+              <a href="{{ route('root.pages.blog.single') }}" class="readmore stretched-link"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
 
             </div>
 
@@ -87,7 +87,7 @@
 
               <hr>
 
-              <a href="blog-details.html" class="readmore stretched-link"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
+              <a href="{{ route('root.pages.blog.single') }}" class="readmore stretched-link"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
 
             </div>
 
@@ -122,7 +122,7 @@
 
               <hr>
 
-              <a href="blog-details.html" class="readmore stretched-link"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
+              <a href="{{ route('root.pages.blog.single') }}" class="readmore stretched-link"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
 
             </div>
 
@@ -157,7 +157,7 @@
 
               <hr>
 
-              <a href="blog-details.html" class="readmore stretched-link"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
+              <a href="{{ route('root.pages.blog.single') }}" class="readmore stretched-link"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
 
             </div>
 
@@ -192,7 +192,7 @@
 
               <hr>
 
-              <a href="blog-details.html" class="readmore stretched-link"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
+              <a href="{{ route('root.pages.blog.single') }}" class="readmore stretched-link"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
 
             </div>
 
@@ -227,7 +227,7 @@
 
               <hr>
 
-              <a href="blog-details.html" class="readmore stretched-link"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
+              <a href="{{ route('root.pages.blog.single') }}" class="readmore stretched-link"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
 
             </div>
 

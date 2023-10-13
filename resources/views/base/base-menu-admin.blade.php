@@ -41,8 +41,8 @@
         <li class="menu {{ Str::is('admin/usermanage/member*', request()->path()) ? 'active' : '' }}">
             <a href="{{ url('/admin/usermanage/member') }}">Pengguna Member </a>
         </li>
-        <li class="menu {{ Str::is('admin/usermanage/member-plus*', request()->path()) ? 'active' : '' }}">
-            <a href="{{ url('/admin/usermanage/member-plus') }}">Pengguna Member Plus </a>
+        <li class="menu {{ Str::is('admin/usermanage/memplus*', request()->path()) ? 'active' : '' }}">
+            <a href="{{ url('/admin/usermanage/memplus') }}">Pengguna Member Plus </a>
         </li>
         <li class="menu {{ Str::is('admin/usermanage/author*', request()->path()) ? 'active' : '' }}">
             <a href="{{ url('/admin/usermanage/author') }}">Pengguna Author </a>

@@ -112,7 +112,7 @@
           <li><a href="{{ route('root.pages.about') }}" class="{{ Str::is('about-us*', request()->path()) ? 'active' : '' }}">About</a></li>
           <li><a href="{{ route('root.pages.services') }}" class="{{ Str::is('services*', request()->path()) ? 'active' : '' }}">Services</a></li>
           <li><a href="{{ route('root.pages.projects') }}" class="{{ Str::is('projects*', request()->path()) ? 'active' : '' }}">Projects</a></li>
-          <li><a href="{{ route('root.pages.blog') }}"  class="{{ Str::is('blog*', request()->path()) ? 'active' : '' }}">Blog</a></li>
+          <li><a href="{{ route('root.pages.blog') }}"  class="{{ Str::is('blog*', request()->path()) || Str::is('blog/*', request()->path()) ? 'active' : '' }}">Blog</a></li>
           <li><a href="{{ route('root.pages.contact') }}" class="{{ Str::is('contact-us*', request()->path()) ? 'active' : '' }}">Contact</a></li>
           @auth
           <li class="dropdown">

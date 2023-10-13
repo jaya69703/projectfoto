@@ -44,116 +44,29 @@
                           <div class="tab-pane fade show active" id="rounded-pills-icon-home" role="tabpanel" aria-labelledby="rounded-pills-icon-home-tab">
                               <div class="row">
                                   <div class="form-group col-lg-6 col-12 mb-2">
-                                      <label for="worker_name">Nama</label>
-                                      <input type="text" id="worker_name" name="worker_name" class="form-control" value="{{ Auth::user()->worker->worker_name }}">
+                                      <label for="name">Nama Pengguna</label>
+                                      <input type="text" id="name" name="name" class="form-control" value="{{ Auth::user()->name }}">
                                   </div>
                                   <div class="form-group col-lg-6 col-12 mb-2">
-                                    <label for="worker_nitk">Nomor Induk Tenaga Kependidikan</label>
-                                    <input type="text" id="worker_nitk" name="worker_nitk" class="form-control" value="{{ Auth::user()->worker->worker_nitk }}" placeholder="Inputkan Nomor Induk Tenaga Kependidikan...">
+                                    <label for="email">Alamat Email</label>
+                                    <input type="email" id="email" name="email" class="form-control" value="{{ Auth::user()->email }}" placeholder="Inputkan Nomor Induk Tenaga Kependidikan...">
                                 </div>
                                 <div class="form-group col-lg-6 col-12 mb-2">
-                                    <label for="divisi_id">Divisi</label>
-                                    <input type="text" id="divisi_id" name="divisi_id" class="form-control" value="{{ Auth::user()->worker->position_id }}" disabled>
+                                    <label for="phone">Nomor Telepon</label>
+                                    <input type="text" id="phone" name="phone" class="form-control" value="{{ Auth::user()->phone }}" disabled>
                                 </div>
                                 <div class="form-group col-lg-6 col-12 mb-2">
-                                    <label for="position_id">Jabatan</label>
-                                    <input type="text" id="position_id" name="position_id" class="form-control" value="{{ Auth::user()->worker->divisi_id }}" disabled>
-                                </div>
-                                <div class="form-group col-lg-6 col-12 mb-2">
-                                    <label for="worker_start">Awal Masuk Kerja</label>
-                                    <input type="date" id="worker_start" name="worker_start" class="form-control" value="{{ Auth::user()->worker->worker_start }}" placeholder="Inputkan Tanggal Awal Masuk Kerja...">
-                                </div>
-                                <div class="form-group col-lg-6 col-12 mb-2">
-                                    <label for="worker_sknumber">Nomor Surat Tugas</label>
-                                    <input type="text" id="worker_sknumber" name="worker_sknumber" class="form-control" value="{{ Auth::user()->worker->worker_sknumber }}" placeholder="Inputkan Nomor Surat Tugas..." disabled>
+                                    <label for="code">Kode Pengguna</label>
+                                    <input type="text" id="code" name="code" class="form-control" value="{{ Auth::user()->code }}" disabled>
                                 </div>
                             </div>
                           </div>
                           <div class="tab-pane fade" id="rounded-pills-icon-profile" role="tabpanel" aria-labelledby="rounded-pills-icon-profile-tab">
-                              <div class="row">
-                                  <div class="form-group col-lg-6 col-12 mb-2">
-                                      <label for="name">Nama</label>
-                                      <input type="text" id="name" name="name" class="form-control" value="{{ Auth::user()->worker->worker_name }}">
-                                  </div>
-                                  <div class="form-group col-lg-6 col-12 mb-2">
-                                      <label for="kelas_id">Kelas</label>
-                                      <input type="text" id="kelas_id" name="kelas_id" class="form-control" value="{{ Auth::user()->worker->worker_name }}" disabled>
-                                  </div>
-                                  <div class="form-group col-lg-6 col-12 mb-2">
-                                      <label for="worker_niknumber">Nomor Induk Kependudukan</label>
-                                      <input type="text" id="worker_niknumber" name="worker_niknumber" class="form-control" value="{{ Auth::user()->worker->worker_niknumber }}" placeholder="Inputkan Nomor Induk Kependudukan...">
-                                  </div>
-                                  <div class="form-group col-lg-6 col-12 mb-2">
-                                      <label for="worker_kknumber">Nomor Kartu Keluarga</label>
-                                      <input type="text" id="worker_kknumber" name="worker_kknumber" class="form-control" value="{{ Auth::user()->worker->worker_kknumber }}" placeholder="Inputkan Nomor Kartu Keluarga...">
-                                  </div>
 
-                                  <div class="form-group col-lg-6 col-12 mb-2">
-                                      <label for="worker_email">Alamat Email</label>
-                                      <input type="text" id="worker_email" name="worker_email" class="form-control" value="{{ Auth::user()->worker->worker_email }}" disabled>
-                                  </div>
-                                  <div class="form-group col-lg-6 col-12 mb-2">
-                                      <label for="worker_phone">Nomor Telepon</label>
-                                      <input type="text" id="worker_phone" name="worker_phone" class="form-control" value="{{ Auth::user()->worker->worker_phone }}" disabled>
-                                  </div>
-                                  <div class="form-group col-lg-6 col-12 mb-2">
-                                      <label for="worker_placebirth">Tempat Lahir</label>
-                                      <input type="text" id="worker_placebirth" name="worker_placebirth" class="form-control" value="{{ Auth::user()->worker->worker_placebirth }}" placeholder="Inputkan Tempat Lahir kamu...">
-                                  </div>
-                                  <div class="form-group col-lg-6 col-12 mb-2">
-                                      <label for="worker_datebirth">Tanggal Lahir</label>
-                                      <input type="date" id="worker_datebirth" name="worker_datebirth" class="form-control" value="{{ Auth::user()->worker->worker_datebirth }}" placeholder="Inputkan Tanggal Lahir kamu...">
-                                  </div>
-                                  <div class="form-group col-lg-6 col-12 mb-2">
-                                      <label for="worker_gender">Jenis Kelamin</label>
-                                      <select name="worker_gender" id="worker_gender" class="form-select">
-                                          <option value="" selected>Pilih Jenis Kelamin</option>
-                                          <option value="Pria" {{ Auth::user()->worker->worker_gender == 'Pria' ? 'selected' : '' }}>Laki Laki</option>
-                                          <option value="Wanita" {{ Auth::user()->worker->worker_gender == 'Wanita' ? 'selected' : '' }}>Perempuan</option>
-                                      </select>
-                                  </div>
-                                  <div class="form-group col-lg-6 col-12 mb-2">
-                                      <label for="worker_religion">Agama</label>
-                                      <select name="worker_religion" id="worker_religion" class="form-select">
-                                          <option value="" selected>Pilih Agama Anda</option>
-                                          <option value="Agama Islam" {{ Auth::user()->worker->worker_religion == 'Agama Islam' ? 'selected' : '' }}>Agama Islam</option>
-                                          <option value="Agama Kristen" {{ Auth::user()->worker->worker_religion == 'Agama Kristen' ? 'selected' : '' }}>Agama Kristen</option>
-                                          <option value="Agama Hindu" {{ Auth::user()->worker->worker_religion == 'Agama Hindu' ? 'selected' : '' }}>Agama Hindu</option>
-                                          <option value="Agama Buddha" {{ Auth::user()->worker->worker_religion == 'Agama Buddha' ? 'selected' : '' }}>Agama Buddha</option>
-                                          <option value="Agama Konghuchu" {{ Auth::user()->worker->worker_religion == 'Agama Konghuchu' ? 'selected' : '' }}>Agama Konghuchu</option>
-                                      </select>
-                                  </div>
-                              </div>
 
                           </div>
                           <div class="tab-pane fade" id="rounded-pills-icon-contact" role="tabpanel" aria-labelledby="rounded-pills-icon-contact-tab">
-                              <div class="row">
 
-                                  <div class="form-group col-lg-6 col-12 mb-2">
-                                      <label for="worker_father">Nama Ayah</label>
-                                      <input type="text" id="worker_father" name="worker_father" class="form-control" value="{{ Auth::user()->worker->worker_father }}" placeholder="Inputkan Nama Ayah...">
-                                  </div>
-                                  <div class="form-group col-lg-6 col-12 mb-2">
-                                      <label for="worker_phonefather">Nomor Telepon Ayah</label>
-                                      <input type="text" id="worker_phonefather" name="worker_phonefather" class="form-control" value="{{ Auth::user()->worker->worker_phonefather }}" placeholder="Inputkan Nomor Telepon Ayah...">
-                                  </div>
-                                  <div class="form-group col-lg-6 col-12 mb-2">
-                                      <label for="worker_mother">Nama Ibu</label>
-                                      <input type="text" id="worker_mother" name="worker_mother" class="form-control" value="{{ Auth::user()->worker->worker_mother }}" placeholder="Inputkan Nama Ibu...">
-                                  </div>
-                                  <div class="form-group col-lg-6 col-12 mb-2">
-                                      <label for="worker_phonemother">Nomor Telepon Ibu</label>
-                                      <input type="text" id="worker_phonemother" name="worker_phonemother" class="form-control" value="{{ Auth::user()->worker->worker_phonemother }}" placeholder="Inputkan Nomor Telepon Ibu...">
-                                  </div>
-                                  <div class="form-group col-lg-6 col-12 mb-2">
-                                      <label for="worker_wali">Nama Wali ( Opsional )</label>
-                                      <input type="text" id="worker_wali" name="worker_wali" class="form-control" value="{{ Auth::user()->worker->worker_wali }}" placeholder="Inputkan Nama Wali...">
-                                  </div>
-                                  <div class="form-group col-lg-6 col-12 mb-2">
-                                      <label for="worker_phonewali">Nomor Telepon Wali ( Opsional )</label>
-                                      <input type="text" id="worker_phonewali" name="worker_phonewali" class="form-control" value="{{ Auth::user()->worker->worker_phonewali }}" placeholder="Inputkan Nomor Telepon Wali...">
-                                  </div>
-                              </div>
                           </div>
                       </div>
                   </div>
