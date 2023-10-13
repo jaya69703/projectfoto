@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('book_time');
             $table->string('book_take')->nullable();
             $table->string('book_prof')->nullable();
+            $table->string('book_done')->nullable();
 
             $table->timestamps();
         });

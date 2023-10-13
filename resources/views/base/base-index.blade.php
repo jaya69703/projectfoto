@@ -191,7 +191,7 @@
                     @auth
 
                     @include('base.base-menu-admin')
-                    @include('base.base-menu-worker')
+                    @include('base.base-menu-author')
                     @include('base.base-menu-user')
                     @endauth
 

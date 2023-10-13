@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Pages\Profile\AdminController;
+use App\Http\Controllers\Pages\Profile\AuthorController;
 use App\Http\Controllers\Pages\Profile\UserController;
 use App\Http\Controllers\Pages\Base\TodoController;
 use App\Http\Controllers\Pages\Base\AnnouncementController;
@@ -88,6 +89,19 @@ Route::middleware(['auth', 'user-access:Member'])->group(function () {
 });
 //
 
+Route::middleware(['auth', 'user-access:Author', 'isverify:1'])->group(function () {
+
+    // DASHBOARD ADMIN
+    Route::get('/author/home', [AuthorController::class, 'index'])->name('author.home.index');
+    Route::get('/author/profile', [AuthorController::class, 'show'])->name('author.profile.index');
+    Route::patch('/author/profile/update', [AuthorController::class, 'update'])->name('author.profile.update');
+
+    // APLIKASI TODO LIST
+    Route::get('/author/app/todo', [TodoController::class, 'index'])->name('author.app.todo.index');
+    Route::post('/author/app/todo/store', [TodoController::class, 'store'])->name('author.app.todo.store');
+    Route::delete('/author/app/todo/destroy/{id}', [TodoController::class, 'destroy'])->name('author.app.todo.destroy');
+    Route::patch('/author/app/todo/update/{id}', [TodoController::class, 'update'])->name('author.app.todo.update');
+});
 Route::middleware(['auth', 'user-access:Admin', 'isverify:1'])->group(function () {
     Route::get('/chat-index', function () {
         $data['title'] = "iSchool";

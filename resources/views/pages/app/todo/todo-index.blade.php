@@ -11,6 +11,8 @@
 
 @endsection
 @section('content')
+@if (Auth::user()->type == 'Admin')
+
 <div class="row layout-top-spacing">
     <div class="col-lg-12 col-12">
         <div class="card">
@@ -64,8 +66,65 @@
         </div>
     </div>
 </div>
+@elseif (Auth::user()->type == 'Author')
+<div class="row layout-top-spacing">
+    <div class="col-lg-12 col-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <span style="font-size: 20px">{{ $submenu }}</span>
+                <span class="align-items-center">
+                    <a href="#" class="btn btn-outline-primary btn-rounded" data-bs-toggle="modal" data-bs-target="#createTodo"><i class="fa-solid fa-plus"></i></a>
+                    <a href="" class="btn btn-outline-warning btn-rounded"><i class="fa-solid fa-sync"></i></a>
+                </span>
+            </div>
+            <div class="card-body">
+                <table id="style-3" class="table style-3 dt-table-hover">
+                    <thead>
+                        <tr class="text-center">
+                            <th>Record Id</th>
+                            <th>Title</th>
+                            <th>Deadline</th>
+                            <th>Status</th>
+                            <th>UpdateAt</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($todo as $key => $item)
+                        @if ($item->user_id == Auth::user()->id)
+                        <tr>
+                            <td class="text-center">{{ ++$key }}</td>
+                            <td>{{ $item->title }}</td>
+                            <td class="text-center">{{ $item->end_date }}</td>
+                            <td class="text-center">{{ $item->status }}</td>
+                            <td class="text-center">{{ $item->updated_at->diffforhumans() }}</td>
+                            <td class="text-center d-flex justify-content-center align-items-center">
+                                <a href="#" class="btn btn-outline-warning btn-rounded right" data-bs-toggle="modal" data-bs-target="#showTodo"><i class="fa-solid fa-eye"></i></a>
+                                <a href="#" class="btn btn-outline-success btn-rounded right" data-bs-toggle="modal" data-bs-target="#editTodo"><i class="fa-solid fa-edit"></i></a>
+                                <form id="delete-form-{{ $item->id }}" action="{{ route('author.app.todo.destroy', $item->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <a type="button" class="bs-tooltip btn btn-rounded btn-outline-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-original-title="Delete"
+                                        data-url="{{ route('author.app.todo.destroy', $item->id) }}" data-name="{{ $item->name }}"
+                                        onclick="deleteData('{{ $item->id }}')">
+                                        <i class="fa-solid fa-trash-can"></i>
+                                     </a>
+                                </form>
+                            </td>
+                        </tr>
+                        @endif
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+@endif
 @endsection
 @section('modal')
+@if (Auth::user()->type == 'Admin')
+
 {{-- MODAL CREATE --}}
 <div class="modal fade" id="createTodo" tabindex="-1" role="dialog" aria-labelledby="tabsModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -204,6 +263,147 @@
     </div>
 </div>
 @endforeach
+@elseif(Auth::user()->type == 'Author')
+
+{{-- MODAL CREATE --}}
+<div class="modal fade" id="createTodo" tabindex="-1" role="dialog" aria-labelledby="tabsModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <form action="{{ route('author.app.todo.store') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <div class="modal-content">
+                <div class="modal-header" style="font-size: 20px">
+                    <h5 class="modal-title" id="tabsModalLabel">Create {{ $submenu }}</h5>
+                    <div class="d-flex justify-content-between align-items-center">
+
+                        <button style="margin-right: 10px;" type="submit" class="btn btn-rounded btn-outline-secondary" data-bs-dismiss="modal">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                        <button style="" type="button" class="btn btn-rounded btn-outline-warning" data-bs-dismiss="modal" aria-label="Close">
+                            <i class="fa-solid fa-close"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group col-12 mb-2">
+                        <label for="title">Title</label>
+                        <input type="text" name="title" id="title" class="form-control" placeholder="Input todo title...">
+                        @error('title')<small class="text-danger">{{ $message }}</small> @enderror
+                    </div>
+                    <div class="form-group col-12 mb-2">
+                        <label for="desc">Description</label>
+                        <textarea name="desc" id="desc" class="form-control" cols="30" rows="10" placeholder="Input todo description..."></textarea>
+                        @error('desc')<small class="text-danger">{{ $message }}</small> @enderror
+                    </div>
+                    <div class="form-group col-12 mb-2">
+                        <label for="end_date">Deadline</label>
+                        <input type="date" name="end_date" id="end_date" class="form-control" placeholder="Input todo deadline...">
+                        @error('end_date')<small class="text-danger">{{ $message }}</small> @enderror
+                    </div>
+                    <div class="form-group col-12 mb-2">
+                        <label for="status">Choose Status</label>
+                        <select name="status" id="status" class="form-select">
+                            <option value="" selected>Choose Status</option>
+                            <option value="OnProgress">OnProgress</option>
+                            <option value="Pending">Pending</option>
+                            <option value="Finished">Finished</option>
+                        </select>
+                        @error('status')<small class="text-danger">{{ $message }}</small> @enderror
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{{-- MODAL EDIT --}}
+@foreach ($todo as $key => $item)
+<div class="modal fade" id="editTodo" tabindex="-1" role="dialog" aria-labelledby="tabsModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <form action="{{ route('author.app.todo.update', $item->id) }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            @method('PATCH')
+            <div class="modal-content">
+                <div class="modal-header" style="font-size: 20px">
+                    <h5 class="modal-title" id="tabsModalLabel">Edit {{ $submenu }}</h5>
+                    <div class="d-flex justify-content-between align-items-center">
+
+                        <button style="margin-right: 10px;" type="submit" class="btn btn-rounded btn-outline-secondary" data-bs-dismiss="modal">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                        <button style="" type="button" class="btn btn-rounded btn-outline-warning" data-bs-dismiss="modal" aria-label="Close">
+                            <i class="fa-solid fa-close"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group col-12 mb-2">
+                        <label for="title">Title</label>
+                        <input type="text" name="title" id="title" class="form-control" placeholder="Input todo title..." value="{{ $item->title }}">
+                        @error('title')<small class="text-danger">{{ $message }}</small> @enderror
+                    </div>
+                    <div class="form-group col-12 mb-2">
+                        <label for="desc">Description</label>
+                        <textarea name="desc" id="desc" class="form-control" cols="30" rows="10" placeholder="Input todo description..." value="{{ $item->desc }}">{{ $item->desc }}</textarea>
+                        @error('desc')<small class="text-danger">{{ $message }}</small> @enderror
+                    </div>
+                    <div class="form-group col-12 mb-2">
+                        <label for="end_date">Deadline</label>
+                        <input type="date" name="end_date" id="end_date" class="form-control" placeholder="Input todo deadline..." value="{{ $item->end_date }}">
+                        @error('end_date')<small class="text-danger">{{ $message }}</small> @enderror
+                    </div>
+                    <div class="form-group col-12 mb-2">
+                        <label for="status">Choose Status</label>
+                        <select name="status" id="status" class="form-select">
+                            <option value="" selected>Choose Status</option>
+                            <option value="OnProgress" {{ $item->status == 'OnProgress' ? 'selected' : '' }}>OnProgress</option>
+                            <option value="Pending" {{ $item->status == 'Pending' ? 'selected' : '' }}>Pending</option>
+                            <option value="Finished" {{ $item->status == 'Finished' ? 'selected' : '' }}>Finished</option>
+                        </select>
+                        @error('status')<small class="text-danger">{{ $message }}</small> @enderror
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+@endforeach
+{{-- MODAL SHOW --}}
+@foreach ($todo as $key => $item)
+<div class="modal fade" id="showTodo" tabindex="-1" role="dialog" aria-labelledby="tabsModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <form action="{{ route('author.app.todo.update', $item->id) }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            @method('PATCH')
+            <div class="modal-content">
+                <div class="modal-header" style="font-size: 20px">
+                    <h5 class="modal-title" id="tabsModalLabel">Edit {{ $submenu }}</h5>
+                    <div class="d-flex justify-content-between align-items-center">
+
+                        <button style="margin-right: 10px;" type="submit" class="btn btn-rounded btn-outline-secondary" data-bs-dismiss="modal">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                        <button style="" type="button" class="btn btn-rounded btn-outline-warning" data-bs-dismiss="modal" aria-label="Close">
+                            <i class="fa-solid fa-close"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group col-12 mb-2">
+                        <label for="title">Title</label>
+                        <input disabled  type="text" name="title" id="title" class="form-control" placeholder="Input todo title..." value="{{ $item->title }}">
+                        @error('title')<small class="text-danger">{{ $message }}</small> @enderror
+                    </div>
+                    <div class="form-group col-12 mb-2">
+                        <label for="desc">Description</label>
+                        <textarea disabled name="desc" id="desc" class="form-control" cols="30" rows="10" placeholder="Input todo description..." value="{{ $item->desc }}">{{ $item->desc }}</textarea>
+                        @error('desc')<small class="text-danger">{{ $message }}</small> @enderror
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+@endforeach
+@endif
 @endsection
 @section('custom-js')
 <script>
