@@ -18,6 +18,7 @@ class Booking extends Model
         'book_note',
         'book_stat',
         'book_prof',
+        'book_done',
     ];
 
     public function user()

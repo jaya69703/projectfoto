@@ -29,7 +29,11 @@
 <link href="{{ asset('main') }}/src/plugins/src/apex/apexcharts.css" rel="stylesheet" type="text/css">
 @endsection
 @section('content')
+@if(Str::is('author/home', request()->path()))
+@include('base.base-home-author')
+@elseif(Str::is('admin/home', request()->path()))
 @include('base.base-home-admin')
+@endif
 <div class="row layout-top-spacing">
     <div class="col-lg-3 col-12 mb-3">
 
@@ -98,6 +102,8 @@
         multiCheck(c3);
     </script>
     <script src="{{ asset('main') }}/src/plugins/src/apex/apexcharts.min.js"></script>
+    @if (Str::is('admin/home', request()->path()))
+
     <script>
         var productsData = @json($productsData); // Mengambil data dari Blade
 
@@ -156,5 +162,6 @@
 
         simpleColumnStacked.render();
     </script>
+    @endif
 
 @endsection

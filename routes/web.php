@@ -96,11 +96,18 @@ Route::middleware(['auth', 'user-access:Author', 'isverify:1'])->group(function 
     Route::get('/author/profile', [AuthorController::class, 'show'])->name('author.profile.index');
     Route::patch('/author/profile/update', [AuthorController::class, 'update'])->name('author.profile.update');
 
+    // AUTHOR UPDATE I
+    Route::get('/author/booking/all', [AuthorController::class, 'viewBooking'])->name('author.booking.view');
+    Route::patch('/author/book/product/sending/{id}', [AuthorController::class, 'sendProduct'])->name('author.book.product.sending');
+
     // APLIKASI TODO LIST
     Route::get('/author/app/todo', [TodoController::class, 'index'])->name('author.app.todo.index');
     Route::post('/author/app/todo/store', [TodoController::class, 'store'])->name('author.app.todo.store');
     Route::delete('/author/app/todo/destroy/{id}', [TodoController::class, 'destroy'])->name('author.app.todo.destroy');
     Route::patch('/author/app/todo/update/{id}', [TodoController::class, 'update'])->name('author.app.todo.update');
+
+
+
 });
 Route::middleware(['auth', 'user-access:Admin', 'isverify:1'])->group(function () {
     Route::get('/chat-index', function () {

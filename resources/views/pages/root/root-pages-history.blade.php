@@ -75,6 +75,8 @@
                                             <a href="#" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#paymentHere{{$item->id}}"><i class="fa-solid fa-eye"></i></a>
                                             @elseif($item->book_stat == 'Menunggu Verifikasi')
                                             <a href="#" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#paymentView{{$item->id}}"><i class="fa-solid fa-eye"></i></a>
+                                            @elseif($item->book_stat == 'Selesai')
+                                            <a href="#" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#packageView{{$item->id}}"><i class="fa-solid fa-eye"></i></a>
                                             @endif
                                         </td>
                                     </tr>
@@ -130,6 +132,34 @@
                         <label for="book_prof">Bukti Pembayaran</label>
                         <input type="file" name="book_prof" id="book_prof" class="form-control">
                         @error('book_prof') <small class="text-danger">{{ $message }}</small> @enderror
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+@endforeach
+@foreach ($book as $item)
+<div class="modal fade" id="packageView{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="tabsModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <form action="{{ route('member.book.product.payment', $item->id) }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            @method('PATCH')
+            <div class="modal-content">
+                <div class="modal-header" style="font-size: 20px">
+                    <h5 class="modal-title" id="tabsModalLabel">Lihat Pesanan</h5>
+                    <div class="d-flex justify-content-between align-items-center">
+
+                        <button style="" type="button" class="btn btn-rounded btn-outline-warning" data-bs-dismiss="modal" aria-label="Close">
+                            <i class="fa-solid fa-close"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group col-12 mb-3">
+                        <label for="book_done">Berikut pesanan anda</label>
+                        <textarea name="book_done" id="book_done" class="form-control" cols="30" rows="10">{{ $item->book_done }}</textarea>
+                        @error('book_done') <small class="text-danger">{{ $message }}</small> @enderror
                     </div>
                 </div>
             </div>

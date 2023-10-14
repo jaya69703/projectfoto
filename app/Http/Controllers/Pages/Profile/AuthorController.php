@@ -4,8 +4,11 @@ namespace App\Http\Controllers\Pages\Profile;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+
 use App\Models\User;
 use App\Models\Author;
+use App\Models\Booking;
 use Auth;
 
 class AuthorController extends Controller
@@ -19,7 +22,7 @@ class AuthorController extends Controller
         $data['menu'] = "Dashboard";
         $data['submenu'] = 'Author';
 
-        return view('base.base-profile', $data);
+        return view('base.base-home', $data);
     }
 
     /**
@@ -48,6 +51,27 @@ class AuthorController extends Controller
         $data['submenu'] = 'Author';
 
         return view('base.base-profile', $data);
+    }
+
+    public function viewBooking()
+    {
+        $data['title'] = "SkyDash";
+        $data['menu'] = "Kelola Pesanan";
+        $data['submenu'] = 'Lihat Pesanan';
+        $data['book'] = Booking::where('book_stat', 6)->get();
+
+
+        return view('pages.booking.author-booking', $data);
+    }
+
+    public function sendProduct(Request $request, $id)
+    {
+        $book = Booking::findorFail($id);
+        $book->book_done = $request->book_done;
+        $book->book_stat = 7;
+        $book->save();
+
+        return back()->with('success', 'Kirim paket berhasil...');
     }
 
     /**
