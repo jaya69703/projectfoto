@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\Pages\App\CategoryBController;
+use App\Http\Controllers\Pages\App\TagBController;
+use App\Http\Controllers\Pages\App\PostController;
+
 use App\Http\Controllers\Pages\Profile\AdminController;
 use App\Http\Controllers\Pages\Profile\AuthorController;
 use App\Http\Controllers\Pages\Profile\UserController;
@@ -29,7 +33,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [RootController::class, 'index'])->name('root.index');
 Route::get('/about-us', [RootController::class, 'about'])->name('root.pages.about');
 Route::get('/blog', [RootController::class, 'blog'])->name('root.pages.blog');
-Route::get('/blog/single', [RootController::class, 'blogsingle'])->name('root.pages.blog.single');
+Route::get('/blog/{slug}', [RootController::class, 'blogsingle'])->name('root.pages.blog.single');
 Route::get('/contact-us', [RootController::class, 'contact'])->name('root.pages.contact');
 Route::post('/contact-us/store', [MessageController::class, 'store'])->name('root.pages.contact.store');
 Route::get('/product/details/{id}', [RootController::class, 'pdetails'])->name('root.pages.pdetails');
@@ -99,6 +103,25 @@ Route::middleware(['auth', 'user-access:Author', 'isverify:1'])->group(function 
     // AUTHOR UPDATE I
     Route::get('/author/booking/all', [AuthorController::class, 'viewBooking'])->name('author.booking.view');
     Route::patch('/author/book/product/sending/{id}', [AuthorController::class, 'sendProduct'])->name('author.book.product.sending');
+
+    // ROUTING CATEGORY BLOG
+    Route::get('/author/category', [CategoryBController::class, 'index'])->name('author.blog.category-index');
+    Route::post('/author/category/store', [CategoryBController::class, 'store'])->name('author.blog.category-store');
+    Route::patch('/author/category/{id}/update', [CategoryBController::class, 'update'])->name('author.blog.category-update');
+    Route::delete('/author/category/{id}/destroy', [CategoryBController::class, 'destroy'])->name('author.blog.category-destroy');
+
+    // ROUTING TAGS BLOG
+    Route::get('/author/tags', [TagBController::class, 'index'])->name('author.blog.tags-index');
+    Route::post('/author/tags/store', [TagBController::class, 'store'])->name('author.blog.tags-store');
+    Route::patch('/author/tags/{id}/update', [TagBController::class, 'update'])->name('author.blog.tags-update');
+    Route::delete('/author/tags/{id}/destroy', [TagBController::class, 'destroy'])->name('author.blog.tags-destroy');
+
+    // ROUTING POSTS BLOG
+    Route::get('/author/posts', [PostController::class, 'index'])->name('author.blog.post-index');
+    Route::get('/author/posts/create', [PostController::class, 'create'])->name('author.blog.post-create');
+    Route::post('/author/posts/store', [PostController::class, 'store'])->name('author.blog.post-store');
+    Route::patch('/author/posts/{id}/update', [PostController::class, 'update'])->name('author.blog.post-update');
+    Route::delete('/author/posts/{id}/destroy', [PostController::class, 'destroy'])->name('author.blog.post-destroy');
 
     // APLIKASI TODO LIST
     Route::get('/author/app/todo', [TodoController::class, 'index'])->name('author.app.todo.index');

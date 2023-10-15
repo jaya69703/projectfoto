@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Paket;
 use App\Models\WebSetting;
 use App\Models\Booking;
+use App\Models\{Post, TagsB, CategoryB};
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -43,17 +44,21 @@ class RootController extends Controller
         $data['title'] = "SkyDash";
         $data['menu'] = "Home";
         $data['submenu'] = "Blog";
-        $data['users'] = User::where('type', '2')->get();
+        $data['posts'] = Post::latest()->get();
 
         return view('pages.root.root-pages-blog', $data);
     }
 
-    public function blogsingle()
+    public function blogsingle($slug)
     {
         $data['title'] = "SkyDash";
         $data['menu'] = "Home";
         $data['submenu'] = "Blog Single Page";
-        $data['users'] = User::where('type', '2')->get();
+        $data['posts'] = Post::latest()->take(5)->get();
+        $data['post'] = Post::where('slug', $slug)->first();
+        $data['category'] = Categoryb::all();
+        $data['tags'] = TagsB::all();
+        // $data['users'] = User::where('type', '2')->get();
 
         return view('pages.root.root-pages-blog-single', $data);
     }

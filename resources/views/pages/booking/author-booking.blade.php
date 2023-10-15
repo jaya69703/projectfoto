@@ -37,15 +37,6 @@
                             <td>{!! $item->book_stat !!}</td>
                             <td>
                                 <a href="#" class="btn btn-rounded btn-outline-primary" data-bs-toggle="modal" data-bs-target="#uploadPhoto{{$item->id}}" style="margin-right: 5px"><i class="fa-solid fa-eye"></i></a>
-                                <form id="delete-form-{{ $item->id }}" action="{{ route('admin.booking.destroy', $item->id) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <a type="button" class="bs-tooltip btn btn-rounded btn-outline-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-original-title="Delete"
-                                        data-url="{{ route('admin.booking.destroy', $item->id) }}" data-name="{{ $item->name }}"
-                                        onclick="deleteData('{{ $item->id }}')">
-                                        <i class="fa-solid fa-trash-can"></i>
-                                    </a>
-                                </form>
                             </td>
                         </tr>
                         @endforeach
@@ -74,6 +65,7 @@
                         </button>
                     </div>
                 </div>
+
                 <div class="modal-body">
                     <div class="form-group col-12 mb-3 text-center">
                         <img src="{{ asset('storage/images/prof/'.$item->book_prof) }}" alt="" style="max-height: 300px">

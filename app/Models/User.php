@@ -67,6 +67,10 @@ class User extends Authenticatable
     {
         return $this->hasOne(Worker::class, 'code', 'code');
     }
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
 
     public function getPhoneAttribute($value)
     {
