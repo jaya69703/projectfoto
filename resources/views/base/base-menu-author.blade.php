@@ -52,7 +52,7 @@
         <li class="menu {{ Str::is('author/tags*', request()->path()) ? 'active' : '' }}">
             <a href="{{ url('/author/tags') }}">Kelola Tags </a>
         </li>
-        <li class="menu {{ Str::is('author/posts/*', request()->path()) ? 'active' : '' }}">
+        <li class="menu {{ Str::is('author/posts*', request()->path()) ? 'active' : '' }}">
             <a href="{{ url('/author/posts') }}">Kelola Post </a>
         </li>
     </ul>

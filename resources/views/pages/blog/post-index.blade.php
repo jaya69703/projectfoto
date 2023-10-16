@@ -22,6 +22,7 @@
                             <th class="text-center">Slug</th>
                             <th class="text-center">Keywords</th>
                             <th class="text-center">Meta Description</th>
+                            <th class="text-center">Created At</th>
                             <th class="text-center">Aksi</th>
                         </tr>
                     </thead>
@@ -29,17 +30,19 @@
                         @foreach ($posts as $key => $item)
                         <tr class="text-center">
                             <td>{{ ++$key }}</td>
-                            <td>{{ $item->name }}</td>
+                            <td>{{ $item->title }}</td>
                             <td>{{ $item->slug }}</td>
                             <td>{{ $item->keywords }}</td>
                             <td>{{ $item->meta_desc }}</td>
+                            <td>{{ $item->created_at->diffForHumans() }}</td>
                             <td class="d-flex justify-content-between align-items-center">
-                                <a href="#" class="btn btn-rounded btn-outline-primary" data-bs-toggle="modal" data-bs-target="#updateCategory{{$item->id}}" style="margin-right: 5px"><i class="fa-solid fa-eye"></i></a>
-                                <form id="delete-form-{{ $item->id }}" action="{{ route('author.blog.category-destroy', $item->id) }}" method="POST">
+                                <a href="{{ route('root.pages.blog.single', $item->slug) }}" class="btn btn-rounded btn-outline-primary" style="margin-right: 5px"><i class="fa-solid fa-eye"></i></a>
+                                <a href="{{ route('author.blog.post-edit', $item->id) }}" class="btn btn-rounded btn-outline-secondary" style="margin-right: 5px"><i class="fa-solid fa-edit"></i></a>
+                                <form id="delete-form-{{ $item->id }}" action="{{ route('author.blog.post-destroy', $item->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <a type="button" class="bs-tooltip btn btn-rounded btn-outline-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-original-title="Delete"
-                                        data-url="{{ route('author.blog.category-destroy', $item->id) }}" data-name="{{ $item->name }}"
+                                        data-url="{{ route('author.blog.post-destroy', $item->id) }}" data-name="{{ $item->name }}"
                                         onclick="deleteData('{{ $item->id }}')">
                                         <i class="fa-solid fa-trash-can"></i>
                                      </a>

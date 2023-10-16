@@ -120,7 +120,9 @@
             <ul>
                 @if(Auth::user()->type === 'Member')
                 <li><a href="{{ route('member.book.profile') }}">Profile User</a></li>
-                @else
+                @elseif(Auth::user()->type === 'Author')
+                <li><a href="{{ route('author.home.index') }}">Panel Admin</a></li>
+                @elseif(Auth::user()->type === 'Admin')
                 <li><a href="{{ route('admin.home.index') }}">Panel Admin</a></li>
                 @endif
                 <li><a href="{{ route('member.book.changepass') }}">Change Password</a></li>

@@ -122,6 +122,7 @@ Route::middleware(['auth', 'user-access:Author', 'isverify:1'])->group(function 
     Route::get('/author/posts', [PostController::class, 'index'])->name('author.blog.post-index');
     Route::get('/author/posts/create', [PostController::class, 'create'])->name('author.blog.post-create');
     Route::post('/author/posts/store', [PostController::class, 'store'])->name('author.blog.post-store');
+    Route::get('/author/posts/{id}/edit', [PostController::class, 'edit'])->name('author.blog.post-edit');
     Route::patch('/author/posts/{id}/update', [PostController::class, 'update'])->name('author.blog.post-update');
     Route::delete('/author/posts/{id}/destroy', [PostController::class, 'destroy'])->name('author.blog.post-destroy');
 

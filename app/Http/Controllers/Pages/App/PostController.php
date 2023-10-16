@@ -101,7 +101,14 @@ class PostController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $data['title'] = "AR Projects";
+        $data['menu'] = "Blog Menu";
+        $data['submenu'] = "Edit Postingan";
+        $data['category'] = CategoryB::all();
+        $data['tags'] = TagsB::all();
+        $data['posts'] = Post::findorFail($id);
+
+        return view('pages.blog.post-edit', $data);
     }
 
     /**
@@ -117,6 +124,14 @@ class PostController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $post = Post::findorFail($id);
+        $post->tags()->detach();
+
+        if($post->cover && file_exists(public_path('images/cover/' . $post->cover))){
+            \Storage::delete('images/cover/'. $post->cover);
+        }
+        $post->delete();
+
+        return back()->with('success', 'data berhasil dihapus...');
     }
 }

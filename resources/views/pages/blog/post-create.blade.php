@@ -65,7 +65,7 @@
                         @error('keywords') <small class="text-danger">{{ $message }}</small> @enderror
                     </div>
                     <div class="form-group mb-2">
-                        <label for="meta_desc">Judul Postingan</label>
+                        <label for="meta_desc">Meta Description</label>
                         <input type="text" name="meta_desc" id="meta_desc" class="form-control" placeholder="Inputkan meta desc postingan..">
                         @error('meta_desc') <small class="text-danger">{{ $message }}</small> @enderror
                     </div>
