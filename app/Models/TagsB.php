@@ -11,8 +11,9 @@ class TagsB extends Model
     protected $table = 'tagsb'; // Sesuaikan dengan nama tabel yang ada di database
 
     protected $guarded = [];
-    public function Posts()
+    public function posts()
     {
-        return $this->belongsToMany(Post::class);
+        return $this->belongsToMany(Post::class, 'post_tag', 'tag_id', 'post_id')->withPivot('post_id', 'tag_id');
     }
+
 }

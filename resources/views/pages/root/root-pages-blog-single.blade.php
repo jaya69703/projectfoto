@@ -50,14 +50,13 @@
             <div class="meta-bottom">
               <i class="bi bi-folder"></i>
               <ul class="cats">
-                <li><a href="{{ $post->category->slug }}">{{ $post->category->name }}</a></li>
+                <li><a href="{{ route('root.pages.blog.category', $post->category->slug) }}">{{ $post->category->name }}</a></li>
               </ul>
 
               <i class="bi bi-tags"></i>
               <ul class="tags">
-                {{ $post->id }}
-                @foreach($post->tags as $key => $tag)
-                  <li><a href="#">{{ $tag->name }}</a></li>
+                @foreach($post->tags as $tag)
+                <li><a href="{{ route('root.pages.blog.tags', $tag->slug) }}">{{ $tag->name }}</a></li>
                 @endforeach
               </ul>
             </div><!-- End meta bottom -->
@@ -194,7 +193,7 @@
               <h3 class="sidebar-title">Kategori</h3>
               <ul class="mt-3">
                 @foreach($category as $itemm)
-                <li><a href="{{ route('root.pages.blog', $itemm->slug) }}">{{ $itemm->name }} <span>({{$itemm->posts->count()}})</span></a></li>
+                <li><a href="{{ route('root.pages.blog.category', $itemm->slug) }}">{{ $itemm->name }} <span>({{$itemm->posts->count()}})</span></a></li>
                 @endforeach
               </ul>
             </div><!-- End sidebar categories-->
@@ -222,7 +221,7 @@
               <h3 class="sidebar-title">Tags</h3>
               <ul class="mt-3">
                 @foreach($tags as $tag)
-                <li><a href="{{ route('root.pages.blog', $tag->slug) }}">{{ $tag->name }}</a></li>
+                <li><a href="{{ route('root.pages.blog.tags', $tag->slug) }}">{{ $tag->name }}</a></li>
                 @endforeach
               </ul>
             </div><!-- End sidebar tags-->

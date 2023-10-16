@@ -74,9 +74,10 @@ class PostController extends Controller
 
             $tagsB = TagsB::find($request->tagsb); // Ganti 'find' dengan metode lain jika diperlukan
 
-            if ($tagsB) {
+            // dd($request->tagsb);
+            if ($request->tagsb) {
                 foreach ($tagsB as $tag) {
-                    $post->tagsb()->attach($tag->id);
+                    $post->tags()->attach($tag->id);
                 }
             } else {
                 return redirect()->back()->with('error', 'Tag tidak ditemukan.');

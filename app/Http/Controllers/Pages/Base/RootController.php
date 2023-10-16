@@ -58,9 +58,35 @@ class RootController extends Controller
         $data['post'] = Post::where('slug', $slug)->first();
         $data['category'] = Categoryb::all();
         $data['tags'] = TagsB::all();
-        // $data['users'] = User::where('type', '2')->get();
 
         return view('pages.root.root-pages-blog-single', $data);
+    }
+    public function blogcategory(Categoryb $category)
+    {
+        $data['title'] = "SkyDash";
+        $data['menu'] = "Home";
+        $data['submenu'] = "Blog Category Page";
+        // $data['posts'] = Post::latest()->take(5)->get();
+        $data['posts'] = $category->posts()->latest()->get();
+        // $data['post'] = Post::where('slug', $slug)->first();
+        $data['category'] = Categoryb::all();
+        $data['tags'] = TagsB::all();
+
+        return view('pages.root.root-pages-blog', $data);
+    }
+    public function blogtags(Tagsb $tagsb)
+    {
+        $data['title'] = "SkyDash";
+        $data['menu'] = "Home";
+        $data['submenu'] = "Blog Tags Page";
+        // $data['posts'] = Post::latest()->take(5)->get();
+        $data['posts'] = $tagsb->posts()->latest()->get();
+        // $data['post'] = Post::where('slug', $slug)->first();
+        $data['category'] = Categoryb::all();
+        $data['tags'] = TagsB::all();
+
+        // dd($data['posts']);
+        return view('pages.root.root-pages-blog', $data);
     }
 
     public function contact()

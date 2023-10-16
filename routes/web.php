@@ -34,6 +34,8 @@ Route::get('/', [RootController::class, 'index'])->name('root.index');
 Route::get('/about-us', [RootController::class, 'about'])->name('root.pages.about');
 Route::get('/blog', [RootController::class, 'blog'])->name('root.pages.blog');
 Route::get('/blog/{slug}', [RootController::class, 'blogsingle'])->name('root.pages.blog.single');
+Route::get('/category/{category:slug}', [RootController::class, 'blogcategory'])->name('root.pages.blog.category');
+Route::get('/tag/{tagsb:slug}', [RootController::class, 'blogtags'])->name('root.pages.blog.tags');
 Route::get('/contact-us', [RootController::class, 'contact'])->name('root.pages.contact');
 Route::post('/contact-us/store', [MessageController::class, 'store'])->name('root.pages.contact.store');
 Route::get('/product/details/{id}', [RootController::class, 'pdetails'])->name('root.pages.pdetails');
