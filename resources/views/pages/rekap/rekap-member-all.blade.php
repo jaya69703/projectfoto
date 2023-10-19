@@ -67,8 +67,8 @@
                                 <tr class="text-center">
                                     <th>No.</th>
                                     <th>Nama Member</th>
-                                    <th>Nomor Telepon</th>
                                     <th>Alamat Email</th>
+                                    <th>Nomor Telepon</th>
                                     <th>Waktu Daftar</th>
                                 </tr>
                             </thead>
@@ -82,7 +82,11 @@
                                         <td>{{ $item->name }}</td>
                                         <td>{{ $item->email }}</td>
                                         <td>{{ $item->phone }}</td>
+                                        @if($item->created_at)
                                         <td>{{ $item->created_at->format('d/m/Y H:i:s') }}</td> <!-- Menggunakan format yang diinginkan, contohnya 'd/m/Y H:i:s' -->
+                                        @else
+                                        <td>No Data</td>
+                                        @endif
                                     </tr>
                                     @php
                                     $newMember++;
