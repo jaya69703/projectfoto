@@ -29,6 +29,8 @@ class User extends Authenticatable
         'type',
         'password',
         'isverify',
+        'created_at', // tambahkan created_at di sini
+        'updated_at', // tambahkan updated_at di sini
     ];
 
     /**
@@ -59,7 +61,7 @@ class User extends Authenticatable
         return new Attribute(
             get: function ($value) {
                 // return ["User", "Worker", "Admin"][$value];
-                return ["Member", "Member Plus", "Author", "Admin"][$value];
+                return ["Member", "Member Plus", "Author", "Admin", "Super Admin"][$value];
             }
         );
     }

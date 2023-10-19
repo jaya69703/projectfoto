@@ -8,6 +8,7 @@
 @endsection
 @section('content')
     <div class="layout-top-spacing">
+        @include('base.base-profile-sadmin')
         @include('base.base-profile-admin')
         @include('base.base-profile-author')
         @include('base.base-profile-user')

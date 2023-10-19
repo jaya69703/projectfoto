@@ -33,50 +33,13 @@
 @include('base.base-home-author')
 @elseif(Str::is('admin/home', request()->path()))
 @include('base.base-home-admin')
+@elseif(Str::is('superadmin/home', request()->path()))
+@include('base.base-home-sadmin')
 @endif
 <div class="row layout-top-spacing">
     <div class="col-lg-3 col-12 mb-3">
 
         {{-- DASHBOARD UNTUK ADMIN --}}
-    </div>
-    <div class="col-lg-12 col-12 mb-3">
-        <div class="card mb-2">
-            <div class="card-header d-flex justify-content-between align-items-center">
-                <span style="font-size: 20px">Dashboard Information</span>
-                <span class="align-items-center">
-                    <a href="" class="btn btn-outline-warning btn-rounded"><i class="fa-solid fa-sync"></i> ReFresh</a>
-                </span>
-            </div>
-            <div class="card-body">
-                <table id="style-3" class="table style-3 dt-table-hover">
-                    <thead>
-                        <tr>
-                            <th class="text-center">Id</th>
-                            <th class="text-center">Title</th>
-                            <th class="text-center">Author</th>
-                            <th class="text-center">CreatedAt</th>
-                            <th class="text-center">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @php
-                            $announ = App\Models\Announcement::all();
-                        @endphp
-                        @foreach ($announ as $key => $item)
-                        <tr>
-                            <td class="text-center">{{ ++$key }}</td>
-                            <td>{{ $item->title }}</td>
-                            <td class="text-center">{{ $item->user->name }}</td>
-                            <td class="text-center">{{ $item->created_at->diffforhumans() }}</td>
-                            <td class="text-center">
-                                <a href="{{ route('guest.app.announ.show', $item->id) }}" class="btn btn-outline-secondary btn-rounded"><i class="fa-solid fa-eye"></i></a>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
     </div>
 </div>
 @endsection

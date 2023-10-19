@@ -23,6 +23,11 @@ class Paket extends Model
     ];
     public function getPriceAttribute($value)
     {
+        // Hapus aksesor ini jika Anda ingin mengakses nilai asli tanpa format tambahan
         return 'Rp ' . number_format($value, 0, ',', '.');
+    }
+    public function getRawPriceAttribute()
+    {
+        return $this->attributes['price'];
     }
 }

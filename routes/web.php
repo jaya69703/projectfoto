@@ -5,6 +5,7 @@ use App\Http\Controllers\Pages\App\TagBController;
 use App\Http\Controllers\Pages\App\PostController;
 
 use App\Http\Controllers\Pages\Profile\AdminController;
+use App\Http\Controllers\Pages\Profile\SAdminController;
 use App\Http\Controllers\Pages\Profile\AuthorController;
 use App\Http\Controllers\Pages\Profile\UserController;
 use App\Http\Controllers\Pages\Base\TodoController;
@@ -202,6 +203,28 @@ Route::middleware(['auth', 'user-access:Admin', 'isverify:1'])->group(function (
     // ANNOUNCEMENT LIST APP
     Route::get('/admin/app/setting', [WebSettingController::class, 'index'])->name('admin.app.setting.index');
     Route::patch('/admin/app/setting/update', [WebSettingController::class, 'update'])->name('admin.app.setting.update');
+});
+Route::middleware(['auth', 'user-access:Super Admin', 'isverify:1'])->group(function () {
+
+    // DASHBOARD SUPER ADMIN
+    Route::get('/superadmin/home', [SAdminController::class, 'index'])->name('sadmin.home.index');
+    Route::get('/superadmin/profile', [SAdminController::class, 'show'])->name('sadmin.profile.index');
+    Route::patch('/superadmin/profile/update', [SAdminController::class, 'update'])->name('sadmin.profile.update');
+
+    Route::get('/superadmin/member/all', [SAdminController::class, 'memberAll'])->name('sadmin.member.all');
+    Route::get('/superadmin/member/filter', [SAdminController::class, 'memberFilter'])->name('sadmin.member.filter');
+    Route::get('/superadmin/report/member/download/{month}/{format}', [SAdminController::class, 'printReportMember'])->name('sadmin.report-member.download');
+
+    Route::get('/superadmin/transaksi/all', [SAdminController::class, 'transAll'])->name('sadmin.transaksi.all');
+    Route::get('/superadmin/transaksi/filter', [SAdminController::class, 'transFilter'])->name('sadmin.transaksi.filter');
+    Route::get('/superadmin/report/download/{month}/{format}', [SAdminController::class, 'printReport'])->name('sadmin.report.download');
+    // Route::get('/superadmin/transaksi/preview-print', [SAdminController::class, 'previewPrint'])->name('sadmin.transaksi.preview-print');
+    // Route::get('/superadmin/transaksi/all', [SAdminController::class, 'transAll'])->name('sadmin.transaksi.all');
+    // Route::get('/superadmin/transaksi/all', [SAdminController::class, 'transAll'])->name('sadmin.transaksi.filter');
+    // Route::get('/superadmin/transaksi/preview-print', [SAdminController::class, 'previewPrint'])->name('sadmin.transaksi.preview-print');
+
+    Route::get('/superadmin/print', [SAdminController::class, 'cetakDataTransaksi'])->name('sadmin.report.print');
+
 });
 
 require __DIR__.'/auth.php';

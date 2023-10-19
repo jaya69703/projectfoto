@@ -21,6 +21,7 @@ class RouteServiceProvider extends ServiceProvider
     public const HOME_MEMBERP = '/member-plus/book/profile';
     public const HOME_AUTHOR = '/author/profile';
     public const HOME_ADMIN = '/admin/profile';
+    public const HOME_SADMIN = '/superadmin/profile';
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.

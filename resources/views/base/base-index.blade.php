@@ -189,7 +189,7 @@
                     @endguest
 
                     @auth
-
+                    @include('base.base-menu-sadmin')
                     @include('base.base-menu-admin')
                     @include('base.base-menu-author')
                     @include('base.base-menu-user')
@@ -260,6 +260,7 @@
 
     <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
     <script src="{{ asset('main') }}/src/plugins/src/global/vendors.min.js"></script>
+
     <script src="{{ asset('main') }}/src/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset('main') }}/src/plugins/src/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="{{ asset('main') }}/layouts/vertical-dark-menu/app.js"></script>

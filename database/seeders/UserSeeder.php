@@ -79,15 +79,28 @@ class UserSeeder extends Seeder
         // Default Admin
         DB::table('users')->insert([
             // GENERAL INFO ACCOUNT
+            'name' => 'Admin Account',
+            'email' => 'adminaccount@example.com',
+            'image' => 'default.png',
+            'phone' => '089612345611',
+            'password' => Hash::make('adminaccount'),
+            // SPECIAL IDENTITY
+            'code' => '000000',
+            'isverify' => '1',
+            'type' => '3',
+        ]);
+        // Default Super Admin
+        DB::table('users')->insert([
+            // GENERAL INFO ACCOUNT
             'name' => 'Super Administrator',
             'email' => 'superadmin@example.com',
             'image' => 'default.png',
             'phone' => '089612345678',
             'password' => Hash::make('20022003'),
             // SPECIAL IDENTITY
-            'code' => '000000',
+            'code' => '000004',
             'isverify' => '1',
-            'type' => '3',
+            'type' => '4',
         ]);
 
     }

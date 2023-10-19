@@ -62,6 +62,8 @@ class RegisteredUserController extends Controller
             return redirect()->intended(RouteServiceProvider::HOME_AUTHOR)->with('success', 'Signed in successfully');
         } elseif (Auth::user()->type == 'Admin') {
             return redirect()->intended(RouteServiceProvider::HOME_ADMIN)->with('success', 'Signed in successfully');
+        } elseif (Auth::user()->type == 'Super Admin') {
+            return redirect()->intended(RouteServiceProvider::HOME_SADMIN)->with('success', 'Signed in successfully');
         }
     }
 }

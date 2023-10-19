@@ -16,6 +16,7 @@ return new class extends Migration
             $table->integer('user_id');
             $table->integer('paket_id');
             $table->integer('book_stat')->default('0');
+            // Jika Sudah Selesai Value Status 7
             $table->date('book_date');
             $table->text('book_note');
             $table->string('book_time');
