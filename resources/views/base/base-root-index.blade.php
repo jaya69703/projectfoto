@@ -108,12 +108,16 @@
       <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a href="{{ route('root.index') }}" class="{{ Str::is('/', request()->path()) ? 'active' : '' }}">Home</a></li>
-          <li><a href="{{ route('root.pages.about') }}" class="{{ Str::is('about-us*', request()->path()) ? 'active' : '' }}">About</a></li>
-          <li><a href="{{ route('root.pages.services') }}" class="{{ Str::is('services*', request()->path()) ? 'active' : '' }}">Services</a></li>
-          <li><a href="{{ route('root.pages.projects') }}" class="{{ Str::is('projects*', request()->path()) ? 'active' : '' }}">Projects</a></li>
-          <li><a href="{{ route('root.pages.blog') }}"  class="{{ Str::is('blog*', request()->path()) || Str::is('blog/*', request()->path()) ? 'active' : '' }}">Blog</a></li>
-          <li><a href="{{ route('root.pages.contact') }}" class="{{ Str::is('contact-us*', request()->path()) ? 'active' : '' }}">Contact</a></li>
+          @php $page = App\Models\Page::where('page_id', '1')->get(); @endphp
+          {{-- {{ dd($page); }} --}}
+          @foreach($page as $item)
+          <li><a href="{{$item->page_link}}" class="{{ Str::is('$item->page_link', request()->path()) ? 'active' : '' }}">{{$item->page_name}}</a></li>
+          @endforeach
+          {{-- <li><a href="{{ route('root.pages.about') }}" class="{{ Str::is('about-us*', request()->path()) ? 'active' : '' }}">About</a></li> --}}
+          {{-- <li><a href="{{ route('root.pages.services') }}" class="{{ Str::is('services*', request()->path()) ? 'active' : '' }}">Services</a></li> --}}
+          {{-- <li><a href="{{ route('root.pages.projects') }}" class="{{ Str::is('projects*', request()->path()) ? 'active' : '' }}">Projects</a></li> --}}
+          {{-- <li><a href="{{ route('root.pages.blog') }}"  class="{{ Str::is('blog*', request()->path()) || Str::is('blog/*', request()->path()) ? 'active' : '' }}">Blog</a></li> --}}
+          {{-- <li><a href="{{ route('root.pages.contact') }}" class="{{ Str::is('contact-us*', request()->path()) ? 'active' : '' }}">Contact</a></li> --}}
           @auth
           <li class="dropdown">
             <a href="#"><i class="fa-solid fa-user-circle" style="font-size: 20px; margin-right: 8px;"></i><span style="margin-right: 5px;">{{ Auth::user()->name }}</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
@@ -269,7 +273,6 @@
               <li><a href="#">Terms of service</a></li>
               <li><a href="#">Privacy policy</a></li>
             </ul>
-
           </div><!-- End footer links column-->
 
 
@@ -281,17 +284,6 @@
               <li><a href="#">Product Management</a></li>
               <li><a href="#">Marketing</a></li>
               <li><a href="#">Graphic Design</a></li>
-            </ul>
-          </div><!-- End footer links column-->
-
-          <div class="col-lg-2 col-md-3 footer-links">
-            <h4>Hic solutasetp <i class="bi bi-chevron-down dropdown-indicator"></i></h4>
-            <ul class="footer-menu">
-              <li><a href="#">Molestiae accusamus iure</a></li>
-              <li><a href="#">Excepturi dignissimos</a></li>
-              <li><a href="#">Suscipit distinctio</a></li>
-              <li><a href="#">Dilecta</a></li>
-              <li><a href="#">Sit quas consectetur</a></li>
             </ul>
           </div><!-- End footer links column-->
 

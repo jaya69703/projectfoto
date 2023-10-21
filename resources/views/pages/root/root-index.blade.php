@@ -47,15 +47,15 @@
       <div class="container" data-aos="fade-up">
 
         <div class="section-header">
-          <h2>Our Projects</h2>
+          <h2>Layanan Paket Fotografi Kami</h2>
           <p>Consequatur libero assumenda est voluptatem est quidem illum et officia imilique qui vel architecto accusamus fugit aut qui distinctio</p>
         </div>
 
         <div class="portfolio-isotope" data-portfolio-filter="*" data-portfolio-layout="masonry" data-portfolio-sort="original-order">
 
           <ul class="portfolio-flters" data-aos="fade-up" data-aos-delay="100">
-            <li data-filter="*" class="filter-active">All</li>
-            <li data-filter=".filter-terbaru">Terbaru</li>
+            {{-- <li data-filter="*" class="filter-active">All</li> --}}
+            {{-- <li data-filter=".filter-terbaru">Terbaru</li> --}}
           </ul><!-- End Projects Filters -->
 
           <div class="row gy-4 portfolio-container" data-aos="fade-up" data-aos-delay="200">
@@ -194,6 +194,8 @@
       </div>
     </section><!-- End Testimonials Section -->
 
+
+    @if($posts->count() > 0)
     <!-- ======= Recent Blog Posts Section ======= -->
     <section id="recent-blog-posts" class="recent-blog-posts">
       <div class="container" data-aos="fade-up"">
@@ -204,104 +206,52 @@
 
           <div class="row gy-5">
 
+              @forelse($posts as $key => $item)
               <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
               <div class="post-item position-relative h-100">
 
                   <div class="post-img position-relative overflow-hidden">
-                  <img src="{{ asset('root') }}/assets/img/blog/blog-1.jpg" class="img-fluid" alt="">
-                  <span class="post-date">December 12</span>
+                    <img src="{{ asset('storage/images/cover/'.$item->cover) }}" class="img-fluid" alt="">
+                    <span class="post-date">{{ $item->created_at->diffForHumans() }}</span>
                   </div>
 
                   <div class="post-content d-flex flex-column">
 
-                  <h3 class="post-title">Eum ad dolor et. Autem aut fugiat debitis</h3>
+                  <h3 class="post-title">{{ $item->title }}</h3>
 
                   <div class="meta d-flex align-items-center">
                       <div class="d-flex align-items-center">
-                      <i class="bi bi-person"></i> <span class="ps-2">Julia Parker</span>
+                      <i class="bi bi-person"></i> <span class="ps-2">{{ $item->user->name }}</span>
                       </div>
                       <span class="px-3 text-black-50">/</span>
                       <div class="d-flex align-items-center">
-                      <i class="bi bi-folder2"></i> <span class="ps-2">Politics</span>
+                      <i class="bi bi-folder2"></i> <span class="ps-2">{{ $item->category->name }}</span>
                       </div>
                   </div>
 
                   <hr>
 
-                  <a href="blog-details.html" class="readmore stretched-link"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
+                  <a href="{{ route('root.pages.blog.single', $item->slug) }}" class="readmore stretched-link"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
 
                   </div>
 
               </div>
               </div><!-- End post item -->
 
-              <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-              <div class="post-item position-relative h-100">
+              @empty
+              <div class="col-lg-12 col-12 mb-3 text-center">
 
-                  <div class="post-img position-relative overflow-hidden">
-                  <img src="{{ asset('root') }}/assets/img/blog/blog-2.jpg" class="img-fluid" alt="">
-                  <span class="post-date">July 17</span>
-                  </div>
-
-                  <div class="post-content d-flex flex-column">
-
-                  <h3 class="post-title">Et repellendus molestiae qui est sed omnis</h3>
-
-                  <div class="meta d-flex align-items-center">
-                      <div class="d-flex align-items-center">
-                      <i class="bi bi-person"></i> <span class="ps-2">Mario Douglas</span>
-                      </div>
-                      <span class="px-3 text-black-50">/</span>
-                      <div class="d-flex align-items-center">
-                      <i class="bi bi-folder2"></i> <span class="ps-2">Sports</span>
-                      </div>
-                  </div>
-
-                  <hr>
-
-                  <a href="blog-details.html" class="readmore stretched-link"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
-
-                  </div>
-
+                  <p class="text">Belum ada blog</p>
               </div>
-              </div><!-- End post item -->
+              @endforelse
 
-              <div class="col-xl-4 col-md-6">
-              <div class="post-item position-relative h-100" data-aos="fade-up" data-aos-delay="300">
-
-                  <div class="post-img position-relative overflow-hidden">
-                  <img src="{{ asset('root') }}/assets/img/blog/blog-3.jpg" class="img-fluid" alt="">
-                  <span class="post-date">September 05</span>
-                  </div>
-
-                  <div class="post-content d-flex flex-column">
-
-                  <h3 class="post-title">Quia assumenda est et veritati tirana ploder</h3>
-
-                  <div class="meta d-flex align-items-center">
-                      <div class="d-flex align-items-center">
-                      <i class="bi bi-person"></i> <span class="ps-2">Lisa Hunter</span>
-                      </div>
-                      <span class="px-3 text-black-50">/</span>
-                      <div class="d-flex align-items-center">
-                      <i class="bi bi-folder2"></i> <span class="ps-2">Economics</span>
-                      </div>
-                  </div>
-
-                  <hr>
-
-                  <a href="blog-details.html" class="readmore stretched-link"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
-
-                  </div>
-
-              </div>
-              </div><!-- End post item -->
 
           </div>
 
         </div>
     </section>
     <!-- End Recent Blog Posts Section -->
+    @endif
 
   </main><!-- End #main -->
 @endsection

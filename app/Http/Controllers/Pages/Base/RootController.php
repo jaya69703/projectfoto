@@ -24,6 +24,7 @@ class RootController extends Controller
         $data['menu'] = "Home";
         $data['submenu'] = "Index";
         $data['paket'] = Paket::all();
+        $data['posts'] = Post::latest()->take(6)->get();
         $data['web'] = WebSetting::find(1)->get();
 
         return view('pages.root.root-index', $data);
@@ -99,6 +100,14 @@ class RootController extends Controller
         // dd($data['users']);
 
         return view('pages.root.root-pages-contact', $data);
+    }
+    public function privacyPolicy()
+    {
+        $data['title'] = "SkyDash";
+        $data['menu'] = "Home";
+        $data['submenu'] = "Kebijakan Privasi";
+
+        return view('pages.root.root-pages-privacy-policy', $data);
     }
 
     public function pdetails($id)

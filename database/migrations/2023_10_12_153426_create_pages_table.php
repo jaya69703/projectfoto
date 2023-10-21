@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('page_id')->nullable();
             $table->string('page_type');
-            // TYPE 0 = MAIN PAGE; 1 = SUBPAGE MAIN; 2 = SUBPAGE
+            // TYPE 0 = HALAMAN UTAMA; 1 = SUB HALAMAN;
             $table->string('page_name');
             $table->string('page_desc');
             $table->string('page_link');

@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Pages\Base;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Message;
+use App\Models\WebSetting;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\View;
 
 class MessageController extends Controller
 {
@@ -75,6 +78,33 @@ class MessageController extends Controller
     /**
      * Update the specified resource in storage.
      */
+    public function kirimBalas(Request $request, $id)
+    {
+        $data['client'] = Message::findorFail($id);
+        $data['web'] = WebSetting::findorFail($id);
+        $data['name'] = $request->name;
+        $data['email'] = $request->email;
+        $data['subject'] = $request->subject;
+        $data['desc'] = $request->message;
+        // dd($request->all());
+
+        // Mail::send('pages.mail.mail-reply', $data, function($message) use ($request) {
+        //     $message->to($request->email)->subject($request->subject);
+        // });
+
+        $to_email = $request->email;
+        $to_name = $data['name'];
+        $subject = 'Reply';
+
+        Mail::send('pages.mail.mail-reply', $data, function ($message) use ($to_email, $to_name, $subject) {
+            $message->to($to_email, $to_name)
+                ->subject($subject);
+        });
+        // return 'Email sent at ' . now();
+
+        return redirect()->route('admin.message.index')->with('success', 'Pesan berhasil dikirim');
+    }
+
     public function update(Request $request, string $id)
     {
         //

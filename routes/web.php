@@ -9,6 +9,7 @@ use App\Http\Controllers\Pages\Profile\SAdminController;
 use App\Http\Controllers\Pages\Profile\AuthorController;
 use App\Http\Controllers\Pages\Profile\UserController;
 use App\Http\Controllers\Pages\Base\TodoController;
+use App\Http\Controllers\Pages\Base\PageController;
 use App\Http\Controllers\Pages\Base\AnnouncementController;
 use App\Http\Controllers\Pages\Base\WebSettingController;
 use App\Http\Controllers\Pages\Base\RootController;
@@ -37,6 +38,7 @@ Route::get('/blog', [RootController::class, 'blog'])->name('root.pages.blog');
 Route::get('/blog/{slug}', [RootController::class, 'blogsingle'])->name('root.pages.blog.single');
 Route::get('/category/{category:slug}', [RootController::class, 'blogcategory'])->name('root.pages.blog.category');
 Route::get('/tag/{tagsb:slug}', [RootController::class, 'blogtags'])->name('root.pages.blog.tags');
+Route::get('/privacy-policy', [RootController::class, 'privacyPolicy'])->name('root.pages.privacy-policy');
 Route::get('/contact-us', [RootController::class, 'contact'])->name('root.pages.contact');
 Route::post('/contact-us/store', [MessageController::class, 'store'])->name('root.pages.contact.store');
 Route::get('/product/details/{id}', [RootController::class, 'pdetails'])->name('root.pages.pdetails');
@@ -44,6 +46,14 @@ Route::get('/projects', [RootController::class, 'projects'])->name('root.pages.p
 // Route::get('/product/{pakets:slug}', [RootController::class, 'sample'])->name('root.pages.sample');
 Route::get('/services', [RootController::class, 'services'])->name('root.pages.services');
 
+
+Route::get('/nota-penjualan', function () {
+    $data['title'] = "iSchool";
+    $data['menu'] = "Error";
+    $data['submenu'] = "Error Verify";
+
+    return view('pages.mail.nota-penjualan',$data);
+})->name('pages.nota-penjualan');
 
 Route::get('/errors-verify', function () {
     $data['title'] = "iSchool";
@@ -152,6 +162,7 @@ Route::middleware(['auth', 'user-access:Admin', 'isverify:1'])->group(function (
     // MESSAGE USER
     Route::get('/admin/message', [MessageController::class, 'index'])->name('admin.message.index');
     Route::get('/admin/message/show/{id}', [MessageController::class, 'show'])->name('admin.message.show');
+    Route::post('/admin/message/reply/{id}', [MessageController::class, 'kirimBalas'])->name('admin.message.reply');
     Route::delete('/admin/message/delete/{id}', [MessageController::class, 'destroy'])->name('admin.message.destroy');
 
     // APLIKASI TODO LIST
@@ -165,6 +176,12 @@ Route::middleware(['auth', 'user-access:Admin', 'isverify:1'])->group(function (
     Route::get('/admin/app/announ/show/{id}', [AnnouncementController::class, 'show'])->name('admin.app.announ.show');
     Route::patch('/admin/app/announ/update/{id}', [AnnouncementController::class, 'update'])->name('admin.app.announ.update');
     Route::delete('/admin/app/announ/destroy/{id}', [AnnouncementController::class, 'destroy'])->name('admin.app.announ.destroy');
+    // KELOLA PAGES
+    Route::get('/admin/pages', [PageController::class, 'index'])->name('admin.pages.index');
+    Route::post('/admin/pages/store', [PageController::class, 'store'])->name('admin.pages.store');
+    Route::get('/admin/pages/show/{id}', [PageController::class, 'show'])->name('admin.pages.show');
+    Route::patch('/admin/pages/update/{id}', [PageController::class, 'update'])->name('admin.pages.update');
+    Route::delete('/admin/pages/destroy/{id}', [PageController::class, 'destroy'])->name('admin.pages.destroy');
 
     // APLIKASI CHAT
     Route::get('/admin/chat', [ChatController::class, 'index'])->name('admin.chat.index');

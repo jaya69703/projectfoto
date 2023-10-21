@@ -8,7 +8,6 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Support\Facades\Log;
 
 
 class User extends Authenticatable
@@ -54,17 +53,22 @@ class User extends Authenticatable
     ];
 
     protected function type(): Attribute
+
     {
-        $value = $this->attributes['type'];
-        Log::info("Value of 'type' attribute: $value");
 
         return new Attribute(
-            get: function ($value) {
-                // return ["User", "Worker", "Admin"][$value];
-                return ["Member", "Member Plus", "Author", "Admin", "Super Admin"][$value];
+
+            get: fn ($value) =>  match ($value) {
+                0 => "Member",
+                1 => "Member Plus",
+                2 => "Author",
+                3 => "Admin",
+                4 => "Super Admin",
+                default => throw new \Exception("Undefined array key"),
             }
         );
     }
+
     public function worker()
     {
         return $this->hasOne(Worker::class, 'code', 'code');

@@ -9,11 +9,14 @@
 @section('content')
 <div class="row layout-top-spacing">
     <div class="col-lg-6 col-12">
+        {{-- {{dd($message->id)}} --}}
+        <form action="{{ route('admin.message.reply', $message->id) }}" method="POST" enctype="multipart/form-data">
+        @csrf
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <span class="text f20">Reply {{ $menu . (' - From ') . $message->name }}</span>
                 <span class="icon">
-                    <button type="submit" class="btn btn-outline-primary"><i class="fa-solid fa-paper-plane"></i></button>
+                    <button type="submit" class="btn btn-outline-primary btn-rounded"><i class="fa-solid fa-paper-plane"></i></button>
                 </span>
             </div>
             <div class="row card-body">
@@ -27,21 +30,22 @@
                 </div>
                 <div class="form-group mb-2 col-lg-12 col-12">
                     <label for="subject">Subject Mail</label>
-                    <input type="text" name="subject" id="subject" class="form-control">
+                    <input type="text" name="subject" id="subject" class="form-control" value="Reply: {{ $message->subject}}">
                 </div>
                 <div class="form-group mb-2 col-lg-12 col-12">
                     <label for="message">Message Mail</label>
-                    <textarea name="message" id="message" cols="30" rows="10" class="form-control"></textarea>
+                    <textarea name="message" id="message" cols="30" rows="10" class="form-control" placeholder="Isikan pesan balasanmu..."></textarea>
                 </div>
             </div>
         </div>
+        </form>
     </div>
     <div class="col-lg-6 col-12">
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <span class="text f20">Detail {{ $menu . (' - From ') . $message->name }}</span>
                 <span class="icon">
-                    <a href="" class="btn btn-outline-warning"><i class="fa-solid fa-sync"></i></a>
+                    <a href="" class="btn btn-outline-warning btn-rounded"><i class="fa-solid fa-sync"></i></a>
                 </span>
             </div>
             <div class="row card-body">
