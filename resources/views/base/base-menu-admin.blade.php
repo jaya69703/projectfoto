@@ -90,6 +90,14 @@
         </div>
     </a>
 </li>
+<li class="menu {{ Str::is('admin/pages*', request()->path()) ? 'active' : '' }}">
+    <a href="{{ url('/admin/pages') }}" aria-expanded="false" class="dropdown-toggle">
+        <div class="d-flex align-items-center justify-content-between">
+            <i class="fa-solid fa-folder" style="font-size: 20px; margin-right: 10px;" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ></i>
+            <span>Page Manager</span>
+        </div>
+    </a>
+</li>
 <li class="menu {{ Str::is('admin/app/announ*', request()->path()) ? 'active' : '' }}">
     <a href="{{ url('/admin/app/announ') }}" aria-expanded="false" class="dropdown-toggle">
         <div class="d-flex align-items-center justify-content-between">
