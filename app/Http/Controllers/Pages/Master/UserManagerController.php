@@ -50,10 +50,11 @@ class UserManagerController extends Controller
         $data['menu'] = "User Manager";
         $data['submenu'] = "Create Users";
         $data['user'] = User::findOrFail($id);
+        // $data['ip'] = '47.250.55.111'; //Static IP address get
         $data['ip'] = request()->ip(); //Dynamic IP address get
         $data['locate'] = \Location::get($data['ip']);
 
-        dd($data['ip']);
+        // dd($data['locate']);
         return view('pages.usermanage.usermanage-show', $data);
     }
 

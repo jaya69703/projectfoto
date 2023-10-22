@@ -17,11 +17,11 @@
                     <span style="font-size: 14px;">{{ $user->code }}</span><br>
                 </div>
                 <div class="col-lg-6 col-12">
-                    <span style="font-size: 16px;">Location User</span>
-                    {{-- <span style="font-size: 14px;">{{ $locate->countryName , (' - '), $locate->countryCode }}</span>
-                    <span style="font-size: 14px;">{{ $locate->regionName , (' - '), $locate->regionCode }}</span>
-                    <span style="font-size: 14px;">{{ $locate->cityName , (' - '), $locate->zipCode }}</span>
-                    <span style="font-size: 14px;">{{ $locate->latitude , (' - '), $locate->longitude }}</span> --}}
+                    <span class="text-white" style="font-size: 16px;">Location User {{ $ip }}</span><br>
+                    <span style="font-size: 14px;">{{ $locate->countryName . (' - '). $locate->countryCode }}</span><br>
+                    <span style="font-size: 14px;">{{ $locate->regionName . (' - '). $locate->regionCode }}</span><br>
+                    <span style="font-size: 14px;">{{ $locate->cityName . (' - '). $locate->zipCode }}</span><br>
+                    <span style="font-size: 14px;">{{ $locate->latitude . (' - '). $locate->longitude }}</span><br>
                 </div>
             </div>
         </div>

@@ -16,6 +16,8 @@
             <form id="delete-form-{{ $item->id }}" action="{{ route('admin.usermanage.memberplus.destroy', $item->id) }}" method="POST">
                 @csrf
                 @method('DELETE')
+                <a href="{{ route('admin.usermanage.show', $item->id) }}" class="btn btn-outline-secondary btn-rounded"><i class="fa-solid fa-eye"></i></a>
+
                 <a type="button" class="bs-tooltip btn btn-rounded btn-outline-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-original-title="Delete"
                     data-url="{{ route('admin.usermanage.memberplus.destroy', $item->id) }}" data-name="{{ $item->name }}"
                     onclick="deleteData('{{ $item->id }}')">
