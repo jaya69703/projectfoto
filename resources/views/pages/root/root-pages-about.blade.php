@@ -3,12 +3,6 @@
 
 <style>
 
-@media only screen and (max-width: 768px) {
-    .img-bg {
-        height: 50vh; /* Sesuaikan tinggi sesuai kebutuhan */
-        background-size: contain;
-    }
-}
 </style>
 @endsection
 @section('content')
@@ -36,10 +30,10 @@
           <div class="col-lg-7 about-img" style="background-image: url({{ asset('root') }}/assets/img/about.jpg);"></div>
 
           <div class="col-lg-7">
-            <h2>Consequatur eius et magnam</h2>
+            <h2 class="text-center">Tentang Kami</h2>
             <div class="our-story">
-              <h4>Est 1988</h4>
-              <h3>Our Story</h3>
+              <h4>Sejak 2024</h4>
+              <h3>Cerita kami</h3>
               <p>Inventore aliquam beatae at et id alias. Ipsa dolores amet consequuntur minima quia maxime autem. Quidem id sed ratione. Tenetur provident autem in reiciendis rerum at dolor. Aliquam consectetur laudantium temporibus dicta minus dolor.</p>
               <ul>
                 <li><i class="bi bi-check-circle"></i> <span>Ullamco laboris nisi ut aliquip ex ea commo</span></li>
@@ -117,49 +111,54 @@
       <div class="container" data-aos="fade-up">
 
         <div class="row justify-content-around gy-4">
-            <div class="col-lg-6 d-flex align-items-center" style="background: url({{ asset('storage/images/web/AlurPemesananMember.png') }}) no-repeat center; background-size: contain; height: 100vh;" data-aos="zoom-in" data-aos-delay="100">
+            <div class="col-lg-6 img-bg d-flex align-items-center" style="background: url({{ asset('storage/images/web/AlurPemesananMember.png') }}) no-repeat center;background-size: contain;" data-aos="zoom-in" data-aos-delay="100"></div>
+            <div class="col-lg-6 col-12 d-flex flex-column justify-content-center">
+                <h3>Tutorial Alur Pendaftaran dan Pemesanan</h3>
+                <p>Berikut adalah langkah-langkah untuk mendaftar dan melakukan pemesanan:</p>
+
+                <div class="icon-box d-flex position-relative" data-aos="fade-up" data-aos-delay="100">
+                    <i class="bi bi-easel flex-shrink-0"></i>
+                    <div>
+                        <h4><a href="#" class="stretched-link">Langkah 1: Daftar Akun</a></h4>
+                        <p>Langkah pertama, pastikan kamu sudah punya akun. Jika belum, maka kamu bisa klik Menu Sign In Kemudian disitu pilih Daftar Akun. Setelah itu isi nama, email, no hp dan password Lalu klik tombol +. Maka akunmu akan terbuat.</p>
+                    </div>
+                </div><!-- End Icon Box -->
+
+                <div class="icon-box d-flex position-relative" data-aos="fade-up" data-aos-delay="200">
+                    <i class="bi bi-patch-check flex-shrink-0"></i>
+                    <div>
+                        <h4><a href="/" target="_blank" class="stretched-link">Langkah 2: Pilih Paket dan Booking</a></h4>
+                        <p>Langkah kedua, Kembali ke <a href="/" target="_blank">Halaman Utama</a> pilih paket yang diinginkan. kemudian Klik Booking Sekarang lalu Pilih Tanggal, Waktu dan Catatan jika ingin request sesuatu.</p>
+                    </div>
+                </div><!-- End Icon Box -->
+
+                <div class="icon-box d-flex position-relative" data-aos="fade-up" data-aos-delay="300">
+                    <i class="bi bi-brightness-high flex-shrink-0"></i>
+                    <div>
+                        <h4><a href="/member/book/history" class="stretched-link">Langkah 3: Lakukan Pembayaran</a></h4>
+                        <p>Lakukan pembayaran pada menu Rent History. lalu Scan Code QRIS dan lakukan pembayaran sesuai nominal yang tertera lalu Screenshoot dan Upload Bukti Transfer untuk dilakukan verifikasi oleh Admin. Kemudian jika verifikasi Berhasil admin akan menghubungi kamu melalui nomor telepon / email kamu.</p>
+                    </div>
+                </div><!-- End Icon Box -->
+
+                <div class="icon-box d-flex position-relative" data-aos="fade-up" data-aos-delay="400">
+                    <i class="bi bi-brightness-high flex-shrink-0"></i>
+                    <div>
+                        <h4><a href="#" class="stretched-link">Langkah 4: Proses Pemesanan</a></h4>
+                        <p>Setelah Pembayaran berhasil diverifikasi, kamu akan dihubungi oleh Admin untuk tahap Perencanaan dan Diskusi. Setelah itu, Tunggu tahapan Shooting dan Editing Selesai</p>
+                    </div>
+                </div><!-- End Icon Box -->
+
+                <div class="icon-box d-flex position-relative" data-aos="fade-up" data-aos-delay="400">
+                    <i class="bi bi-brightness-high flex-shrink-0"></i>
+                    <div>
+                        <h4><a href="#" class="stretched-link">Langkah 5: Selesai</a></h4>
+                        <p>Setelah proses editing selesai, kamu akan dikirimkan hasil Foto dalam bentuk SoftFile maupun HardFile. Setelah selesai Kamu bisa berikan penilaian Rating pada kami.</p>
+                    </div>
+                </div><!-- End Icon Box -->
             </div>
 
-
-
-          <div class="col-lg-6 col-12 d-flex flex-column justify-content-center">
-            <h3>Enim quis est voluptatibus aliquid consequatur fugiat</h3>
-            <p>Esse voluptas cumque vel exercitationem. Reiciendis est hic accusamus. Non ipsam et sed minima temporibus laudantium. Soluta voluptate sed facere corporis dolores excepturi</p>
-
-            <div class="icon-box d-flex position-relative" data-aos="fade-up" data-aos-delay="100">
-              <i class="bi bi-easel flex-shrink-0"></i>
-              <div>
-                <h4><a href="" class="stretched-link">Lorem Ipsum</a></h4>
-                <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
-              </div>
-            </div><!-- End Icon Box -->
-
-            <div class="icon-box d-flex position-relative" data-aos="fade-up" data-aos-delay="200">
-              <i class="bi bi-patch-check flex-shrink-0"></i>
-              <div>
-                <h4><a href="" class="stretched-link">Nemo Enim</a></h4>
-                <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque</p>
-              </div>
-            </div><!-- End Icon Box -->
-
-            <div class="icon-box d-flex position-relative" data-aos="fade-up" data-aos-delay="300">
-              <i class="bi bi-brightness-high flex-shrink-0"></i>
-              <div>
-                <h4><a href="" class="stretched-link">Dine Pad</a></h4>
-                <p>Explicabo est voluptatum asperiores consequatur magnam. Et veritatis odit. Sunt aut deserunt minus aut eligendi omnis</p>
-              </div>
-            </div><!-- End Icon Box -->
-
-            <div class="icon-box d-flex position-relative" data-aos="fade-up" data-aos-delay="400">
-              <i class="bi bi-brightness-high flex-shrink-0"></i>
-              <div>
-                <h4><a href="" class="stretched-link">Tride clov</a></h4>
-                <p>Est voluptatem labore deleniti quis a delectus et. Saepe dolorem libero sit non aspernatur odit amet. Et eligendi</p>
-              </div>
-            </div><!-- End Icon Box -->
-
-          </div>
         </div>
+
 
       </div>
     </section><!-- End Alt Services Section -->
