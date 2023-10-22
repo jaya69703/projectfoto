@@ -209,6 +209,7 @@ Route::middleware(['auth', 'user-access:Admin', 'isverify:1'])->group(function (
     Route::get('/admin/usermanage/memplus', [UserManagerController::class, 'index'])->name('admin.usermanage.memberplus');
     Route::get('/admin/usermanage/author', [UserManagerController::class, 'index'])->name('admin.usermanage.author');
     Route::get('/admin/usermanage/admin', [UserManagerController::class, 'index'])->name('admin.usermanage.admin');
+    Route::get('/admin/usermanage/show/{id}', [UserManagerController::class, 'show'])->name('admin.usermanage.show');
     // TAMBAH USER 4 ROLE
     Route::post('/admin/usermanage/store', [UserManagerController::class, 'store'])->name('admin.usermanage.store');
     // DELETE USER AUTHOR AND MEMBER PLUS

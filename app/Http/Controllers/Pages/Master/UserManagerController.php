@@ -44,6 +44,19 @@ class UserManagerController extends Controller
         return view('pages.usermanage.usermanage-create', $data);
     }
 
+    public function show($id)
+    {
+        $data['title'] = "SkyDash";
+        $data['menu'] = "User Manager";
+        $data['submenu'] = "Create Users";
+        $data['user'] = User::findOrFail($id);
+        $data['ip'] = request()->ip(); //Dynamic IP address get
+        $data['locate'] = \Location::get($data['ip']);
+
+        dd($data['ip']);
+        return view('pages.usermanage.usermanage-show', $data);
+    }
+
     /**
      * Store a newly created resource in storage.
      */

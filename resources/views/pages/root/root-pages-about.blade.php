@@ -1,6 +1,15 @@
 @extends('base.base-root-index')
 @section('custom-css')
 
+<style>
+
+@media only screen and (max-width: 768px) {
+    .img-bg {
+        height: 50vh; /* Sesuaikan tinggi sesuai kebutuhan */
+        background-size: contain;
+    }
+}
+</style>
 @endsection
 @section('content')
 <main id="main">
@@ -108,9 +117,12 @@
       <div class="container" data-aos="fade-up">
 
         <div class="row justify-content-around gy-4">
-          <div class="col-lg-6 img-bg" style="background-image: url({{ asset('root') }}/assets/img/alt-services.jpg);" data-aos="zoom-in" data-aos-delay="100"></div>
+            <div class="col-lg-6 d-flex align-items-center" style="background: url({{ asset('storage/images/web/AlurPemesananMember.png') }}) no-repeat center; background-size: contain; height: 100vh;" data-aos="zoom-in" data-aos-delay="100">
+            </div>
 
-          <div class="col-lg-5 d-flex flex-column justify-content-center">
+
+
+          <div class="col-lg-6 col-12 d-flex flex-column justify-content-center">
             <h3>Enim quis est voluptatibus aliquid consequatur fugiat</h3>
             <p>Esse voluptas cumque vel exercitationem. Reiciendis est hic accusamus. Non ipsam et sed minima temporibus laudantium. Soluta voluptate sed facere corporis dolores excepturi</p>
 
