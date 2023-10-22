@@ -27,7 +27,7 @@
 
         <div class="row position-relative">
 
-          <div class="col-lg-7 about-img" style="background-image: url({{ asset('root') }}/assets/img/about.jpg);"></div>
+          <div class="col-lg-6 about-img" style="background-image: url({{ asset('root') }}/assets/img/about.jpg);"></div>
 
           <div class="col-lg-7">
             <h2 class="text-center">Tentang Kami</h2>
