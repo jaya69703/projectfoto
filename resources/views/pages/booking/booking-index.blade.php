@@ -39,7 +39,8 @@
                             <td>{{ $item->book_time }}</td>
                             <td>{{ $item->paket->price }}</td>
                             <td>{!! $item->book_stat !!}</td>
-                            <td class="text-center d-flex justify-content-center align-items-center">
+                            <td class="d-flex justify-content-between align-items-center">
+                                <a href="#" class="btn btn-rounded btn-outline-primary" data-bs-toggle="modal" data-bs-target="#updateStatus{{$item->id}}"><i class="fa-solid fa-eye"></i></a>
                                 <form id="delete-form-{{ $item->id }}" action="{{ route('admin.booking.destroy', $item->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
@@ -78,7 +79,8 @@
                             <td>{{ $item->book_time }}</td>
                             <td>{{ $item->paket->price }}</td>
                             <td>{!! $item->book_stat !!}</td>
-                            <td>
+                            <td class="d-flex justify-content-between align-items-center">
+                                <a href="#" class="btn btn-rounded btn-outline-primary" data-bs-toggle="modal" data-bs-target="#updateStatus{{$item->id}}"><i class="fa-solid fa-eye"></i></a>
                                 <form id="delete-form-{{ $item->id }}" action="{{ route('admin.booking.destroy', $item->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
@@ -177,6 +179,46 @@
         </div>
     </div>
 </div>
+@foreach ($all as $item)
+<div class="modal fade" id="updateStatus{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="tabsModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <form action="{{ route('admin.book.product.verify', $item->id) }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            @method('PATCH')
+            <div class="modal-content">
+                <div class="modal-header align-items-center" style="font-size: 20px">
+                    <h5 class="modal-title" id="tabsModalLabel"><span style="font-size: 20px;">Lihat bukti pembayaran</span></h5>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <button style="margin-right: 5px;" type="submit" class="btn btn-rounded btn-outline-secondary">
+                            <i class="fa-solid fa-paper-plane"></i>
+                        </button>
+                        <button style="" type="button" class="btn btn-rounded btn-outline-warning" data-bs-dismiss="modal" aria-label="Close">
+                            <i class="fa-solid fa-close"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group col-12 mb-3 text-center">
+                        <img src="{{ asset('storage/images/prof/'.$item->book_prof) }}" alt="" style="max-height: 300px">
+                    </div>
+                    <div class="form-group col-12 mb-3">
+                        <label for="book_stat">Verifikasi Pembayaran</label>
+                        <select name="book_stat" id="book_stat" class="form-control">
+                            <option value="1" {{ $item->book_stat == 'Menunggu Verifikasi' ? 'selected' : '' }}>Menunggu Verifikasi</option>
+                            <option value="2" {{ $item->book_stat == 'Diterima'    ? 'selected' : '' }}>Diterima</option>
+                            <option value="3" {{ $item->book_stat == 'Ditolak' ? 'selected' : '' }}>Ditolak</option>
+                            <option value="4" {{ $item->book_stat == 'Menunggu Penjadwalan' ? 'selected' : '' }}>Menunggu Penjadwalan</option>
+                            <option value="5" {{ $item->book_stat == 'Sedang Foto Shot' ? 'selected' : '' }}>Sedang Foto Shot</option>
+                            <option value="6" {{ $item->book_stat == 'Tahap Editing Foto' ? 'selected' : '' }}>Tahap Editing Foto</option>
+                            <option value="7" {{ $item->book_stat == 'Selesai' ? 'selected' : '' }}>Selesai</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+@endforeach
 @foreach ($verify as $item)
 @if($item->book_stat == 'Menunggu Verifikasi')
 <div class="modal fade" id="paymentView{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="tabsModalLabel" aria-hidden="true">

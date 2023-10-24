@@ -45,7 +45,6 @@
 @endsection
 @section('custom-js')
     <script>
-
         c3 = $('#style-3').DataTable({
             "dom": "<'dt--top-section'<'row'<'col-12 col-sm-6 d-flex justify-content-sm-start justify-content-center'l><'col-12 col-sm-6 d-flex justify-content-sm-end justify-content-center mt-sm-0 mt-3'f>>>" +
         "<'table-responsive'tr>" +
@@ -66,7 +65,6 @@
     </script>
     <script src="{{ asset('main') }}/src/plugins/src/apex/apexcharts.min.js"></script>
     @if (Str::is('admin/home', request()->path()))
-
     <script>
         var productsData = @json($productsData); // Mengambil data dari Blade
 
@@ -120,6 +118,66 @@
 
         var simpleColumnStacked = new ApexCharts(
             document.querySelector("#chartpenjualan"),
+            sColStacked
+        );
+
+        simpleColumnStacked.render();
+    </script>
+    @endif
+    @if (Str::is('admin/home', request()->path()))
+    <script>
+        var productsData = @json($productsData); // Mengambil data dari Blade
+
+        var sColStacked = {
+            chart: {
+                fontFamily: 'Nunito, Arial, sans-serif',
+                height: 350,
+                type: 'bar',
+                stacked: true,
+                toolbar: {
+                    show: false,
+                }
+            },
+            responsive: [{
+                breakpoint: 480,
+                options: {
+                    legend: {
+                        position: 'bottom',
+                        offsetX: -10,
+                        offsetY: 0
+                    }
+                }
+            }],
+            plotOptions: {
+                bar: {
+                    horizontal: false,
+                },
+            },
+            series: productsData,
+            xaxis: {
+                categories: @json($dates),
+            },
+            legend: {
+                position: 'right',
+                offsetY: 40,
+                markers: {
+                    width: 10,
+                    height: 10,
+                    offsetX: -5,
+                    offsetY: 0
+                },
+                itemMargin: {
+                    horizontal: 10,
+                    vertical: 0
+                }
+            },
+            fill: {
+                opacity: 1
+            }
+        };
+
+        var simpleColumnStacked = new ApexCharts(
+            document.querySelector("#chartpenghasilan"),
             sColStacked
         );
 

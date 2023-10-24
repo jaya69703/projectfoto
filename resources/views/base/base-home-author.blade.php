@@ -45,7 +45,7 @@
             <div class="card btn btn-outline-success">
                 <div class="card-body d-flex justify-content-around align-items-center">
                     <span class="icon"><i class="fa-solid fa-tags" style="font-size: 50px"></i></span>
-                    <span class="text-white" style="margin-left: 20px; font-size: 16px;">Jumlah Tags <br> {{ App\Models\Tagsb::all()->count() }} </span>
+                    <span class="text-white" style="margin-left: 20px; font-size: 16px;">Jumlah Tags <br> {{ App\Models\TagsB::all()->count() }} </span>
                 </div>
             </div>
         </a>

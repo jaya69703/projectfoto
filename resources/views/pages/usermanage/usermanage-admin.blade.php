@@ -21,7 +21,7 @@
                     data-url="{{ route('admin.usermanage.destroy', $item->id) }}" data-name="{{ $item->name }}"
                     onclick="deleteData('{{ $item->id }}')">
                     <i class="fa-solid fa-trash-can"></i>
-                 </a>
+                </a>
             </form>
         </td>
     </tr>

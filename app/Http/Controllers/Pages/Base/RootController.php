@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Validation\Rules\Password;
 use App\Rules\MatchOldPassword;
+use Illuminate\Support\Facades\Mail;
+
 
 class RootController extends Controller
 {
@@ -108,6 +110,14 @@ class RootController extends Controller
         $data['submenu'] = "Kebijakan Privasi";
 
         return view('pages.root.root-pages-privacy-policy', $data);
+    }
+    public function termsOfServices()
+    {
+        $data['title'] = "SkyDash";
+        $data['menu'] = "Home";
+        $data['submenu'] = "Syarat dan Ketentuan";
+
+        return view('pages.root.root-pages-tos', $data);
     }
 
     public function pdetails($id)
@@ -247,6 +257,16 @@ class RootController extends Controller
         $book->book_note = $request->book_note;
 
         $book->save();
+
+        // KIRIM NOTA TRANSAKSI
+        $to_email = Auth::user()->email;
+        $to_name = Auth::user()->name;
+        $subject = '';
+
+        Mail::send('pages.mail.mail-reply', $data, function ($message) use ($to_email, $to_name, $subject) {
+            $message->to($to_email, $to_name)
+                ->subject($subject);
+        });
 
         return redirect()->route('member.book.history')->with('success', 'Pemesanan sukses!!, Silahkan lakukan pembayaran dan upload bukti pembayaran');
     }

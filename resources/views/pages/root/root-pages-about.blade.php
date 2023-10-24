@@ -117,7 +117,7 @@
                 <p>Berikut adalah langkah-langkah untuk mendaftar dan melakukan pemesanan:</p>
 
                 <div class="icon-box d-flex position-relative" data-aos="fade-up" data-aos-delay="100">
-                    <i class="bi bi-easel flex-shrink-0"></i>
+                    <i class="bi bi-person-add flex-shrink-0"></i>
                     <div>
                         <h4><a href="#" class="stretched-link">Langkah 1: Daftar Akun</a></h4>
                         <p>Langkah pertama, pastikan kamu sudah punya akun. Jika belum, maka kamu bisa klik Menu Sign In Kemudian disitu pilih Daftar Akun. Setelah itu isi nama, email, no hp dan password Lalu klik tombol +. Maka akunmu akan terbuat.</p>
@@ -125,7 +125,7 @@
                 </div><!-- End Icon Box -->
 
                 <div class="icon-box d-flex position-relative" data-aos="fade-up" data-aos-delay="200">
-                    <i class="bi bi-patch-check flex-shrink-0"></i>
+                    <i class="bi bi-cart-plus flex-shrink-0"></i>
                     <div>
                         <h4><a href="/" target="_blank" class="stretched-link">Langkah 2: Pilih Paket dan Booking</a></h4>
                         <p>Langkah kedua, Kembali ke <a href="/" target="_blank">Halaman Utama</a> pilih paket yang diinginkan. kemudian Klik Booking Sekarang lalu Pilih Tanggal, Waktu dan Catatan jika ingin request sesuatu.</p>
@@ -133,7 +133,7 @@
                 </div><!-- End Icon Box -->
 
                 <div class="icon-box d-flex position-relative" data-aos="fade-up" data-aos-delay="300">
-                    <i class="bi bi-brightness-high flex-shrink-0"></i>
+                    <i class="bi bi-cash flex-shrink-0"></i>
                     <div>
                         <h4><a href="/member/book/history" class="stretched-link">Langkah 3: Lakukan Pembayaran</a></h4>
                         <p>Lakukan pembayaran pada menu Rent History. lalu Scan Code QRIS dan lakukan pembayaran sesuai nominal yang tertera lalu Screenshoot dan Upload Bukti Transfer untuk dilakukan verifikasi oleh Admin. Kemudian jika verifikasi Berhasil admin akan menghubungi kamu melalui nomor telepon / email kamu.</p>
@@ -141,7 +141,7 @@
                 </div><!-- End Icon Box -->
 
                 <div class="icon-box d-flex position-relative" data-aos="fade-up" data-aos-delay="400">
-                    <i class="bi bi-brightness-high flex-shrink-0"></i>
+                    <i class="bi bi-arrow-repeat flex-shrink-0"></i>
                     <div>
                         <h4><a href="#" class="stretched-link">Langkah 4: Proses Pemesanan</a></h4>
                         <p>Setelah Pembayaran berhasil diverifikasi, kamu akan dihubungi oleh Admin untuk tahap Perencanaan dan Diskusi. Setelah itu, Tunggu tahapan Shooting dan Editing Selesai</p>
@@ -149,7 +149,7 @@
                 </div><!-- End Icon Box -->
 
                 <div class="icon-box d-flex position-relative" data-aos="fade-up" data-aos-delay="400">
-                    <i class="bi bi-brightness-high flex-shrink-0"></i>
+                    <i class="bi bi-cart-check flex-shrink-0"></i>
                     <div>
                         <h4><a href="#" class="stretched-link">Langkah 5: Selesai</a></h4>
                         <p>Setelah proses editing selesai, kamu akan dikirimkan hasil Foto dalam bentuk SoftFile maupun HardFile. Setelah selesai Kamu bisa berikan penilaian Rating pada kami.</p>

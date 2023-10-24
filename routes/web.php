@@ -39,6 +39,7 @@ Route::get('/blog/{slug}', [RootController::class, 'blogsingle'])->name('root.pa
 Route::get('/category/{category:slug}', [RootController::class, 'blogcategory'])->name('root.pages.blog.category');
 Route::get('/tag/{tagsb:slug}', [RootController::class, 'blogtags'])->name('root.pages.blog.tags');
 Route::get('/privacy-policy', [RootController::class, 'privacyPolicy'])->name('root.pages.privacy-policy');
+Route::get('/terms-of-services', [RootController::class, 'termsOfServices'])->name('root.pages.terms-of-services');
 Route::get('/contact-us', [RootController::class, 'contact'])->name('root.pages.contact');
 Route::post('/contact-us/store', [MessageController::class, 'store'])->name('root.pages.contact.store');
 Route::get('/product/details/{id}', [RootController::class, 'pdetails'])->name('root.pages.pdetails');
@@ -236,6 +237,8 @@ Route::middleware(['auth', 'user-access:Super Admin', 'isverify:1'])->group(func
     Route::get('/superadmin/transaksi/all', [SAdminController::class, 'transAll'])->name('sadmin.transaksi.all');
     Route::get('/superadmin/transaksi/filter', [SAdminController::class, 'transFilter'])->name('sadmin.transaksi.filter');
     Route::get('/superadmin/report/download/{month}/{format}', [SAdminController::class, 'printReport'])->name('sadmin.report.download');
+    Route::get('/superadmin/report/download-all/{format}', [SAdminController::class, 'printReportAll'])->name('sadmin.report.download-all');
+    Route::get('/superadmin/report/download-member-all/{format}', [SAdminController::class, 'printReportMemberAll'])->name('sadmin.report.download-member-all');
     // Route::get('/superadmin/transaksi/preview-print', [SAdminController::class, 'previewPrint'])->name('sadmin.transaksi.preview-print');
     // Route::get('/superadmin/transaksi/all', [SAdminController::class, 'transAll'])->name('sadmin.transaksi.all');
     // Route::get('/superadmin/transaksi/all', [SAdminController::class, 'transAll'])->name('sadmin.transaksi.filter');

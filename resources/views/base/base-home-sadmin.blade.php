@@ -22,11 +22,21 @@
     </div>
 </div>
 <div class="row layout-top-spacing">
+    <div class="col-lg-8 col-12 mb-2">
+        <div class="card">
+            <div class="card-header">
+                <span style="font-size: 20px">Grafik Pemesanan</span>
+            </div>
+            <div class="card-body">
+                <div id="chartpenghasilan"></div>
+            </div>
+        </div>
+    </div>
     <div class="col-lg-6 col-12 mb-3">
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <span style="font-size: 20px">Data Transaksi Berhasil</span>
-                <span><a href="" class="btn btn-outline-primary btn-rounded"><i class="fa-solid fa-print"></i></a></span>
+                <span style="font-size: 20px">Data Semua Transaksi</span>
+                <span><a href="{{ route('sadmin.report.download-all', ['format' => 'pdf']) }}" class="btn btn-outline-primary btn-rounded"><i class="fa-solid fa-print"></i></a></span>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -61,8 +71,10 @@
     <div class="col-lg-6 col-12 mb-3">
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <span style="font-size: 20px">Data Member Terbaru</span>
-                <span><a href="" class="btn btn-outline-primary btn-rounded"><i class="fa-solid fa-print"></i></a></span>
+                <span style="font-size: 20px">Data Semua Member</span>
+                <span>
+                    <a href="{{ route('sadmin.report.download-member-all', ['format' => 'pdf']) }}" class="btn btn-outline-primary btn-rounded"><i class="fa-solid fa-print"></i></a>
+                </span>
             </div>
             <div class="card-body">
                 <div class="table-responsive">

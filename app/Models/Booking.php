@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 class Booking extends Model
 {
-    use HasFactory;
+    use HasFactory, Searchable;
     protected $table = 'bookings'; // Sesuaikan dengan nama tabel yang ada di database
 
     protected $fillable = [
@@ -51,6 +52,14 @@ class Booking extends Model
         } else {
             return 'Status Tidak Diketahui';
         }
+    }
+    public function toSearchableArray()
+    {
+        return [
+            'user' => $this->user->name,
+            'paket' => $this->paket->name,
+            'price' => $this->paket->price,
+        ];
     }
 
 }

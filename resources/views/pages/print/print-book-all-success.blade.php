@@ -1,25 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Laporan Transaksi</title>
+    <title>Laporan Data Semua Transaksi</title>
 </head>
 <body>
-    @if(Str::is('superadmin/member/filter?month={$month}', request()->path()))
-    @php
-        setlocale(LC_TIME, 'id_ID'); // Atur lokal ke Bahasa Indonesia
-        $date = \Carbon\Carbon::createFromFormat('m', $month); // Buat objek tanggal dari format bulan
 
-        $monthName = $date->format('F'); // Dapatkan nama bulan dalam Bahasa Indonesia
-    @endphp
-    <h1 style="text-align: center">Laporan Transaksi Bulan {{ $monthName }}</h1>
-    @else
     <h1 style="text-align: center">Laporan Data Semua Transaksi</h1>
-    @endif
 
     @if($transaksi)
         <table border="1">
             <thead>
-                <tr>
+                <tr style="text-align:center;">
                     <th>ID</th>
                     <th>Nama Member</th>
                     <th>Nama Paket</th>
@@ -33,7 +24,7 @@
             <tbody>
 
                 @foreach($transaksi as $item)
-                    <tr class="text-center">
+                    <tr style="text-align:center;">
                         <td>{{ $item->id }}</td>
                         <td>{{ $item->user->name }}</td>
                         <td>{{ $item->paket->name }}</td>

@@ -31,7 +31,7 @@
                         <label for="month">Pilih Bulan</label>
                         <div class="d-flex justify-content-between align-items-center">
                             <select name="month" id="month" class="form-select">
-                                <option value="" {{ request('month') == '' ? 'selected' : '' }}>Semua Bulan</option>
+                                <option value="all" {{ request('month') == 'all' ? 'selected' : '' }}>Semua Bulan</option>
                                 <option value="1" {{ request('month') == '1' ? 'selected' : '' }}>Januari</option>
                                 <option value="2" {{ request('month') == '2' ? 'selected' : '' }}>Februari</option>
                                 <option value="3" {{ request('month') == '3' ? 'selected' : '' }}>Maret</option>
@@ -52,11 +52,18 @@
                                 <span class="text-danger">Bulan yang dipilih tidak valid.</span>
                             @endif
                             <button type="submit" class="btn btn-primary btn-rounded" style="margin-left: 10px"><i class="fa-solid fa-sort"></i></button>
+
                             @if(request('month'))
                             <a href="{{ route('sadmin.report.download', ['month' => request('month'), 'format' => 'pdf']) }}" class="btn btn-primary btn-rounded" style="margin-left: 5px;"><i class="fa-solid fa-print"></i></a>
 
                             @endif
                         </div>
+                    </form>
+                </div>
+                <div class="col-lg-6 form-group">
+                    <form method="GET">
+                        <label for="Search">Search Member</label>
+                        <input type="text" name="search" id="search" value="{{ request()->get('search') }}" class="form-control" placeholder="Search member...">
                     </form>
                 </div>
 
@@ -110,8 +117,8 @@
     document.getElementById('month').onchange = function() {
         if (this.value !== '') {
             window.location.href = '{{ route("sadmin.transaksi.filter") }}?month=' + this.value;
-        } else {
-            window.location.href = '{{ route("sadmin.transaksi.all") }}';
+        // } else {
+        //     window.location.href = '{{ route("sadmin.transaksi.all") }}';
         }
     };
 </script>

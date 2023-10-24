@@ -267,11 +267,11 @@
           <div class="col-lg-2 col-md-3 footer-links">
             <h4>Useful Links <i class="bi bi-chevron-down dropdown-indicator"></i></h4>
             <ul class="footer-menu">
-              <li><a href="#">Home</a></li>
-              <li><a href="#">About us</a></li>
-              <li><a href="#">Services</a></li>
-              <li><a href="#">Terms of service</a></li>
-              <li><a href="#">Privacy policy</a></li>
+              <li><a href="/">Home</a></li>
+              <li><a href="/about-us">About us</a></li>
+              <li><a href="/services">Services</a></li>
+              <li><a href="/terms-of-services">Terms of service</a></li>
+              <li><a href="/privacy-policy">Privacy policy</a></li>
             </ul>
           </div><!-- End footer links column-->
 

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('slug');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('category_id'); // Tambahkan ini jika diperlukan
-            $table->text('desc');
+            $table->longText('desc');
             $table->string('keywords');
             $table->text('meta_desc');
             $table->timestamps();

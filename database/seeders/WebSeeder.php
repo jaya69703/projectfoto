@@ -17,7 +17,7 @@ class WebSeeder extends Seeder
         DB::table('web_settings')->insert([
             'id' => '1',
             // GENERAL INFO ACCOUNT
-            'name' => 'StarterKit',
+            'name' => 'ARShoot',
             'image' => 'logo.png',
             'head_title' => 'Abadikan Semua Momen Anda',
             'head_desc' => 'Kami membantu anda dalam mengabadikan setiap momen yang tak terlupakan.',
