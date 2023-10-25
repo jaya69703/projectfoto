@@ -38,8 +38,8 @@
                           <li class="nav-item ml-2 mr-2">
                               <a class="nav-link mb-2 text-center" id="rounded-pills-icon-contact-tab" data-bs-toggle="pill" href="#rounded-pills-icon-contact" role="tab" aria-controls="rounded-pills-icon-contact" aria-selected="false"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-phone"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg> Contact</a>
                           </li>
-
                       </ul>
+                      @if(Route::is('member.book.profile'))
                       <div class="tab-content" id="rounded-pills-icon-tabContent">
                           <div class="tab-pane fade show active" id="rounded-pills-icon-home" role="tabpanel" aria-labelledby="rounded-pills-icon-home-tab">
                               <div class="row">
@@ -78,6 +78,45 @@
                               </div>
                           </div>
                       </div>
+                      @elseif(Route::is('admin.usermanage.show'))
+                        <div class="tab-content" id="rounded-pills-icon-tabContent">
+                            <div class="tab-pane fade show active" id="rounded-pills-icon-home" role="tabpanel" aria-labelledby="rounded-pills-icon-home-tab">
+                                <div class="row">
+                                    <div class="form-group col-lg-6 col-12 mb-2">
+                                        <label for="name">Fullname</label>
+                                        <input type="text" id="name" name="name" class="form-control" value="{{ $user->name }}">
+                                        @error('name') <small class="text-danger">{{ $message }}</small> @enderror
+                                    </div>
+                                    <div class="form-group col-lg-6 col-12 mb-2">
+                                        <label for="email">Email address</label>
+                                        <input type="email" id="email" name="email" class="form-control" value="{{ $user->email }}">
+                                        @error('email') <small class="text-danger">{{ $message }}</small> @enderror
+                                    </div>
+                                    <div class="form-group col-lg-6 col-12 mb-2">
+                                        <label for="phone">Phone Number</label>
+                                        <input type="text" id="phone" name="phone" class="form-control" value="{{ $user->phone }}">
+                                        @error('phone') <small class="text-danger">{{ $message }}</small> @enderror
+
+                                    </div>
+                                    <div class="form-group col-lg-6 col-12 mb-2">
+                                        <label for="code">User Code</label>
+                                        <input type="text" id="code" name="code" class="form-control" value="{{ $user->code }}">
+                                        @error('code') <small class="text-danger">{{ $message }}</small> @enderror
+                                    </div>
+                            </div>
+                            </div>
+                            <div class="tab-pane fade" id="rounded-pills-icon-profile" role="tabpanel" aria-labelledby="rounded-pills-icon-profile-tab">
+                                <div class="row">
+                                </div>
+
+                            </div>
+                            <div class="tab-pane fade" id="rounded-pills-icon-contact" role="tabpanel" aria-labelledby="rounded-pills-icon-contact-tab">
+                                <div class="row">
+
+                                </div>
+                            </div>
+                        </div>
+                      @endif
                   </div>
               </div>
           </div>

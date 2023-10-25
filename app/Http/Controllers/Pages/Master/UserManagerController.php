@@ -48,14 +48,12 @@ class UserManagerController extends Controller
     {
         $data['title'] = "SkyDash";
         $data['menu'] = "User Manager";
-        $data['submenu'] = "Create Users";
+        $data['submenu'] = "View Users";
         $data['user'] = User::findOrFail($id);
-        // $data['ip'] = '47.250.55.111'; //Static IP address get
-        $data['ip'] = request()->ip(); //Dynamic IP address get
-        $data['locate'] = \Location::get($data['ip']);
 
+        // dd($data['user']);
         // dd($data['locate']);
-        return view('pages.usermanage.usermanage-show', $data);
+        return view('base.base-profile-user-show', $data);
     }
 
     /**
@@ -141,7 +139,22 @@ class UserManagerController extends Controller
 
         $user->isverify = $request->isverify;
         $user->save();
-        return redirect()->route('admin.usermanage.user.index')->with('success', 'Data berhasil diupdate.');
+        return back()->with('success', 'Data berhasil diupdate.');
+
+    }
+
+    public function updateMember(Request $request, string $id)
+    {
+        $user = User::find($id);
+        $request->validate([
+            'name' => 'required',
+            'phone' => 'required',
+        ]);
+
+        $user->name = $request->name;
+        $user->phone = $request->phone;
+        $user->save();
+        return back()->with('success', 'Data berhasil diupdate.');
 
     }
 

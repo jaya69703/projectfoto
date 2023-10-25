@@ -22,7 +22,7 @@ $web = App\Models\WebSetting::find(1);
         <div class="col-lg-4 col-12 mb-3">
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                    <span style="font-size: 20px">Logo {{ $submenu }}</span>
+                    <span style="font-size: 20px">LOGO Website</span>
                     <span class="align-items-center">
                         <button type="button" class="btn btn-outline-danger btn-rounded mr-2" id="reset-button"><i class="fa-solid fa-arrows-rotate"></i></button>
                     </span>
@@ -34,10 +34,25 @@ $web = App\Models\WebSetting::find(1);
                 </div>
             </div>
         </div>
+        <div class="col-lg-4 col-12 mb-3">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <span style="font-size: 20px">QRIS Website</span>
+                    <span class="align-items-center">
+                        <button type="button" class="btn btn-outline-danger btn-rounded mr-2" id="qris-reset-button"><i class="fa-solid fa-arrows-rotate"></i></button>
+                    </span>
+                </div>
+                <div class="card-body text-center">
+                    <img src="{{ asset('storage/images/web/'.$web->site_qris) }}" class="card-img-top img-fluid" style="width: 300px;" alt="Image-Picture" id="qrisPreview">
+                    <input type="file" id="site_qris" name="site_qris" class="form-control mt-3" accept="image/x-png,image/gif,image/jpeg" value="{{ $web->site_qris }}">
+                    @error('site_qris') <small class="text-danger">{{ $message }}</small> @enderror
+                </div>
+            </div>
+        </div>
         <div class="col-lg-8 col-12 mb-3">
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                    <span style="font-size: 20px">{{ $submenu }}</span>
+                    <span style="font-size: 20px">Data Informasi Website</span>
                     <span class="align-items-center">
                         <button type="submit" class="btn btn-outline-primary btn-rounded"><i class="fa-solid fa-floppy-disk"></i></button>
                         <a href="" class="btn btn-outline-warning btn-rounded"><i class="fa-solid fa-sync"></i></a>
@@ -45,13 +60,13 @@ $web = App\Models\WebSetting::find(1);
                 </div>
                 <div class="row card-body">
                     <div class="form-group col-lg-6 col-12 mb-2">
-                        <label for="name">Website name</label>
+                        <label for="name">Nama Website</label>
                         <input type="text" name="name" id="name" class="form-control" placeholder="Input your web name..." value="{{ $web->name }}">
                         @error('name') <small class="text-danger">{{ $message }}</small> @enderror
 
                     </div>
                     <div class="form-group col-lg-6 col-12 mb-2">
-                        <label for="site_link">Website link</label>
+                        <label for="site_link">Link Website</label>
                         <input type="text" name="site_link" id="site_link" class="form-control" placeholder="Input your web site_link..." value="{{ $web->site_link }}">
                         @error('site_link') <small class="text-danger">{{ $message }}</small> @enderror
                     </div>
@@ -117,6 +132,40 @@ $web = App\Models\WebSetting::find(1);
         imagePreview.src = defaultImageSrc;
         // Reset nilai input file
         imageInput.value = '';
+    });
+</script>
+<script>
+    // Mendapatkan elemen-elemen yang dibutuhkan
+    const qrisInput = document.getElementById('site_qris');
+    const qrisPreview = document.getElementById('qrisPreview');
+    const qrisResetButton = document.getElementById('qris-reset-button');
+
+    // Simpan URL gambar awal sebagai nilai default
+    const defaultQrisSrc = qrisPreview.src;
+
+    // Fungsi untuk menampilkan pratinjau gambar
+    function showQrisPreview(file, preview) {
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                preview.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    }
+
+    // Event listener ketika gambar diubah di input file
+    qrisInput.addEventListener('change', function () {
+        const selectedFile = this.files[0];
+        showQrisPreview(selectedFile, qrisPreview);
+    });
+
+    // Event listener untuk tombol reset
+    qrisResetButton.addEventListener('click', function () {
+        // Kembalikan gambar ke gambar awal
+        qrisPreview.src = defaultQrisSrc;
+        // Reset nilai input file
+        qrisInput.value = '';
     });
 </script>
 @endsection

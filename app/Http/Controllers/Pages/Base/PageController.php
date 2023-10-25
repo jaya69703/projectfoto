@@ -15,7 +15,7 @@ class PageController extends Controller
     {
         $data['title'] = 'AR Project';
         $data['menu'] = 'Kelola Halaman';
-        $data['submenu'] = 'Halaman';
+        $data['submenu'] = 'Daftar Halaman';
         $data['page'] = Page::all();
         $data['tpage'] = Page::where('page_type', 0)->get();
 

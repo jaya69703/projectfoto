@@ -38,7 +38,7 @@
                         <tr>
                             <td class="text-center">{{ ++$key }}</td>
                             <td>{{ $item->title }}</td>
-                            <td class="text-center">{{ $item->end_date }}</td>
+                            <td class="text-center">{{ $item->exp_date }}</td>
                             <td class="text-center">{{ $item->status }}</td>
                             <td class="text-center">{{ $item->updated_at->diffforhumans() }}</td>
                             <td class="text-center d-flex justify-content-center align-items-center">
@@ -48,7 +48,7 @@
                                     @csrf
                                     @method('DELETE')
                                     <a type="button" class="bs-tooltip btn btn-rounded btn-outline-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-original-title="Delete"
-                                        data-url="{{ route('admin.usermanage.worker.destroy', $item->id) }}" data-name="{{ $item->name }}"
+                                        data-url="{{ route('admin.app.announ.destroy', $item->id) }}" data-name="{{ $item->name }}"
                                         onclick="deleteData('{{ $item->id }}')">
                                         <i class="fa-solid fa-trash-can"></i>
                                      </a>
@@ -71,7 +71,7 @@
             @csrf
             <div class="modal-content">
                 <div class="modal-header" style="font-size: 20px">
-                    <h5 class="modal-title" id="tabsModalLabel">Create {{ $submenu }}</h5>
+                    <h5 class="modal-title" id="tabsModalLabel">Buat Pengumuman</h5>
                     <div class="d-flex justify-content-between align-items-center">
 
                         <button style="margin-right: 10px;" type="submit" class="btn btn-rounded btn-outline-secondary" data-bs-dismiss="modal">
@@ -126,7 +126,7 @@
             @method('PATCH')
             <div class="modal-content">
                 <div class="modal-header" style="font-size: 20px">
-                    <h5 class="modal-title" id="tabsModalLabel">Edit {{ $submenu }}</h5>
+                    <h5 class="modal-title" id="tabsModalLabel">Ubah Pengumuman</h5>
                     <div class="d-flex justify-content-between align-items-center">
 
                         <button style="margin-right: 10px;" type="submit" class="btn btn-rounded btn-outline-secondary" data-bs-dismiss="modal">
@@ -177,7 +177,7 @@
             @method('PATCH')
             <div class="modal-content">
                 <div class="modal-header" style="font-size: 20px">
-                    <h5 class="modal-title" id="tabsModalLabel">Edit {{ $submenu }}</h5>
+                    <h5 class="modal-title" id="tabsModalLabel">Lihat Pengumuman</h5>
                     <div class="d-flex justify-content-between align-items-center">
 
                         <button style="margin-right: 10px;" type="submit" class="btn btn-rounded btn-outline-secondary" data-bs-dismiss="modal">

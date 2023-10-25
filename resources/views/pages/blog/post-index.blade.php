@@ -1,5 +1,6 @@
 @extends('base.base-index')
 @section('custom-css')
+
 @endsection
 @section('content')
 <div class="row layout-top-spacing">
@@ -35,7 +36,7 @@
                             <td>{{ $item->keywords }}</td>
                             <td>{{ $item->meta_desc }}</td>
                             <td>{{ $item->created_at->diffForHumans() }}</td>
-                            <td class="d-flex justify-content-between align-items-center">
+                            <td class="d-flex justify-content-center align-items-center">
                                 <a href="{{ route('root.pages.blog.single', $item->slug) }}" class="btn btn-rounded btn-outline-primary" style="margin-right: 5px"><i class="fa-solid fa-eye"></i></a>
                                 <a href="{{ route('author.blog.post-edit', $item->id) }}" class="btn btn-rounded btn-outline-secondary" style="margin-right: 5px"><i class="fa-solid fa-edit"></i></a>
                                 <form id="delete-form-{{ $item->id }}" action="{{ route('author.blog.post-destroy', $item->id) }}" method="POST">

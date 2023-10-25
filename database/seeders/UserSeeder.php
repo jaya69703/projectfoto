@@ -18,6 +18,7 @@ class UserSeeder extends Seeder
         // Default Member
         DB::table('users')->insert([
             // GENERAL INFO ACCOUNT
+            'id' => '1',
             'name' => 'Member Account',
             'email' => 'useraccount@example.com',
             'image' => 'default.png',
@@ -30,6 +31,7 @@ class UserSeeder extends Seeder
         ]);
         // Default Member Plus
         DB::table('users')->insert([
+            'id' => '2',
             // GENERAL INFO ACCOUNT
             'name' => 'Member Plus',
             'email' => 'memberplus@example.com',
@@ -55,6 +57,7 @@ class UserSeeder extends Seeder
         // Default Author Account
         DB::table('users')->insert([
             // GENERAL INFO ACCOUNT
+            'id' => '3',
             'name' => 'Author',
             'email' => 'author@example.com',
             'image' => 'default.png',
@@ -79,6 +82,7 @@ class UserSeeder extends Seeder
         // Default Admin
         DB::table('users')->insert([
             // GENERAL INFO ACCOUNT
+            'id' => '4',
             'name' => 'Admin Account',
             'email' => 'adminaccount@example.com',
             'image' => 'default.png',
@@ -92,6 +96,7 @@ class UserSeeder extends Seeder
         // Default Super Admin
         DB::table('users')->insert([
             // GENERAL INFO ACCOUNT
+            'id' => '5',
             'name' => 'Super Administrator',
             'email' => 'superadmin@example.com',
             'image' => 'default.png',

@@ -20,4 +20,5 @@ class Page extends Model
         'updated_at',
         'created_at'
     ];
+
 }

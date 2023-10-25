@@ -95,45 +95,6 @@
                         @endforeach
                     </tbody>
                 </table>
-                @elseif(Str::is('admin/booking/progress', request()->path()))
-                <table id="style-3" class="table style-3 dt-table-hover">
-                    <thead>
-                        <tr>
-                            <th class="text-center">Id</th>
-                            <th class="text-center">Nama Paket</th>
-                            <th class="text-center">Nama Klien</th>
-                            <th class="text-center">Tanggal Pemesanan</th>
-                            <th class="text-center">Jam Pemesanan</th>
-                            <th class="text-center">Harga</th>
-                            <th class="text-center">Status Pesanan</th>
-                            <th class="text-center">Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($progress as $key => $item)
-                        <tr class="text-center">
-                            <td>{{ ++$key }}</td>
-                            <td>{{ $item->paket->name }}</td>
-                            <td>{{ $item->user->name }}</td>
-                            <td>{{ \Carbon\Carbon::parse($item->book_date)->formatLocalized('%A, %d %B %Y') }}</td>
-                            <td>{{ $item->book_time }}</td>
-                            <td>{{ $item->paket->price }}</td>
-                            <td><span class="badge badge-warning">{{ $item->book_stat }}</span></td>
-                            <td class="text-center d-flex justify-content-center align-items-center">
-                                <form id="delete-form-{{ $item->id }}" action="{{ route('admin.booking.destroy', $item->id) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <a type="button" class="bs-tooltip btn btn-rounded btn-outline-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-original-title="Delete"
-                                        data-url="{{ route('admin.booking.destroy', $item->id) }}" data-name="{{ $item->name }}"
-                                        onclick="deleteData('{{ $item->id }}')">
-                                        <i class="fa-solid fa-trash-can"></i>
-                                    </a>
-                                </form>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
                 @elseif(Str::is('admin/booking/verify', request()->path()))
                 <table id="style-3" class="table style-3 dt-table-hover">
                     <thead>
@@ -158,7 +119,7 @@
                             <td>{{ $item->book_time }}</td>
                             <td>{{ $item->paket->price }}</td>
                             <td>{!! $item->book_stat !!}</td>
-                            <td class="text-center d-flex justify-content-center align-items-center">
+                            <td class="d-flex justify-content-between align-items-center">
                                 <a href="#" class="btn btn-rounded btn-outline-primary" data-bs-toggle="modal" data-bs-target="#paymentView{{$item->id}}"><i class="fa-solid fa-eye"></i></a>
                                 <form id="delete-form-{{ $item->id }}" action="{{ route('admin.booking.destroy', $item->id) }}" method="POST">
                                     @csrf

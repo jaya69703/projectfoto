@@ -12,9 +12,14 @@ class Paket extends Model
 
     protected $fillable = [
         // IDENTITAS ACCOUNT
+        'cpaket_id',
         'user_id',
         'name',
         'image',
+        'image_2',
+        'image_3',
+        'image_4',
+        'image_5',
         'slug',
         'price',
         'description',
@@ -29,5 +34,14 @@ class Paket extends Model
     public function getRawPriceAttribute()
     {
         return $this->attributes['price'];
+    }
+
+    public function cpaket()
+    {
+        return $this->belongsTo(PaketKategori::class);
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

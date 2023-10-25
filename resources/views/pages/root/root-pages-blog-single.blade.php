@@ -1,6 +1,11 @@
 @extends('base.base-root-index')
 @section('custom-css')
-
+<style>
+    .content img {
+        max-width: 100%; /* Atur maksimum lebar gambar menjadi 100% dari lebar container */
+        height: auto; /* Pastikan tinggi gambar disesuaikan secara proporsional */
+    }
+</style>
 @endsection
 @section('content')
 <main id="main">

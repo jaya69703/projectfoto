@@ -16,8 +16,8 @@ class WebSettingController extends Controller
     public function index()
     {
         $data['title'] = "SkyDash";
-        $data['menu'] = "Settings";
-        $data['submenu'] = "Web Information";
+        $data['menu'] = "Pengaturan";
+        $data['submenu'] = "Data Informasi Website";
         $data['web'] = WebSetting::all();
 
         return view('pages.app.setting.setting-index', $data);
@@ -63,6 +63,7 @@ class WebSettingController extends Controller
         $request->validate([
             'name' => 'required',
             'site_link' => 'required',
+            'site_qris' => 'nullable|mimes:png,jpg|max:2048',
             'image' => 'nullable|mimes:png,jpg|max:2048',
             'site_social_ig' => 'nullable|max:255',
             'site_social_fb' => 'nullable|max:255',
@@ -82,6 +83,22 @@ class WebSettingController extends Controller
             $filename = $request->image->getClientOriginalName();
             $request->image->storeAs('images/web/', $filename, 'public');
             $web->image = $filename;
+
+            $web->save();
+            // Auth()->web()->update(['image'=>$filename]);
+            return redirect()->route('admin.app.setting.index')->with('success', 'Foto berhasil diupdate.');
+        }
+
+        if($request->hasFile('site_qris')){
+            $oldPhoto = $web->site_qris;
+
+            if ($oldPhoto !== 'qris.png' && Storage::disk('public')->exists('images/web/' . $oldPhoto)) {
+                Storage::disk('public')->delete('images/web/' . $oldPhoto);
+            }
+
+            $filename = $request->site_qris->getClientOriginalName();
+            $request->site_qris->storeAs('images/web/', $filename, 'public');
+            $web->site_qris = $filename;
 
             $web->save();
             // Auth()->web()->update(['image'=>$filename]);

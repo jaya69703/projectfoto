@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Pages\Base;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\Paket;
 use App\Models\WebSetting;
 use App\Models\Booking;
 use App\Models\{Post, TagsB, CategoryB};
@@ -16,16 +15,64 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Validation\Rules\Password;
 use App\Rules\MatchOldPassword;
 use Illuminate\Support\Facades\Mail;
+// KELOLA PAKET
+use App\Models\Paket;
+use App\Models\PaketKategori;
 
 
 class RootController extends Controller
 {
+    // PACKAGE MANAGEMENT
+    public function package($slug)
+    {
+        $data['title'] = "AR POTRET";
+        $data['menu'] = "Paket";
+        $data['submenu'] = "Lihat Paket";
+        $data['paket'] = Paket::where('slug', $slug)->first();
+        $data['cpaket'] = PaketKategori::all();
+        $data['web'] = WebSetting::find(1)->get();
+
+        $userId = Auth::User()->id;
+
+        $data['ubook'] = Booking::whereHas('paket', function ($query) use ($slug) {
+            $query->where('slug', $slug);
+        })->where('user_id', $userId)->where('book_stat', 7)->get();
+
+        return view('pages.root.root-pages-pdetails', $data);
+    }
+
+    public function packageCategory($slug)
+    {
+        $data['title'] = "AR POTRET";
+        $data['menu'] = "Kategori";
+        $data['submenu'] = "Lihat Kategori";
+        $data['paket'] = Paket::all();
+        // $data['paket'] = Paket::whereHas('cpaket', function ($query) use ($slug) {
+        //     $query->where('slug', $slug); })->get();
+        $data['cpaket'] = PaketKategori::all();
+
+        // dd($data['paket']);
+
+
+
+        return view('pages.root.root-pages-projects', $data);
+    }
+
+
+
+
+
+
+
+
+
     public function index()
     {
         $data['title'] = "SkyDash";
         $data['menu'] = "Home";
         $data['submenu'] = "Index";
-        $data['paket'] = Paket::all();
+        $data['paket'] = Paket::paginate(6);
+        $data['cpaket'] = PaketKategori::all();
         $data['posts'] = Post::latest()->take(6)->get();
         $data['web'] = WebSetting::find(1)->get();
 
@@ -128,7 +175,6 @@ class RootController extends Controller
         $data['users'] = User::where('type', '2')->get();
         $data['paket'] = Paket::findorFail($id);
         $userId = Auth::id();
-        $data['ubook'] = Booking::whereIn('paket_id', [$data['paket']->id])->where('user_id', $userId)->where('book_stat', 7)->get();
 
         // dd($data['ubook']);
 
@@ -167,12 +213,10 @@ class RootController extends Controller
     public function projects()
     {
         $data['title'] = "SkyDash";
-        $data['menu'] = "Home";
-        $data['submenu'] = "Daftar Projects";
-        // $data['users'] = User::where('type', '2')->get();
-        // $data['book'] = Booking::all();
-
-        // dd($data['users']);
+        $data['menu'] = "Paket";
+        $data['submenu'] = "Daftar Paket";
+        $data['paket'] = Paket::all();
+        $data['cpaket'] = PaketKategori::all();
 
         return view('pages.root.root-pages-projects', $data);
     }

@@ -17,6 +17,7 @@ use App\Http\Controllers\Pages\Base\MessageController;
 use App\Http\Controllers\Pages\Master\UserManagerController;
 use App\Http\Controllers\Pages\App\ChatController;
 use App\Http\Controllers\Pages\Master\PaketController;
+use App\Http\Controllers\Pages\PaketKategoriController;
 use App\Http\Controllers\Pages\Master\BookingController;
 use Illuminate\Support\Facades\Route;
 
@@ -31,21 +32,27 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
+// MAIN MENU
 Route::get('/', [RootController::class, 'index'])->name('root.index');
 Route::get('/about-us', [RootController::class, 'about'])->name('root.pages.about');
+Route::get('/services', [RootController::class, 'services'])->name('root.pages.services');
+Route::get('/projects', [RootController::class, 'projects'])->name('root.pages.projects');
+Route::get('/contact-us', [RootController::class, 'contact'])->name('root.pages.contact');
+Route::post('/contact-us/store', [MessageController::class, 'store'])->name('root.pages.contact.store');
+// PACKAGE
+Route::get('/package/{slug}', [RootController::class, 'package'])->name('root.pages.package.show');
+Route::get('/package/category/{slug}', [RootController::class, 'packageCategory'])->name('root.pages.cpackage.show');
+// BLOG
 Route::get('/blog', [RootController::class, 'blog'])->name('root.pages.blog');
 Route::get('/blog/{slug}', [RootController::class, 'blogsingle'])->name('root.pages.blog.single');
 Route::get('/category/{category:slug}', [RootController::class, 'blogcategory'])->name('root.pages.blog.category');
 Route::get('/tag/{tagsb:slug}', [RootController::class, 'blogtags'])->name('root.pages.blog.tags');
+// ESSENTIALS
 Route::get('/privacy-policy', [RootController::class, 'privacyPolicy'])->name('root.pages.privacy-policy');
 Route::get('/terms-of-services', [RootController::class, 'termsOfServices'])->name('root.pages.terms-of-services');
-Route::get('/contact-us', [RootController::class, 'contact'])->name('root.pages.contact');
-Route::post('/contact-us/store', [MessageController::class, 'store'])->name('root.pages.contact.store');
+
 Route::get('/product/details/{id}', [RootController::class, 'pdetails'])->name('root.pages.pdetails');
-Route::get('/projects', [RootController::class, 'projects'])->name('root.pages.projects');
 // Route::get('/product/{pakets:slug}', [RootController::class, 'sample'])->name('root.pages.sample');
-Route::get('/services', [RootController::class, 'services'])->name('root.pages.services');
 
 
 Route::get('/nota-penjualan', function () {
@@ -190,10 +197,14 @@ Route::middleware(['auth', 'user-access:Admin', 'isverify:1'])->group(function (
 
     // FITUR PAKET
     Route::get('/admin/paket', [PaketController::class, 'index'])->name('admin.paket.index');
+    Route::get('/admin/paket-kategori', [PaketKategoriController::class, 'index'])->name('admin.paket-kategori.index');
     Route::post('/admin/paket/store', [PaketController::class, 'store'])->name('admin.paket.store');
+    Route::post('/admin/paket-kategori/store', [PaketKategoriController::class, 'store'])->name('admin.paket-kategori.store');
     Route::get('/admin/paket/show/{id}', [PaketController::class, 'show'])->name('admin.paket.show');
     Route::patch('/admin/paket/edit/{id}', [PaketController::class, 'edit'])->name('admin.paket.edit');
     Route::patch('/admin/paket/update/{id}', [PaketController::class, 'update'])->name('admin.paket.update');
+    Route::patch('/admin/paket-kategori/update/{id}', [PaketKategoriController::class, 'update'])->name('admin.paket-kategori.update');
+    Route::delete('/admin/paket-kategori/destroy/{id}', [PaketKategoriController::class, 'destroy'])->name('admin.paket-kategori.destroy');
     Route::delete('/admin/paket/destroy/{id}', [PaketController::class, 'destroy'])->name('admin.paket.destroy');
 
 
@@ -211,6 +222,7 @@ Route::middleware(['auth', 'user-access:Admin', 'isverify:1'])->group(function (
     Route::get('/admin/usermanage/author', [UserManagerController::class, 'index'])->name('admin.usermanage.author');
     Route::get('/admin/usermanage/admin', [UserManagerController::class, 'index'])->name('admin.usermanage.admin');
     Route::get('/admin/usermanage/show/{id}', [UserManagerController::class, 'show'])->name('admin.usermanage.show');
+    Route::patch('/admin/usermanage/update/{id}', [UserManagerController::class, 'updateMember'])->name('admin.usermanage.update-member');
     // TAMBAH USER 4 ROLE
     Route::post('/admin/usermanage/store', [UserManagerController::class, 'store'])->name('admin.usermanage.store');
     // DELETE USER AUTHOR AND MEMBER PLUS

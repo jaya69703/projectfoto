@@ -60,8 +60,8 @@
                             <td>{{ $item->slug }}</td>
                             <td>{{ $item->keywords }}</td>
                             <td>{{ $item->meta_desc }}</td>
-                            <td class="d-flex justify-content-between align-items-center">
-                                <a href="#" class="btn btn-rounded btn-outline-primary" data-bs-toggle="modal" data-bs-target="#updateCategory{{$item->id}}" style="margin-right: 5px"><i class="fa-solid fa-eye"></i></a>
+                            <td class="d-flex justify-content-center align-items-center">
+                                <a href="#" class="btn btn-rounded btn-outline-primary" data-bs-toggle="modal" data-bs-target="#updateCategory{{$item->id}}" style="margin-right: 5px"><i class="fa-solid fa-edit"></i></a>
                                 <form id="delete-form-{{ $item->id }}" action="{{ route('author.blog.category-destroy', $item->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')

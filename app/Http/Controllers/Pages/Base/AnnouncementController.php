@@ -18,8 +18,8 @@ class AnnouncementController extends Controller
     public function index()
     {
         $data['title'] = "SkyDash";
-        $data['menu'] = "Application";
-        $data['submenu'] = "Announcement";
+        $data['menu'] = "Kelola Pengumuman";
+        $data['submenu'] = "Daftar Pengumuman";
         $data['announ'] = Announcement::all();
 
         return view('pages.app.announ.announ-index', $data);
@@ -28,8 +28,8 @@ class AnnouncementController extends Controller
     public function show($id)
     {
         $data['title'] = "SkyDash";
-        $data['menu'] = "Notify Pages";
-        $data['submenu'] = "Announcement";
+        $data['menu'] = "Kelola Pengumuman";
+        $data['submenu'] = "Lihat Pengumuman";
         $data['announ'] = Announcement::find($id);
 
         return view('pages.app.announ.announ-show', $data);
