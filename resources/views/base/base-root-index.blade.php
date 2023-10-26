@@ -111,7 +111,7 @@
           @php $page = App\Models\Page::where('page_id', '1')->get(); @endphp
           {{-- {{ dd($page); }} --}}
           @foreach($page as $item)
-          <li><a href="{{$item->page_link}}" class="{{ Str::is('$item->page_link', request()->path()) ? 'active' : '' }}">{{$item->page_name}}</a></li>
+          <li><a href="{{ $item->page_link }}" class="{{ Str::is('$item->page_link*', request()->path()) ? 'active' : '' }}">{{$item->page_name}}</a></li>
           @endforeach
           {{-- <li><a href="{{ route('root.pages.about') }}" class="{{ Str::is('about-us*', request()->path()) ? 'active' : '' }}">About</a></li> --}}
           {{-- <li><a href="{{ route('root.pages.services') }}" class="{{ Str::is('services*', request()->path()) ? 'active' : '' }}">Services</a></li> --}}

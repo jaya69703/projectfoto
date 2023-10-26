@@ -31,7 +31,7 @@
                 <div class="portfolio-isotope" data-portfolio-filter="*" data-portfolio-layout="masonry"
                     data-portfolio-sort="original-order">
 
-                    @if (Illuminate\Support\Str::is('paket/category/*', request()->url()))
+                    @if(Illuminate\Support\Str::is('paket/category/*', request()->url()))
                         <ul class="portfolio-flters" data-aos="fade-up" data-aos-delay="100">
                             @php
                                 $used_names = [];
@@ -105,22 +105,9 @@
                                     </div>
                                 </div><!-- End Projects Item -->
                             @endforeach
-
-                            @if ($paket)
-                            @endif
-
-
-
                         </div><!-- End Projects Container -->
                     @endif
                 </div>
-
-
-
-
-
-
-
             </div>
         </section><!-- End Our Projects Section -->
 

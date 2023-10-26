@@ -32,11 +32,14 @@ class RootController extends Controller
         $data['cpaket'] = PaketKategori::all();
         $data['web'] = WebSetting::find(1)->get();
 
-        $userId = Auth::User()->id;
+        if (Auth::check()) {
 
-        $data['ubook'] = Booking::whereHas('paket', function ($query) use ($slug) {
-            $query->where('slug', $slug);
-        })->where('user_id', $userId)->where('book_stat', 7)->get();
+            $userId = Auth::id();
+
+            $data['ubook'] = Booking::whereHas('paket', function ($query) use ($slug) {
+                $query->where('slug', $slug);
+            })->where('user_id', $userId)->where('book_stat', 7)->get();
+        }
 
         return view('pages.root.root-pages-pdetails', $data);
     }

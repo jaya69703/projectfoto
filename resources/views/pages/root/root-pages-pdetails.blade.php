@@ -108,13 +108,14 @@
                                             style="max-width: 245px;" data-bs-toggle="modal" data-bs-target="#bookNow"><i
                                                 class="fa-solid fa-cart-plus"
                                                 style="margin-right: 10px; margin-left: 35px;"></i>Booking Now</a></li>
-                                    @if ($ubook->count() > 0)
+                                    @if($ubook->count() > 0)
                                         <li><a href="#" class="btn btn-outline-warning btn-rounded text-start"
                                                 style="max-width: 245px;" data-bs-toggle="modal" data-bs-target="#bookNow"><i
                                                     class="fa-solid fa-star"
                                                     style="margin-right: 10px; margin-left: 35px;"></i>Rate us</a></li>
                                     @endif
                                 @endauth
+
                                 @guest
                                     <li><a href="#" class="btn btn-outline-warning btn-rounded text-start"
                                             style="max-width: 245px;" data-bs-toggle="modal" data-bs-target="#loginNow"><i
