@@ -48,8 +48,8 @@ class PageSeeder extends Seeder
         DB::table('pages')->insert([
             'page_id' => '1',
             'page_type' => '1',
-            'page_name' => 'Proyek Kami',
-            'page_desc' => 'Halaman Informasi Berisi Mengenai Hasil Proyek Kami',
+            'page_name' => 'Portfolio Paket',
+            'page_desc' => 'Halaman Informasi Berisi Mengenai Hasil Portofolio Kami',
             'page_link' => 'projects',
         ]);
         // HALAMAN BLOG

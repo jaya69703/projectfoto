@@ -102,8 +102,8 @@
 </div>
 {{-- MODAL UPDATE PAKET --}}
 @foreach($paket as $key => $item)
-<div class="modal fade" id="editPaket{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="tabsModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+<div class="modal bd-example-modal-xl fade" id="editPaket{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="tabsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
         <form action="{{ route('admin.paket.update', $item->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PATCH')
@@ -120,26 +120,61 @@
                         </button>
                     </div>
                 </div>
-                <div class="modal-body">
-                    <div class="form-group col-12 mb-2">
+                <div class="row modal-body">
+                    <div class="col-lg-6 col-12 form-group mb-2">
                         <div class="text-center">
-
                             <img class="card-img-top img-fluid mb-2" src="{{ asset('storage/images/paket/'.$item->image) }}" style="width: 450px;" alt="Image-Picture" id="image-preview">
                         </div>
                         <label for="image">Cover Image</label>
                         <input type="file" name="image" id="image" class="form-control" value="{{ $item->image }}">
                     </div>
-                    <div class="form-group mb-2">
+                    @if($item->paket_2)
+                    <div class="col-lg-6 col-12 form-group mb-2">
+                        <div class="text-center">
+                            <img class="card-img-top img-fluid mb-2" src="{{ asset('storage/images/paket/'.$item->image) }}" style="width: 450px;" alt="Image-Picture" id="image-preview">
+                        </div>
+                        <label for="image">Image Plus 1</label>
+                        <input type="file" name="image" id="image" class="form-control" value="{{ $item->image }}">
+                    </div>
+                    @endif
+                    @if($item->paket_3)
+                    <div class="col-lg-6 col-12 form-group mb-2">
+                        <div class="text-center">
+                            <img class="card-img-top img-fluid mb-2" src="{{ asset('storage/images/paket/'.$item->image) }}" style="width: 450px;" alt="Image-Picture" id="image-preview">
+                        </div>
+                        <label for="image">Image Plus 1</label>
+                        <input type="file" name="image" id="image" class="form-control" value="{{ $item->image }}">
+                    </div>
+                    @endif
+                    @if($item->paket_4)
+                    <div class="col-lg-6 col-12 form-group mb-2">
+                        <div class="text-center">
+                            <img class="card-img-top img-fluid mb-2" src="{{ asset('storage/images/paket/'.$item->image) }}" style="width: 450px;" alt="Image-Picture" id="image-preview">
+                        </div>
+                        <label for="image">Image Plus 1</label>
+                        <input type="file" name="image" id="image" class="form-control" value="{{ $item->image }}">
+                    </div>
+                    @endif
+                    @if($item->paket_5)
+                    <div class="col-lg-6 col-12 form-group mb-2">
+                        <div class="text-center">
+                            <img class="card-img-top img-fluid mb-2" src="{{ asset('storage/images/paket/'.$item->image) }}" style="width: 450px;" alt="Image-Picture" id="image-preview">
+                        </div>
+                        <label for="image">Image Plus 1</label>
+                        <input type="file" name="image" id="image" class="form-control" value="{{ $item->image }}">
+                    </div>
+                    @endif
+                    <div class="col-lg-6 col-12 form-group mb-2">
                         <label for="name">Nama Paket</label>
                         <input type="text" name="name" id="name" class="form-control" placeholder="Input package name..." value="{{ $item->name }}">
                         @error('name') <small class="text-danger">{{ $message }}</small> @enderror
                     </div>
-                    <div class="form-group mb-2">
+                    <div class="col-lg-6 col-12 form-group mb-2">
                         <label for="price">Harga Paket</label>
                         <input type="text" name="price" id="price" class="form-control" placeholder="Input package price..." value="{{ $item->price }}">
                         @error('price') <small class="text-danger">{{ $message }}</small> @enderror
                     </div>
-                    <div class="form-group mb-2">
+                    <div class="col-lg-6 col-12 form-group mb-2">
                         <label for="description">Deskripsi Paket</label>
                         <textarea name="description" id="description" class="form-control" cols="30" rows="10" placeholder="Input package description..."  value="{{ $item->description }}"> {{ $item->description }}</textarea>
                         @error('description') <small class="text-danger">{{ $message }}</small> @enderror
