@@ -39,19 +39,19 @@
 
                     <div class="row gy-4 portfolio-container" data-aos="fade-up" data-aos-delay="200">
 
-                        @foreach ($paket as $item)
+                        @foreach ($gallery as $item)
                             <div class="col-lg-4 col-md-6 portfolio-item {{ $item->cpaket->slug }}">
                                 <div class="portfolio-content h-100">
-                                    <img src="{{ asset('storage/images/paket/' . $item->image) }}" class="img-fluid"
+                                    <img src="{{ asset('storage/' . $item->cover) }}" class="img-fluid"
                                         alt="">
                                     <div class="portfolio-info">
                                         <h4>{{ $item->cpaket->name }}</h4>
                                         <p>{{ $item->name }}</p>
-                                        <a href="{{ asset('storage/images/paket/' . $item->image) }}"
-                                            title="{{ $item->description }}"
+                                        <a href="{{ asset('storage/' . $item->cover) }}"
+                                            title="{{ $item->desc }}"
                                             data-gallery="portfolio-gallery-{{ $item->cpaket->slug }}"
                                             class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                                        <a href="{{ route('root.pages.package.show', $item->slug) }}" title="More Details"
+                                        <a href="{{ route('root.pages.portofolio.show', $item->slug) }}" title="More Details"
                                             class="details-link"><i class="bi bi-link-45deg"></i></a>
                                     </div>
                                 </div>

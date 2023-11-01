@@ -174,6 +174,12 @@
                             <option value="7" {{ $item->book_stat == 'Selesai' ? 'selected' : '' }}>Selesai</option>
                         </select>
                     </div>
+                    @if($item->book_stat == 'Selesai')
+                    <div class="form-group col-12 mb-3">
+                        <label for="book_done">Lihat Link Google Drive</label>
+                        <textarea name="book_done" id="book_done" class="form-control" cols="30" rows="10" value="{{ $item->book_done }}">{{ $item->book_done }}</textarea>
+                    </div>
+                    @endif
                 </div>
             </div>
         </form>
@@ -215,6 +221,12 @@
                             <option value="7" {{ $item->book_stat == 'Selesai' ? 'selected' : '' }}>Selesai</option>
                         </select>
                     </div>
+                    @if($item->book_stat == 'Selesai')
+                    <div class="form-group col-12 mb-3">
+                        <label for="book_done">Lihat Link Google Drive</label>
+                        <textarea name="book_done" class="form-control" id="book_done" cols="30" rows="10" value="{{ $item->book_done }}">{{ $item->book_done }}</textarea>
+                    </div>
+                    @endif
                 </div>
             </div>
         </form>

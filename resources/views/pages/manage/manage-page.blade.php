@@ -47,9 +47,9 @@
                     @error('page_name') <small class="text-danger">{{ $message }}</small> @enderror
                 </div>
                 <div class="form-group mb-2">
-                    <label for="page_link">Link Halaman</label>
-                    <input type="text" name="page_link" id="page_link" class="form-control" placeholder="Inputkan Link Halaman...">
-                    @error('page_link') <small class="text-danger">{{ $message }}</small> @enderror
+                    <label for="page_route">Link Halaman</label>
+                    <input type="text" name="page_route" id="page_route" class="form-control" placeholder="Inputkan Link Halaman...">
+                    @error('page_route') <small class="text-danger">{{ $message }}</small> @enderror
                 </div>
                 <div class="form-group mb-2">
                     <label for="page_desc">Deskripsi Halaman</label>
@@ -85,7 +85,7 @@
                             <tr>
                                 <td class="text-center">{{ ++$key }}</td>
                                 <td>{{ $item->page_name }}</td>
-                                <td class="text-center">{{ $item->page_link }}</td>
+                                <td class="text-center">{{ $item->page_route }}</td>
                                 @if($item->page_type == 0)
                                 <td class="text-center"><span class="badge badge-success">Main Page</span></td>
                                 @else
@@ -163,9 +163,9 @@
                         @error('page_name') <small class="text-danger">{{ $message }}</small> @enderror
                     </div>
                     <div class="form-group mb-2">
-                        <label for="page_link">Link Halaman</label>
-                        <input type="text" name="page_link" id="page_link" class="form-control" value="{{ $item->page_link }}" placeholder="Inputkan Link Halaman...">
-                        @error('page_link') <small class="text-danger">{{ $message }}</small> @enderror
+                        <label for="page_route">Link Halaman</label>
+                        <input type="text" name="page_route" id="page_route" class="form-control" value="{{ $item->page_route }}" placeholder="Inputkan Link Halaman...">
+                        @error('page_route') <small class="text-danger">{{ $message }}</small> @enderror
                     </div>
                     <div class="form-group mb-2">
                         <label for="page_desc">Deskripsi Halaman</label>

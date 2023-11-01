@@ -49,9 +49,17 @@ class PaketKategoriController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($slug)
     {
-        //
+        $data['title'] = 'ARShoot';
+        $data['menu'] = 'Kategori Paket';
+        $data['submenu'] = 'Lihat Kategori';
+        // $paketKategori = PaketKategori::with('paket')->get();
+        $data['paket'] = PaketKategori::with('paket')->get();
+        $data['cpaket'] = PaketKategori::all();
+
+        dd($data['paket']);
+        return view('pages.root.root-pages-projects', $data);
     }
 
     /**

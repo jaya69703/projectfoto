@@ -53,8 +53,8 @@
                             <td>Tidak ada data</td>
                             @endif
                             <td class="d-flex justify-content-center align-items-center">
-                                <a href="#" style="margin-right: 10px" data-bs-toggle="modal" data-bs-target="#editPaket{{$item->id}}" class="btn btn-outline-primary btn-rounded"><i class="fa-solid fa-eye"></i></a>
-                                <a href="#" style="margin-right: 10px" data-bs-toggle="modal" data-bs-target="#ubahKategoriPaket{{$item->id}}" class="btn btn-outline-secodary btn-rounded"><i class="fa-solid fa-edit"></i></a>
+                                <a href="{{ route('root.pages.cpackage.see',$item->slug) }}" style="margin-right: 10px" class="btn btn-outline-primary btn-rounded"><i class="fa-solid fa-eye"></i></a>
+                                <a href="#" style="margin-right: 10px" data-bs-toggle="modal" data-bs-target="#ubahKategoriPaket{{$item->id}}" class="btn btn-outline-secondary btn-rounded"><i class="fa-solid fa-edit"></i></a>
                                 <form id="delete-form-{{ $item->id }}" action="{{ route('admin.paket-kategori.destroy', $item->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')

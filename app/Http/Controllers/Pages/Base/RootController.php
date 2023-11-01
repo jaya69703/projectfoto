@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\WebSetting;
 use App\Models\Booking;
+use App\Models\Rating;
 use App\Models\{Post, TagsB, CategoryB};
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
@@ -17,6 +18,7 @@ use App\Rules\MatchOldPassword;
 use Illuminate\Support\Facades\Mail;
 // KELOLA PAKET
 use App\Models\Paket;
+use App\Models\Gallery;
 use App\Models\PaketKategori;
 
 
@@ -31,13 +33,18 @@ class RootController extends Controller
         $data['paket'] = Paket::where('slug', $slug)->first();
         $data['cpaket'] = PaketKategori::all();
         $data['web'] = WebSetting::find(1)->get();
+        $data['rating'] = Rating::whereHas('paket', function ($query) use ($slug) {
+            $query->where('slug', $slug);
+        })->get();
 
+
+        // dd($data['rating']);
         if (Auth::check()) {
 
             $userId = Auth::id();
-
             $data['ubook'] = Booking::whereHas('paket', function ($query) use ($slug) {
                 $query->where('slug', $slug);
+
             })->where('user_id', $userId)->where('book_stat', 7)->get();
         }
 
@@ -52,16 +59,72 @@ class RootController extends Controller
         $data['paket'] = Paket::all();
         // $data['paket'] = Paket::whereHas('cpaket', function ($query) use ($slug) {
         //     $query->where('slug', $slug); })->get();
-        $data['cpaket'] = PaketKategori::all();
-
-        // dd($data['paket']);
-
+        $data['gpaket'] = PaketKategori::all();
+        $data['cpaket'] = PaketKategori::where('slug', $slug)->first();
 
 
-        return view('pages.root.root-pages-projects', $data);
+        // dd($data['cpaket']);
+
+
+
+        return view('pages.root.root-pages-cprojects', $data);
     }
 
+    public function giveRating(Request $request)
+    {
+        $request->validate([
+            'book_id' => 'integer',
+            'rate' => 'integer|max:5',
+        ]);
 
+        $rate = new Rating;
+        $rate->book_id = $request->book_id;
+        $rate->paket_id = $request->paket_id;
+        $rate->user_id = auth()->user()->id;
+        $rate->rate = $request->rate;
+        $rate->desc = $request->desc;
+        $rate->save();
+
+        return back()->with('success', 'Rating telah berhasil...');
+    }
+    public function editRating(Request $request, $id)
+    {
+        $request->validate([
+            'book_id' => 'integer',
+            'rate' => 'integer|max:5',
+        ]);
+
+        $rate = Rating::findOrFail($id);
+        $rate->book_id = $request->book_id;
+        $rate->paket_id = $request->paket_id;
+        $rate->user_id = auth()->user()->id;
+        $rate->rate = $request->rate;
+        $rate->desc = $request->desc;
+        $rate->save();
+
+        return back()->with('success', 'Rating telah berhasil diupdate...');
+    }
+
+    public function portofolio()
+    {
+        $data['title'] = "SkyDash";
+        $data['menu'] = "Beranda";
+        $data['submenu'] = "Halaman Portofolio";
+        $data['gallery'] = Gallery::all();
+        $data['cpaket'] = PaketKategori::all();
+
+        return view('pages.root.root-pages-portofolio', $data);
+    }
+    public function portofolioShow($slug)
+    {
+        $data['title'] = "SkyDash";
+        $data['menu'] = "Beranda";
+        $data['submenu'] = "Halaman Portofolio";
+        $data['gallery'] = Gallery::where('slug', $slug)->first();
+        $data['cpaket'] = PaketKategori::all();
+
+        return view('pages.root.root-pages-portofolio-show', $data);
+    }
 
 
 
@@ -76,12 +139,21 @@ class RootController extends Controller
         $data['submenu'] = "Index";
         $data['paket'] = Paket::paginate(6);
         $data['cpaket'] = PaketKategori::all();
+        $data['rating'] = Rating::all();
         $data['posts'] = Post::latest()->take(6)->get();
         $data['web'] = WebSetting::find(1)->get();
 
         return view('pages.root.root-index', $data);
     }
 
+    public function claims()
+    {
+        $data['title'] = "SkyDash";
+        $data['menu'] = "Home";
+        $data['submenu'] = "Claim Photo";
+
+        return view('pages.root.root-pages-claims', $data);
+    }
     public function about()
     {
         $data['title'] = "SkyDash";
@@ -177,9 +249,11 @@ class RootController extends Controller
         $data['submenu'] = "Detail Produk";
         $data['users'] = User::where('type', '2')->get();
         $data['paket'] = Paket::findorFail($id);
+        $data['rating'] = Rating::where('paket_id', $id)->first();
         $userId = Auth::id();
 
-        // dd($data['ubook']);
+        
+        // dd($data['rating']);
 
         // dd($data['users']);
 
@@ -194,7 +268,7 @@ class RootController extends Controller
         $data['users'] = User::where('type', '2')->get();
         $userId = Auth::user()->id;
         $data['book'] = Booking::where('user_id', $userId)->get();
-
+        $data['rating'] = Rating::where('user_id', $userId)->get();
         // dd($data['users']);
 
         return view('pages.root.root-pages-history', $data);
@@ -304,16 +378,6 @@ class RootController extends Controller
         $book->book_note = $request->book_note;
 
         $book->save();
-
-        // KIRIM NOTA TRANSAKSI
-        $to_email = Auth::user()->email;
-        $to_name = Auth::user()->name;
-        $subject = '';
-
-        Mail::send('pages.mail.mail-reply', $data, function ($message) use ($to_email, $to_name, $subject) {
-            $message->to($to_email, $to_name)
-                ->subject($subject);
-        });
 
         return redirect()->route('member.book.history')->with('success', 'Pemesanan sukses!!, Silahkan lakukan pembayaran dan upload bukti pembayaran');
     }

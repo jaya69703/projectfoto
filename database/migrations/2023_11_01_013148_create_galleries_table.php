@@ -11,20 +11,21 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pakets', function (Blueprint $table) {
+        Schema::create('galleries', function (Blueprint $table) {
             $table->id();
-            $table->integer('cpaket_id');
             $table->integer('user_id');
+            $table->integer('paket_id');
+            $table->integer('cpaket_id');
+            $table->string('cover');
             $table->string('name');
-            $table->string('image');
+            $table->text('desc');
+            $table->string('slug');
             $table->string('image_1')->nullable();
             $table->string('image_2')->nullable();
             $table->string('image_3')->nullable();
             $table->string('image_4')->nullable();
             $table->string('image_5')->nullable();
-            $table->string('slug')->unique();
-            $table->integer('price');
-            $table->text('description');
+            $table->text('drive_link')->nullable();
             $table->timestamps();
         });
     }
@@ -34,6 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pakets');
+        Schema::dropIfExists('galleries');
     }
 };

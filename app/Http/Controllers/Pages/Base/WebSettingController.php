@@ -86,7 +86,7 @@ class WebSettingController extends Controller
 
             $web->save();
             // Auth()->web()->update(['image'=>$filename]);
-            return redirect()->route('admin.app.setting.index')->with('success', 'Foto berhasil diupdate.');
+            return back()->with('success', 'Foto berhasil diupdate.');
         }
 
         if($request->hasFile('site_qris')){
@@ -102,7 +102,22 @@ class WebSettingController extends Controller
 
             $web->save();
             // Auth()->web()->update(['image'=>$filename]);
-            return redirect()->route('admin.app.setting.index')->with('success', 'Foto berhasil diupdate.');
+            return back()->with('success', 'Foto berhasil diupdate.');
+        }
+        if($request->hasFile('site_slide_1')){
+            $oldPhoto = $web->site_slide_1;
+
+            if ($oldPhoto !== 'slide_1.png' && Storage::disk('public')->exists('images/web/' . $oldPhoto)) {
+                Storage::disk('public')->delete('images/web/' . $oldPhoto);
+            }
+
+            $filename = $request->site_slide_1->getClientOriginalName();
+            $request->site_slide_1->storeAs('images/web/', $filename, 'public');
+            $web->site_slide_1 = $filename;
+
+            $web->save();
+            // Auth()->web()->update(['image'=>$filename]);
+            return back()->with('success', 'Foto berhasil diupdate.');
         }
 
         $web->name = $request->name;
@@ -113,7 +128,7 @@ class WebSettingController extends Controller
         $web->site_social_tw = $request->site_social_tw;
         $web->save();
 
-        return redirect()->route('admin.app.setting.index')->with('success', 'Data berhasil diupdate.');
+        return back()->with('success', 'Data berhasil diupdate.');
     }
 
 

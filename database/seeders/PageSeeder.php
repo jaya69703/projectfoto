@@ -18,7 +18,7 @@ class PageSeeder extends Seeder
             'page_type' => '0',
             'page_name' => 'Menu Utama',
             'page_desc' => 'Halaman Fungsional',
-            'page_link' => '#',
+            'page_route' => '#',
         ]);
         // HALAMAN HOME
         DB::table('pages')->insert([
@@ -26,31 +26,39 @@ class PageSeeder extends Seeder
             'page_type' => '1',
             'page_name' => 'Beranda',
             'page_desc' => 'Layanan Penyedia Jasa Fotografi',
-            'page_link' => '/',
+            'page_route' => '/',
         ]);
         // HALAMAN ABOUT US
         DB::table('pages')->insert([
             'page_id' => '1',
             'page_type' => '1',
-            'page_name' => 'Tentang Kami',
+            'page_name' => 'Why Us',
             'page_desc' => 'Halaman Informasi Mengenai Kami',
-            'page_link' => 'about-us',
+            'page_route' => '/#whyUs',
         ]);
         // HALAMAN SERVICES
         DB::table('pages')->insert([
             'page_id' => '1',
             'page_type' => '1',
-            'page_name' => 'Layanan Kami',
+            'page_name' => 'Services',
             'page_desc' => 'Halaman Informasi Berisi Mengenai Layanan Kami',
-            'page_link' => 'services',
+            'page_route' => '/#services',
         ]);
         // HALAMAN PROJECTS
         DB::table('pages')->insert([
             'page_id' => '1',
             'page_type' => '1',
-            'page_name' => 'Portfolio Paket',
+            'page_name' => 'Pricing',
+            'page_desc' => 'Halaman Informasi Berisi Mengenai Daftar Paket Kami',
+            'page_route' => 'pricing',
+        ]);
+        // HALAMAN PORTOFOLIO
+        DB::table('pages')->insert([
+            'page_id' => '1',
+            'page_type' => '1',
+            'page_name' => 'Portofolio',
             'page_desc' => 'Halaman Informasi Berisi Mengenai Hasil Portofolio Kami',
-            'page_link' => 'projects',
+            'page_route' => 'portofolio',
         ]);
         // HALAMAN BLOG
         DB::table('pages')->insert([
@@ -58,7 +66,7 @@ class PageSeeder extends Seeder
             'page_type' => '1',
             'page_name' => 'Berita',
             'page_desc' => 'Halaman Informasi Berisi Berita Yang Menyangkut Kami',
-            'page_link' => 'blog',
+            'page_route' => 'blog',
         ]);
         // HALAMAN CONTACT
         DB::table('pages')->insert([
@@ -66,7 +74,7 @@ class PageSeeder extends Seeder
             'page_type' => '1',
             'page_name' => 'Kontak Kami',
             'page_desc' => 'Halaman Informasi Berisi Mengenai Kontak Kami',
-            'page_link' => 'contact-us',
+            'page_route' => 'contact-us',
         ]);
     }
 }

@@ -16,6 +16,7 @@ class Paket extends Model
         'user_id',
         'name',
         'image',
+        'image_1',
         'image_2',
         'image_3',
         'image_4',
@@ -26,6 +27,13 @@ class Paket extends Model
         'updated_at',
         'created_at'
     ];
+    public function setPriceAttribute($value)
+    {
+        // Hapus mutator ini jika Anda ingin menyimpan nilai tanpa menghapus format tambahan
+        $this->attributes['price'] = str_replace(['Rp', ' ', '.'], '', $value);
+    }
+    
+    // Fungsi untuk mengembalikan nilai harga dalam format yang diinginkan
     public function getPriceAttribute($value)
     {
         // Hapus aksesor ini jika Anda ingin mengakses nilai asli tanpa format tambahan
@@ -41,6 +49,10 @@ class Paket extends Model
         return $this->belongsTo(PaketKategori::class);
     }
     public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+    public function rating()
     {
         return $this->belongsTo(User::class);
     }

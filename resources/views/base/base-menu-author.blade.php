@@ -35,6 +35,14 @@
         </div>
     </a>
 </li>
+<li class="menu {{ Str::is('author/gallery*', request()->path()) ? 'active' : '' }}">
+    <a href="{{ url('/author/gallery') }}" aria-expanded="false" class="dropdown-toggle">
+        <div class="d-flex align-items-center justify-content-between">
+            <i class="fa-solid fa-image" style="font-size: 20px; margin-right: 10px;" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ></i>
+            <span>Kelola Gallery</span>
+        </div>
+    </a>
+</li>
 <li class="menu">
     <a href="#manageUser" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle {{ Request::is('admin/usermanage/admin*') || Request::is('admin/usermanage/member*') ? 'active' : '' }}">
         <div class="d-flex align-items-center justify-content-between">

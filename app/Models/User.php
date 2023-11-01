@@ -55,22 +55,11 @@ class User extends Authenticatable
     ];
 
     protected function type(): Attribute
-
     {
-
         return new Attribute(
-
-            get: fn ($value) =>  match ($value) {
-                0 => "Member",
-                1 => "Member Plus",
-                2 => "Author",
-                3 => "Admin",
-                4 => "Super Admin",
-                default => throw new \Exception("Undefined array key"),
-            }
+            get: fn ($value) =>  ["Member", "Member Plus", "Author", "Admin", "Super Admin"][$value],
         );
     }
-
     public function worker()
     {
         return $this->hasOne(Worker::class, 'code', 'code');

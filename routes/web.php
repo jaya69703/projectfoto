@@ -18,6 +18,7 @@ use App\Http\Controllers\Pages\Master\UserManagerController;
 use App\Http\Controllers\Pages\App\ChatController;
 use App\Http\Controllers\Pages\Master\PaketController;
 use App\Http\Controllers\Pages\PaketKategoriController;
+use App\Http\Controllers\Pages\GalleryController;
 use App\Http\Controllers\Pages\Master\BookingController;
 use Illuminate\Support\Facades\Route;
 
@@ -36,12 +37,16 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [RootController::class, 'index'])->name('root.index');
 Route::get('/about-us', [RootController::class, 'about'])->name('root.pages.about');
 Route::get('/services', [RootController::class, 'services'])->name('root.pages.services');
-Route::get('/projects', [RootController::class, 'projects'])->name('root.pages.projects');
+Route::get('/pricing', [RootController::class, 'projects'])->name('root.pages.pricing');
 Route::get('/contact-us', [RootController::class, 'contact'])->name('root.pages.contact');
+Route::get('/claims', [RootController::class, 'claims'])->name('root.pages.claims');
+Route::get('/portofolio', [RootController::class, 'portofolio'])->name('root.pages.portofolio');
+Route::get('/portofolio/{slug}', [RootController::class, 'portofolioShow'])->name('root.pages.portofolio.show');
 Route::post('/contact-us/store', [MessageController::class, 'store'])->name('root.pages.contact.store');
 // PACKAGE
-Route::get('/package/{slug}', [RootController::class, 'package'])->name('root.pages.package.show');
-Route::get('/package/category/{slug}', [RootController::class, 'packageCategory'])->name('root.pages.cpackage.show');
+Route::get('/paket/{slug}', [RootController::class, 'package'])->name('root.pages.package.show');
+Route::get('/paket/category/{slug}', [RootController::class, 'packageCategory'])->name('root.pages.cpackage.show');
+Route::get('/package/category/{slug}', [PaketKategoriController::class, 'show'])->name('root.pages.cpackage.see');
 // BLOG
 Route::get('/blog', [RootController::class, 'blog'])->name('root.pages.blog');
 Route::get('/blog/{slug}', [RootController::class, 'blogsingle'])->name('root.pages.blog.single');
@@ -92,6 +97,8 @@ Route::middleware(['auth', 'user-access:Member'])->group(function () {
     Route::patch('/member/book/update-profile', [RootController::class, 'updateUser'])->name('member.book.update');
     Route::put('/member/book/update-password', [RootController::class, 'updatePass'])->name('member.book.update.password');
     Route::post('/member/book/product', [RootController::class, 'booknow'])->name('member.book.product');
+    Route::post('/member/book/give/rating', [RootController::class, 'giveRating'])->name('member.book.give.rating');
+    Route::patch('/member/book/edit/rating/{id}', [RootController::class, 'editRating'])->name('member.book.edit.rating');
     Route::patch('/member/book/product/payment/{id}', [RootController::class, 'uploadProof'])->name('member.book.product.payment');
     Route::get('/member/book/history', [RootController::class, 'history'])->name('member.book.history');
     Route::get('/member/book/history/{id}', [RootController::class, 'historyShow'])->name('member.book.history.show');
@@ -124,6 +131,16 @@ Route::middleware(['auth', 'user-access:Author', 'isverify:1'])->group(function 
     // AUTHOR UPDATE I
     Route::get('/author/booking/all', [AuthorController::class, 'viewBooking'])->name('author.booking.view');
     Route::patch('/author/book/product/sending/{id}', [AuthorController::class, 'sendProduct'])->name('author.book.product.sending');
+
+    // ROUTING KELOLA GALLERY 
+    Route::get('/author/gallery', [GalleryController::class, 'index'])->name('author.gallery.index');
+    Route::get('/author/gallery/create', [GalleryController::class, 'create'])->name('author.gallery.create');
+    Route::post('/author/gallery/store', [GalleryController::class, 'store'])->name('author.gallery.store');
+    Route::delete('/author/gallery/{id}/destroy', [GalleryController::class, 'destroy'])->name('author.gallery.destroy');
+    Route::get('/author/gallery/{id}/edit', [GalleryController::class, 'edit'])->name('author.gallery.edit');
+    Route::patch('/author/gallery/{id}/update', [GalleryController::class, 'update'])->name('author.gallery.update');
+
+    
 
     // ROUTING CATEGORY BLOG
     Route::get('/author/category', [CategoryBController::class, 'index'])->name('author.blog.category-index');
@@ -201,7 +218,7 @@ Route::middleware(['auth', 'user-access:Admin', 'isverify:1'])->group(function (
     Route::post('/admin/paket/store', [PaketController::class, 'store'])->name('admin.paket.store');
     Route::post('/admin/paket-kategori/store', [PaketKategoriController::class, 'store'])->name('admin.paket-kategori.store');
     Route::get('/admin/paket/show/{id}', [PaketController::class, 'show'])->name('admin.paket.show');
-    Route::patch('/admin/paket/edit/{id}', [PaketController::class, 'edit'])->name('admin.paket.edit');
+    Route::get('/admin/paket/edit/{id}', [PaketController::class, 'edit'])->name('admin.paket.edit');
     Route::patch('/admin/paket/update/{id}', [PaketController::class, 'update'])->name('admin.paket.update');
     Route::patch('/admin/paket-kategori/update/{id}', [PaketKategoriController::class, 'update'])->name('admin.paket-kategori.update');
     Route::delete('/admin/paket-kategori/destroy/{id}', [PaketKategoriController::class, 'destroy'])->name('admin.paket-kategori.destroy');

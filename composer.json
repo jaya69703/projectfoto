@@ -17,6 +17,7 @@
         "simplesoftwareio/simple-qrcode": "^4.2",
         "spatie/laravel-backup": "^8.3",
         "stevebauman/location": "^7.0",
+        "willvincent/laravel-rateable": "^3.2",
         "yajra/laravel-datatables-oracle": "^10.10"
     },
     "require-dev": {

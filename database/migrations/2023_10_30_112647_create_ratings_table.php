@@ -11,14 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pages', function (Blueprint $table) {
+        Schema::create('ratings', function (Blueprint $table) {
             $table->id();
-            $table->string('page_id')->nullable();
-            $table->string('page_type');
-            // TYPE 0 = HALAMAN UTAMA; 1 = SUB HALAMAN;
-            $table->string('page_name');
-            $table->string('page_desc');
-            $table->string('page_route');
+            $table->integer('book_id');
+            $table->integer('paket_id');
+            $table->integer('user_id');
+            $table->integer('rate');
+            $table->text('desc');
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pages');
+        Schema::dropIfExists('ratings');
     }
 };

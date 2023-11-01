@@ -35,6 +35,8 @@
 @include('base.base-home-admin')
 @elseif(Str::is('superadmin/home', request()->path()))
 @include('base.base-home-sadmin')
+@elseif(Str::is('member/home', request()->path()))
+@include('base.base-home-user')
 @endif
 <div class="row layout-top-spacing">
     <div class="col-lg-3 col-12 mb-3">

@@ -23,23 +23,19 @@
             <div class="container" data-aos="fade-up">
 
 
-
-                @php
-                    $currentCategory = last(explode('/', request()->url())); // Ambil bagian terakhir dari URL sebagai kategori saat ini
-                @endphp
-
                 <div class="portfolio-isotope" data-portfolio-filter="*" data-portfolio-layout="masonry"
                     data-portfolio-sort="original-order">
                     <ul class="portfolio-flters" data-aos="fade-up" data-aos-delay="100">
-                        <li data-filter="*" class="filter-active">All</li>
-                        @foreach ($cpaket as $item)
-                            <li data-filter=".{{ $item->slug }}">{{ $item->name }}</li>
-                        @endforeach
+                        <li data-filter="" class=""><a href="/pricing">All</a></li>
+                        <li data-filter=".{{ $cpaket->slug }}" class="{{ Str::is('paket/category/'.$cpaket->slug, request()->path()) ? 'filter-active' : ''  }}">{{ $cpaket->name }}</li>
+                        {{-- @foreach ($cpaket as $item)
+                        <li data-filter=".{{ $item->slug }}" class="{{ Str::is('paket/category/'.$item->slug, request()->path()) == Str::is('paket/category/'.$cpaket->slug, request()->path()) ? 'filter-active' : ''  }}">{{ $item->name }}</li>
+
+                        @endforeach --}}
                     </ul><!-- End Projects Filters -->
 
                     <div class="row gy-4 portfolio-container" data-aos="fade-up" data-aos-delay="200">
-
-                        @foreach ($paket as $item)
+                        @foreach ($cpaket->paket as $item)
                             <div class="col-lg-4 col-md-6 portfolio-item {{ $item->cpaket->slug }}">
                                 <div class="portfolio-content h-100">
                                     <img src="{{ asset('storage/images/paket/' . $item->image) }}" class="img-fluid"

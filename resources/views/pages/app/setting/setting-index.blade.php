@@ -49,43 +49,103 @@ $web = App\Models\WebSetting::find(1);
                 </div>
             </div>
         </div>
-        <div class="col-lg-8 col-12 mb-3">
+        <div class="col-lg-4 col-12 mb-3">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <span style="font-size: 20px">Slider 1</span>
+                    <span class="align-items-center">
+                        <button type="button" class="btn btn-outline-danger btn-rounded mr-2" id="qris-reset-button"><i class="fa-solid fa-arrows-rotate"></i></button>
+                    </span>
+                </div>
+                <div class="card-body text-center">
+                    <img src="{{ asset('storage/images/web/'.$web->site_slide_1) }}" class="card-img-top img-fluid" style="width: 300px;" alt="Image-Picture" id="image-preview">
+                    <input type="file" id="site_slide_1" name="site_slide_1" class="form-control mt-3" accept="image/x-png,image/gif,image/jpeg" value="{{ $web->site_slide_1 }}">
+                    @error('site_slide_1') <small class="text-danger">{{ $message }}</small> @enderror
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-12 mb-3">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <span style="font-size: 20px">Slider 2</span>
+                    <span class="align-items-center">
+                        <button type="button" class="btn btn-outline-danger btn-rounded mr-2" id="qris-reset-button"><i class="fa-solid fa-arrows-rotate"></i></button>
+                    </span>
+                </div>
+                <div class="card-body text-center">
+                    <img src="{{ asset('storage/images/web/'.$web->site_slide_2) }}" class="card-img-top img-fluid" style="width: 300px;" alt="Image-Picture" id="image-preview">
+                    <input type="file" id="site_slide_2" name="site_slide_2" class="form-control mt-3" accept="image/x-png,image/gif,image/jpeg" value="{{ $web->site_slide_2 }}">
+                    @error('site_slide_2') <small class="text-danger">{{ $message }}</small> @enderror
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-12 mb-3">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <span style="font-size: 20px">Slider 3</span>
+                    <span class="align-items-center">
+                        <button type="button" class="btn btn-outline-danger btn-rounded mr-2" id="qris-reset-button"><i class="fa-solid fa-arrows-rotate"></i></button>
+                    </span>
+                </div>
+                <div class="card-body text-center">
+                    <img src="{{ asset('storage/images/web/'.$web->site_slide_3) }}" class="card-img-top img-fluid" style="width: 300px;" alt="Image-Picture" id="image-preview">
+                    <input type="file" id="site_slide_3" name="site_slide_3" class="form-control mt-3" accept="image/x-png,image/gif,image/jpeg" value="{{ $web->site_slide_3 }}">
+                    @error('site_slide_3') <small class="text-danger">{{ $message }}</small> @enderror
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-12 mb-3">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <span style="font-size: 20px">Slider 4</span>
+                    <span class="align-items-center">
+                        <button type="button" class="btn btn-outline-danger btn-rounded mr-2" id="qris-reset-button"><i class="fa-solid fa-arrows-rotate"></i></button>
+                    </span>
+                </div>
+                <div class="card-body text-center">
+                    <img src="{{ asset('storage/images/web/'.$web->site_slide_4) }}" class="card-img-top img-fluid" style="width: 300px;" alt="Image-Picture" id="image-preview">
+                    <input type="file" id="site_slide_4" name="site_slide_4" class="form-control mt-3" accept="image/x-png,image/gif,image/jpeg" value="{{ $web->site_slide_4 }}">
+                    @error('site_slide_4') <small class="text-danger">{{ $message }}</small> @enderror
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-12 col-12 mb-3">
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <span style="font-size: 20px">Data Informasi Website</span>
-                    <span class="align-items-center">
+                    <span class="">
                         <button type="submit" class="btn btn-outline-primary btn-rounded"><i class="fa-solid fa-floppy-disk"></i></button>
                         <a href="" class="btn btn-outline-warning btn-rounded"><i class="fa-solid fa-sync"></i></a>
                     </span>
                 </div>
                 <div class="row card-body">
-                    <div class="form-group col-lg-6 col-12 mb-2">
+                    <div class="form-group col-lg-4 col-12 mb-2">
                         <label for="name">Nama Website</label>
                         <input type="text" name="name" id="name" class="form-control" placeholder="Input your web name..." value="{{ $web->name }}">
                         @error('name') <small class="text-danger">{{ $message }}</small> @enderror
-
                     </div>
-                    <div class="form-group col-lg-6 col-12 mb-2">
+                    <div class="form-group col-lg-4 col-12 mb-2">
                         <label for="site_link">Link Website</label>
                         <input type="text" name="site_link" id="site_link" class="form-control" placeholder="Input your web site_link..." value="{{ $web->site_link }}">
                         @error('site_link') <small class="text-danger">{{ $message }}</small> @enderror
                     </div>
-                    <div class="form-group col-lg-6 col-12 mb-2">
+                    <div class="form-group col-lg-4 col-12 mb-2">
                         <label for="site_social_fb">Social Link Facebook</label>
                         <input type="text" name="site_social_fb" id="site_social_fb" class="form-control" placeholder="Input your web site_social_fb..." value="{{ $web->site_social_fb }}">
                         @error('site_social_fb') <small class="text-danger">{{ $message }}</small> @enderror
                     </div>
-                    <div class="form-group col-lg-6 col-12 mb-2">
+                    <div class="form-group col-lg-4 col-12 mb-2">
                         <label for="site_social_ig">Social Link Instagram</label>
                         <input type="text" name="site_social_ig" id="site_social_ig" class="form-control" placeholder="Input your web site_social_ig..." value="{{ $web->site_social_ig }}">
                         @error('site_social_ig') <small class="text-danger">{{ $message }}</small> @enderror
                     </div>
-                    <div class="form-group col-lg-6 col-12 mb-2">
+                    <div class="form-group col-lg-4 col-12 mb-2">
                         <label for="site_social_tw">Social Link Twitter or X</label>
                         <input type="text" name="site_social_tw" id="site_social_tw" class="form-control" placeholder="Input your web site_social_tw..." value="{{ $web->site_social_tw }}">
                         @error('site_social_tw') <small class="text-danger">{{ $message }}</small> @enderror
                     </div>
-                    <div class="form-group col-lg-6 col-12 mb-2">
+                    <div class="form-group col-lg-4 col-12 mb-2">
                         <label for="site_social_in">Social Link LinkedIn</label>
                         <input type="text" name="site_social_in" id="site_social_in" class="form-control" placeholder="Input your web site_social_in..." value="{{ $web->site_social_in }}">
                         @error('site_social_in') <small class="text-danger">{{ $message }}</small> @enderror
@@ -168,4 +228,5 @@ $web = App\Models\WebSetting::find(1);
         qrisInput.value = '';
     });
 </script>
+@include('base.include.include-previewimage-paketedit')
 @endsection
